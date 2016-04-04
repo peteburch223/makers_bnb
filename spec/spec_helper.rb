@@ -5,10 +5,15 @@ require File.join(File.dirname(__FILE__), '..', './app/app.rb')
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
+require 'database_cleaner'
+require 'tilt/erb'
+require 'helpers/helpers.rb'
 
 Capybara.app = MakersBnB
 
 RSpec.configure do |config|
+
+  config.include Helpers
   config.include Capybara::DSL
 
   config.expect_with :rspec do |expectations|
@@ -18,5 +23,15 @@ RSpec.configure do |config|
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
+  end
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
   end
 end
