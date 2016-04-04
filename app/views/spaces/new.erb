@@ -2,5 +2,6 @@
 <form action="/spaces/new" method="post">
   <input id="spaceName" name="name" type="text" placeholder="Name" required>
   <textarea id="spaceDescription" name="description" type="text" rows="4" cols="80" placeholder="Description" required></textarea>
+  <input id="spacePrice" name="price" type="number" placeholder="0.00" step="0.01" pattern="^\d{1,4}(\.\d{1,2})?$" required>
   <button id="listMySpace" type="submit">List my Space</button>
 </form>
