@@ -1,7 +1,14 @@
+<% if flash[:errors] && !flash[:errors].empty? %>
+<center><div id='errors'>
+  <% flash[:errors].each do |error| %>
+    <p><%= error %></p>
+  <% end %>
+</div></center>
+<% end %>
 <h3>Sign up to MakersBnB</h3>
-<form>
+<form action="/users/new" method="post">
   <input type='email' name='email' placeholder='Email Address' />
   <input type='password' name='password' placeholder='Password' />
   <input type='password' name='password_confirmation' placeholder='Password confirmation' />
-  <input type='submit' value='Sign up' /> 
+  <input type='submit' value='Sign up' />
 </form>
