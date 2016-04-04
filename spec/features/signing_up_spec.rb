@@ -15,4 +15,13 @@ feature 'Signing up' do
     click_button 'Sign up'
   end
 
+  scenario 'user cannot sign up with incorrectly formatted email address' do
+    visit '/'
+    fill_in 'email',    with: 'test.com'
+    fill_in 'password', with: 'password'
+    fill_in 'password_confirmation', with: 'password'
+    click_button 'Sign up'
+    expect(page).to have_content('Email has an invalid format')
+  end
+
 end
