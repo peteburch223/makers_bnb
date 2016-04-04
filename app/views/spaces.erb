@@ -1,0 +1,12 @@
+<h1>Book a Space</h1>
+<form action="/spaces/new" method="get">
+  <button id="listASpace" type="submit">List a Space</button>
+</form>
+
+<section id="spaceList">
+  <ul class="list-group">
+    <% @spaces.each do |space| %>
+      <li class="list-group-item"><%= space.name %></li>
+    <% end %>
+  </ul>
+</section>
