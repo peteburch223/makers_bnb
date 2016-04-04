@@ -1,12 +1,20 @@
 <h1>Book a Space</h1>
-<form action="/spaces/new" method="get">
-  <button id="listASpace" type="submit">List a Space</button>
-</form>
-
-<section id="spaceList">
-  <ul class="list-group">
-    <% @spaces.each do |space| %>
-      <li class="list-group-item"><%= space.name %></li>
-    <% end %>
-  </ul>
-</section>
+<div class="panel panel-default text-center">
+  <div class="panel-body">
+    <form action="/spaces/new" method="get">
+      <button class="btn" id="listASpace" type="submit">List a Space</button>
+    </form>
+  </div>
+</div>
+<div class="panel panel-default text-left">
+  <div class="panel-body">
+    <div class="list-group">
+      <% @spaces.each do |space| %>
+        <div  class="list-group-item">
+          <h3><%= space.name %>: £<%= space.price %></h3>
+          <p><%= space.description %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
