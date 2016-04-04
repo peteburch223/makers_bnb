@@ -2,6 +2,7 @@ class MakersBnB < Sinatra::Base
 
 
   get '/spaces' do
+    @spaces = Space.all
     erb(:spaces)
   end
 
@@ -10,6 +11,7 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/spaces/new' do
+    Space.create(name: params[:name])
     redirect '/spaces'
   end
 
