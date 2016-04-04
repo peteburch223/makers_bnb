@@ -3,6 +3,7 @@ class Space
 
   property :id, Serial
   property :name, String
+  property :description, Text
 
 
 

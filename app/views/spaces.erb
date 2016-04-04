@@ -6,7 +6,9 @@
 <section id="spaceList">
   <ul class="list-group">
     <% @spaces.each do |space| %>
-      <li class="list-group-item"><%= space.name %></li>
+      <li class="list-group-item"><%= space.name %>
+        <p><%= space.description %></p>
+      </li>
     <% end %>
   </ul>
 </section>
