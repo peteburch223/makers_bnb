@@ -13,3 +13,9 @@ require_relative 'helpers'
 require_relative 'controllers/spaces'
 require_relative 'controllers/users'
 require_relative 'controllers/sessions'
+require_relative 'controllers/requests'
+
+
+  def current_user
+    @current_user ||= User.get(session[:user_id])
+  end

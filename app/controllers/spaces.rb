@@ -2,7 +2,8 @@ class MakersBnB < Sinatra::Base
 
 
   get '/spaces' do
-
+    puts "this is a test"
+    p current_user
     date_from = Date.parse(params[:from_date]) if !params[:from_date].nil?
     date_to = Date.parse(params[:to_date]) if !params[:to_date].nil?
     @spaces = []
@@ -33,7 +34,6 @@ class MakersBnB < Sinatra::Base
     space = Space.create(name: params[:name],
                  description: params[:description],
                  price: params[:price])
-
     nights_count.times do |i|
       space.availabledates << Availabledate.new(avail_date: date_from + i)
       space.save
@@ -45,7 +45,7 @@ class MakersBnB < Sinatra::Base
   get '/spaces/:id' do
     p params[:id]
     @space = Space.get(params[:id].to_i)
-
+    @available = Availabledate.all(space_id: @space.id)
     erb(:"spaces/id")
   end
 

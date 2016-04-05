@@ -1,19 +1,9 @@
 <h1><%= @space.name %></h1>
 <h2><%= @space.description %></h2>
 <h3><%= @space.price %></h3>
-
-<div class="panel panel-default text-center">
-  <div class="panel-body">
-    <form action="/requests/new" method="post">
-      <div class="form-group">
-        <label for="requestFrom">From</label>
-        <input class="form-control" id="requestFrom" name="from_date" type="date" required>
-      </div>
-      <div class="form-group">
-        <label for="requestTo">To</label>
-        <input class="form-control" id="requestTo" name="to_date" type="date" required>
-      </div>
-      <button class="btn" id="listSpaces" type="submit">Request booking</button>
-    </form>
-  </div>
-</div>
+<form action="/requests/new" method="post">
+<% @available.each do |date| %>
+  <input type="checkbox" name="<%= date.avail_date %>" value="<%= date.id %>"><%= date.avail_date %>
+    <% end %>
+  <button class="btn" type="submit">Request booking</button>
+</form>
