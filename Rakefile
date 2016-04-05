@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1c6d8fb21a352556779fcaf96992bf271635a48c
 require 'data_mapper'
 require './app/app.rb'
 
@@ -22,4 +26,11 @@ namespace :db do
     DataMapper.auto_migrate!
     puts "Auto-migrate complete (data was lost)"
   end
+<<<<<<< HEAD
+=======
+
+  task :update_migrate => [:auto_migrate, :auto_upgrade] do
+    puts "updating database..."
+  end
+>>>>>>> 1c6d8fb21a352556779fcaf96992bf271635a48c
 end

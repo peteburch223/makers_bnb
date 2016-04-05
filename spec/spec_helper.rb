@@ -6,6 +6,7 @@ require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
 require 'database_cleaner'
+
 require 'tilt/erb'
 require 'helpers/helpers.rb'
 
@@ -29,9 +30,12 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
   end
 end
