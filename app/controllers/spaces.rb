@@ -5,10 +5,6 @@ class MakersBnB < Sinatra::Base
     @spaces = Space.all(:availabledates => {:avail_date.gte => params[:from_date], :avail_date.lte => params[:to_date]},
                         :fields => [:name,:description,:price],
                         :order => nil)
-
-
-
-
     erb(:spaces)
   end
 
@@ -20,16 +16,15 @@ class MakersBnB < Sinatra::Base
     date_from = Date.parse(params[:from_date])
     date_to = Date.parse(params[:to_date])
 
-    days_count = (date_to - date_from).to_i + 1
+    nights_count = (date_to - date_from).to_i
 
     space = Space.create(name: params[:name],
                  description: params[:description],
                  price: params[:price])
 
-    days_count.times do |i|
+    nights_count.times do |i|
       space.availabledates << Availabledate.new(avail_date: date_from + i)
       space.save
-
     end
 
     redirect '/spaces'
