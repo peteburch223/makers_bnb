@@ -15,8 +15,9 @@ module Helpers
 
   def sign_in(email: 'test@test.com',
               password: 'test1234')
+
     visit '/sessions/new'
-    expect(page).to have_content("Sign in to MakersBnB")
+    expect(page).to have_content("Log in to MakersBnB")
     fill_in 'email',    with: email
     fill_in 'password', with: password
     click_button 'Log in'
