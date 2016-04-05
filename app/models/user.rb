@@ -12,6 +12,9 @@ class User
   validates_confirmation_of :password
   validates_length_of :password, min: 6
 
+  has n, :requests
+  # has n, :spaces
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
