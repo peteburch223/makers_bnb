@@ -13,19 +13,8 @@
       integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   </head>
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <p class="navbar-brand" href="#">Makers BnB</p>
-        </div>
-        <ul class="nav navbar-nav">
-          <li><a href="/spaces">Spaces</a></li>
-          <li><a href="/requests">Requests</a></li>
-          <li><a href="/">Sign Out</a></li>
-        </ul>
-      </div>
-    </nav>
-    <div class="container-fluid text-center">
+
+      <%= partial :navbar %>
       <%= yield %>
     </div>
   </body>
