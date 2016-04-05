@@ -9,8 +9,11 @@
       <li> <%= current_user.email %> </li>
       <li><a href="/spaces">Spaces</a></li>
       <li><a href="/requests">Requests</a></li>
-      <li><a href="/">Sign Out</a></li>
-    <% else %>      
+      <form method='post' action='/sessions'>
+        <input type='hidden' name='_method' value='delete'>
+        <li><input type='submit' value='Log out'></li>
+      </form>
+    <% else %>
       <li><a href="/sessions/new">Log in</a></li>
     <% end %>
     </ul>

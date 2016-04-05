@@ -1,5 +1,3 @@
-
-
 feature 'Signing in' do
   it 'allows a user to sign in' do
     sign_up
@@ -18,7 +16,4 @@ feature 'Signing in' do
     sign_in(email: 'twats@email.com')
     expect(page).to have_content('The email or password is incorrect')
   end
-
-
-
 end
