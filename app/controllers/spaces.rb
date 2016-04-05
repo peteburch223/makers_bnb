@@ -2,9 +2,21 @@ class MakersBnB < Sinatra::Base
 
 
   get '/spaces' do
-    @spaces = Space.all(:availabledates => {:avail_date.gte => params[:from_date], :avail_date.lte => params[:to_date]},
-                        :fields => [:name,:description,:price],
-                        :order => nil)
+
+    date_from = Date.parse(params[:from_date]) if !params[:from_date].nil?
+    date_to = Date.parse(params[:to_date]) if !params[:to_date].nil?
+    @spaces = []
+    avail = Hash.new(0)
+    if !!date_from && !!date_to
+      nights_count = (date_to - date_from).to_i
+      nights_count.times do |i|
+        Space.all(:availabledates => {:avail_date => date_from + i}).each do |space|
+          avail[space.id] += 1
+        end
+      end
+
+      avail.each_pair{|k,v| @spaces << Space.get(k) if v == nights_count}
+    end
     erb(:spaces)
   end
 
@@ -29,7 +41,5 @@ class MakersBnB < Sinatra::Base
 
     redirect '/spaces'
   end
-
-
 
 end

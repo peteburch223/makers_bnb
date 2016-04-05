@@ -156,6 +156,7 @@ DEPENDENCIES
   coveralls
   data_mapper
   database_cleaner
+  dm-aggregates
   dm-postgres-adapter
   pry
   rake
