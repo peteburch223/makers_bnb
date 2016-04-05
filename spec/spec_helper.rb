@@ -6,9 +6,12 @@ require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
 require 'database_cleaner'
+<<<<<<< HEAD
 
 require 'tilt/erb'
 require 'helpers/helpers.rb'
+=======
+>>>>>>> 1c6d8fb21a352556779fcaf96992bf271635a48c
 
 Capybara.app = MakersBnB
 
