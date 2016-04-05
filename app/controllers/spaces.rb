@@ -30,6 +30,13 @@ class MakersBnB < Sinatra::Base
     redirect '/spaces'
   end
 
+  get '/spaces/:id' do
+    p params[:id]
+    @space = Space.get(params[:id].to_i)
+
+    erb(:"spaces/id")
+  end
+
 
 
 end

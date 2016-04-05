@@ -24,11 +24,13 @@
 <div class="panel panel-default text-left">
   <div class="panel-body">
     <div class="list-group">
-      <% @spaces.each do |space| %>
-        <div  class="list-group-item">
-          <h3><%= space.name %>: £<%= space.price %></h3>
-          <p><%= space.description %></p>
-        </div>
+      <% if @spaces %>
+        <% @spaces.each do |space| %>
+          <div  class="list-group-item">
+            <h3><%= space.name %>: £<%= space.price %></h3>
+            <p><%= space.description %></p>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>
