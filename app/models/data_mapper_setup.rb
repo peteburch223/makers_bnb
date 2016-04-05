@@ -2,6 +2,7 @@ DB = 'makers_bnb'
 
 require 'data_mapper'
 require 'dm-postgres-adapter'
+require 'dm-aggregates'
 
 require_relative 'space'
 require_relative 'user'

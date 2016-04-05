@@ -2,9 +2,11 @@ class MakersBnB < Sinatra::Base
 
 
   get '/spaces' do
+
+
     @spaces = Space.all(:availabledates => {:avail_date.gte => params[:from_date], :avail_date.lte => params[:to_date]},
                         :fields => [:name,:description,:price],
-                        :order => nil)
+                        :order => nil)                    
     erb(:spaces)
   end
 
