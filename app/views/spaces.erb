@@ -26,7 +26,7 @@
     <div class="list-group">
       <% @spaces.each do |space| %>
         <div  class="list-group-item">
-          <h3><%= space.name %>: £<%= space.price %></h3>
+          <h3><a href="/spaces/<%= space.id %>"><%= space.name %>: £<%= space.price %></a></h3>
           <p><%= space.description %></p>
         </div>
       <% end %>
