@@ -1,0 +1,19 @@
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-brand" href="#">Makers BnB</p>
+    </div>
+    <ul class="nav navbar-nav">
+    <% if current_user %>
+      <li> <%= current_user.email %> </li>
+      <li><a href="/spaces">Spaces</a></li>
+      <li><a href="/requests">Requests</a></li>
+      <li><a href="/">Sign Out</a></li>
+    <% else %>      
+      <li><a href="/sessions/new">Log in</a></li>
+    <% end %>
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid text-center">
