@@ -6,4 +6,5 @@ class Space
   property :description, Text
   property :price, String
 
+  has n, :availabledates
 end
