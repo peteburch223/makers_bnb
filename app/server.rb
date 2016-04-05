@@ -1,8 +1,5 @@
 class MakersBnB < Sinatra::Base
-<<<<<<< HEAD
 
-=======
->>>>>>> 1c6d8fb21a352556779fcaf96992bf271635a48c
   enable :sessions
   register Sinatra::Flash
   register Sinatra::Partial
@@ -13,11 +10,7 @@ class MakersBnB < Sinatra::Base
   enable :partial_underscores
 
   get '/' do
-<<<<<<< HEAD
     erb :index
-=======
-
->>>>>>> 1c6d8fb21a352556779fcaf96992bf271635a48c
   end
 
 end
