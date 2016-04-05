@@ -13,12 +13,6 @@ feature 'Booking spaces' do
   let(:from_date_not_avail){'03/05/2016'}
   let(:to_date_not_avail){'01/06/2016'}
 
-
-
-  # let(:name_content2){"Shane's gaff"}
-  # let(:description_content2){"Quite pretty, but nice view"}
-  # let(:price_content2){'999.99'}
-
   before(:each) do
     visit 'spaces'
     click_button 'List a Space'
@@ -47,6 +41,13 @@ feature 'Booking spaces' do
   scenario 'start alignment of date availability range check' do
     fill_in('fromDate', with: from_date_minus_one)
     fill_in('toDate', with: to_date)
+    click_button('List Spaces')
+    expect(page).not_to have_content(name_content)
+  end
+
+  scenario 'end alignment of date availability range check' do
+    fill_in('fromDate', with: from_date)
+    fill_in('toDate', with: to_date_plus_one)
     click_button('List Spaces')
     expect(page).not_to have_content(name_content)
   end
