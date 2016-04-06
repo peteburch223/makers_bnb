@@ -36,9 +36,9 @@ $(".datepicker").datepicker({
 
   ,
   onSelect: function(dateText, inst) {
-      var check_in = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#check_in").val());
-      var check_out = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#check_out").val());
-      var selectedDate = $.datepicker.parseDate($.datepicker._defaults.dateFormat, dateText);
+      var check_in = $.datepicker.parseDate("yy-MM-dd", $("#check_in").val());
+      var check_out = $.datepicker.parseDate("yy-MM-dd", $("#check_out").val());
+      var selectedDate = $.datepicker.parseDate("yy-MM-dd", dateText);
 
       if (!check_in || check_out) {
           $("#check_in").val(dateText);
