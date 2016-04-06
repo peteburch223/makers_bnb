@@ -5,9 +5,9 @@ class MakersBnB < Sinatra::Base
     id_array = params[:availabledate_id].split(',')
     id_array.each { |id| availabledate << Availabledate.get(id) }
     #----------------- CALENDAR INPUT TO COME -------------------------------
-    availabledate.each do |id|
+    availabledate.each do |a_date|
       Request.create(user_id: current_user.id,
-                     availabledate_id: id,
+                     availabledate_id: a_date.id,
                      status: 'open')
     end
     redirect '/requests'
