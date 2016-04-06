@@ -15,4 +15,12 @@ feature 'Check access' do
       expect(page).to have_content 'Book a Space'
     end
   end
+
+  scenario 'cannot create new space from /spaces' do
+    visit '/requests'
+    within 'h1' do
+      expect(page).not_to have_content 'Requests'
+      expect(page).to have_content 'Book a Space'
+    end
+  end
 end

@@ -8,6 +8,7 @@ module TestHelpers
   TO_DATE_PLUS_ONE = '03/04/2016'.freeze
   FROM_DATE_NOT_AVAIL = '03/05/2016'.freeze
   TO_DATE_NOT_AVAIL = '01/06/2016'.freeze
+  REQUEST_DATE = '2016-03-05'.freeze
 
   def sign_up(email: 'test@test.com',
               password: 'test1234',
