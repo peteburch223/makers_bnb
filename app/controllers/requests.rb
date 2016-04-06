@@ -4,9 +4,13 @@ class MakersBnB < Sinatra::Base
 
     availabledate = []
     params.each_pair{|key, value| availabledate << Availabledate.get(value)}
+
+    p availabledate
     availabledate.each{|a_date| Request.create(user_id: current_user.id,
                                                availabledate_id: a_date.id,
-                                               status: "open")}
+                                               status: "open",
+                                               space_id: a_date.space_id)}
+
 
     redirect '/requests'
   end
@@ -15,21 +19,9 @@ class MakersBnB < Sinatra::Base
 
     redirect '/spaces' unless current_user
 
-
-    @requests_made = Request.all(user_id: current_user.id)
-    # @available = Availabledate.first(id: @requests_made.availabledate_id)
-    # @space = Space.first(id: @available.space_id)
-    # @owner = User.first(id: @space.user_id)
-
-    @space_requested = Space.all(availabledates: { requests: { user_id: current_user.id } })
-    # @space_requested = Space.first(availabledates: @available.id)
-
-    p @space_requested
-    p @requests_made
-    # p @available
-    # p @space
-    # p @owner
-    # @requests_received Request.all(availabledate => {})
+    @space_requests_made = Space.all(availabledates: { requests: { user_id: current_user.id } })
+    @space_requests_received = Space.all(user_id: current_user.id)
+    @space_requests_received.reject!{|space| space.requests.empty?}
 
     erb(:requests)
   end

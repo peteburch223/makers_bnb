@@ -6,4 +6,5 @@ class Request
 
   belongs_to :availabledate
   belongs_to :user
+  belongs_to :space
 end

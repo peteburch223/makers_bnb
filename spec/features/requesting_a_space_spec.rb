@@ -5,11 +5,6 @@ feature 'requesting a space' do
     filter_spaces
   end
 
-
-
-
-
-
   scenario 'request a booking' do
     click_link TestHelpers::NAME
     expect(page).to have_content(TestHelpers::NAME)
