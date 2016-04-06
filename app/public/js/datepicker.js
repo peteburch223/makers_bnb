@@ -16,7 +16,9 @@ function enableSpecificDates(date) {
 
   for (var i = 0; i < dates.length; i++) {
     if ($.inArray(currentDate, dates) != -1 ) {
-      return [true];
+      var check_in = $.datepicker.parseDate("yy-MM-dd", $("#check_in").val());
+      var check_out = $.datepicker.parseDate("yy-MM-dd", $("#check_out").val());
+      return [true, check_in && ((date.getTime() == check_in.getTime()) || (check_out && date >= check_in && date <= check_out)) ? "dp-highlight" : ""];
     } else {
       return [false];
     }
@@ -30,8 +32,8 @@ $(".datepicker").datepicker({
   dateFormat: "yy-MM-dd",
   beforeShowDay: enableSpecificDates
   // function(date){
-      // var check_in = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#check_in").val());
-      // var check_out = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#check_out").val());
+      // var check_in = $.datepicker.parseDate("yy-MM-dd", $("#check_in").val());
+      // var check_out = $.datepicker.parseDate("yy-MM-dd", $("#check_out").val());
       // return [enableSpecificDates(date), check_in && ((date.getTime() == check_in.getTime()) || (check_out && date >= check_in && date <= check_out)) ? "dp-highlight" : ""];
 
   ,
