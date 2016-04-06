@@ -1,8 +1,6 @@
 class MakersBnB < Sinatra::Base
 
   post '/requests/new' do
-    puts "THIS IS A TEST XXXXXXXX"
-
 
     availabledate = []
     params.each_pair{|key, value| availabledate << Availabledate.get(value)}
@@ -16,8 +14,22 @@ class MakersBnB < Sinatra::Base
   get '/requests' do
 
     redirect '/spaces' unless current_user
-    @requests_made = Request.all()
-    @requests_received
+
+
+    @requests_made = Request.all(user_id: current_user.id)
+    # @available = Availabledate.first(id: @requests_made.availabledate_id)
+    # @space = Space.first(id: @available.space_id)
+    # @owner = User.first(id: @space.user_id)
+
+    @space_requested = Space.all(availabledates: { requests: { user_id: current_user.id } })
+    # @space_requested = Space.first(availabledates: @available.id)
+
+    p @space_requested
+    p @requests_made
+    # p @available
+    # p @space
+    # p @owner
+    # @requests_received Request.all(availabledate => {})
 
     erb(:requests)
   end
