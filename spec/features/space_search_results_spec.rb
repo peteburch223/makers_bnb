@@ -1,10 +1,9 @@
 feature 'Space availability' do
-
-  let(:name_content){"Pete's grotty gaff"}
-  let(:description_content){"Quite smelly, but nice view"}
-  let(:price_content){'99.99'}
-  let(:from_date){'03/03/2016'}
-  let(:to_date){'01/04/2016'}
+  let(:name_content) { "Pete's grotty gaff" }
+  let(:description_content) { 'Quite smelly, but nice view' }
+  let(:price_content) { '99.99' }
+  let(:from_date) { '03/03/2016' }
+  let(:to_date) { '01/04/2016' }
 
   before(:each) do
     visit 'spaces'
