@@ -1,8 +1,8 @@
-feature 'Signing in' do
+feature 'Signing in', :broken => false  do
   it 'allows a user to sign in' do
     sign_up
     sign_in
-    expect(page).to have_content('test@test.com')
+    expect(page).to have_content(TestHelpers::O1_USER_EMAIL)
   end
 
   it 'does not allow a user to sign in with incorrect password' do
