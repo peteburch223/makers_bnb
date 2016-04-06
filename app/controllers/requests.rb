@@ -1,23 +1,23 @@
 class MakersBnB < Sinatra::Base
-
-post '/requests/new' do
-  p params
-  p current_user
-
-
-
-  params.each_pair do |k,v|
-
-    Request.create(availabledate_id: v, user_id: current_user.id, status: 'open')
-
+  post '/requests/new' do
+    availabledate = []
+    params.each_pair { |_key, value| availabledate << Availabledate.get(value) }
+    #----------------- CALENDAR INPUT TO COME -------------------------------
+    availabledate.each do |a_date|
+      Request.create(user_id: current_user.id,
+                     availabledate_id: a_date.id,
+                     status: 'open')
+    end
+    redirect '/requests'
   end
 
-  redirect '/'
+  get '/requests' do
+    redirect '/spaces' unless current_user
 
-  # erb(:'requests')
+    @space_requests_made = Space.all(availabledates: { requests: { user_id: current_user.id } })
+    @space_requests_received = Space.all(user_id: current_user.id)
+    @space_requests_received.reject! { |space| space.availabledates.requests.empty? }
 
-
-end
-
-
+    erb(:requests)
+  end
 end

@@ -1,19 +1,14 @@
 var available_obj = gon.available_dates;
-
+console.log(available_obj);
 var dates = [];
 
 for (var key in available_obj) {
   dates.push(available_obj[key]);
 }
 
-function enableSpecificDates(date) {
-  var m = date.getMonth() + 1;
-  if (m < 10) { m = '0' + m; }
-  var d = date.getDate();
-  if (d < 10) { d = '0' + d; }
-  var y = date.getFullYear();
-  var currentDate = y + '-' + m + '-' + d;
 
+function enableSpecificDates(date) {
+  currentDate = parseDates(date);
   for (var i = 0; i < dates.length; i++) {
     if ($.inArray(currentDate, dates) != -1 ) {
       var check_in = $.datepicker.parseDate("yy-MM-dd", $("#check_in").val());
@@ -23,6 +18,16 @@ function enableSpecificDates(date) {
       return [false];
     }
   }
+}
+
+function parseDates(date){
+  var m = date.getMonth() + 1;
+  if (m < 10) { m = '0' + m; }
+  var d = date.getDate();
+  if (d < 10) { d = '0' + d; }
+  var y = date.getFullYear();
+  var currentDate = y + '-' + m + '-' + d;
+  return currentDate;
 }
 
 
@@ -36,17 +41,24 @@ $(".datepicker").datepicker({
       var check_out = $.datepicker.parseDate("yy-MM-dd", $("#check_out").val());
       var selectedDate = $.datepicker.parseDate("yy-MM-dd", dateText);
 
+      var mo = inst.currentMonth + 1;
+      if (mo < 10) { mo = '0' + mo; }
+      var test = String(inst.currentYear) + '-' + mo + '-' + inst.currentDay;
+      var id = (_.invert(available_obj))[test];
+
+
       if (!check_in || check_out) {
-          $("#check_in").val(dateText);
+          $("#check_in").val(dateText, id);
           $("#check_out").val("");
           $(this).datepicker();
       } else if( selectedDate < check_in ) {
           $("#check_out").val( $("#check_in").val() );
-          $("#check_in").val( dateText );
+          $("#check_in").val(dateText, id);
           $(this).datepicker();
       } else {
-          $("#check_out").val(dateText);
+          $("#check_out").val(dateText, id);
           $(this).datepicker();
       }
+      $("#availabledate_id").val(id);
   }
 });

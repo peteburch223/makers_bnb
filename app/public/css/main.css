@@ -1,4 +1,6 @@
-
+#availabledate_id {
+  display: none;
+}
 .dp-highlight .ui-state-default {
   background: #484;
   color: #FFF;
