@@ -1,4 +1,4 @@
-feature 'Signing out', :broken => true  do
+feature 'Signing out', :broken => false  do
   scenario 'when logged in' do
     sign_up
     click_button 'Log out'

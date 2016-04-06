@@ -8,5 +8,4 @@ class Space
 
   belongs_to :user
   has n, :availabledates
-  has n, :requests
 end

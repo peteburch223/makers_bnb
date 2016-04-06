@@ -7,8 +7,7 @@ class MakersBnB < Sinatra::Base
     #----------------- CALENDAR INPUT TO COME -------------------------------
     availabledate.each{|a_date| Request.create(user_id: current_user.id,
                                                availabledate_id: a_date.id,
-                                               status: "open",
-                                               space_id: a_date.space_id)}
+                                               status: "open")}
     redirect '/requests'
   end
 
