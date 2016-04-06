@@ -7,12 +7,12 @@ require 'capybara/rspec'
 require 'rspec'
 require 'database_cleaner'
 require 'tilt/erb'
-require 'helpers/helpers.rb'
+require 'helpers/test_helpers.rb'
 
 Capybara.app = MakersBnB
 
 RSpec.configure do |config|
-  config.include Helpers
+  config.include TestHelpers
   config.include Capybara::DSL
 
   config.expect_with :rspec do |expectations|

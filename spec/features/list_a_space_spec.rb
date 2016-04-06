@@ -1,13 +1,6 @@
 feature 'Spaces' do
-  let(:name_content) { "Pete's grotty gaff" }
-  let(:description_content) { 'Quite smelly, but nice view' }
-  let(:price_content) { '99.99' }
-  let(:from_date) { '03/03/2016' }
-  let(:to_date) { '01/04/2016' }
-
   let(:name_content2) { "Shane's gaff" }
   let(:description_content2) { 'Quite pretty, but nice view' }
-  let(:price_content2) { '999.99' }
 
   before(:each) do
     visit '/spaces'
@@ -22,41 +15,12 @@ feature 'Spaces' do
   end
 
   scenario 'can list multiple spaces' do
-    click_button('List a Space')
-
-    fill_in('spaceName', with: name_content)
-    fill_in('spaceDescription', with: description_content)
-    fill_in('spacePrice', with: price_content)
-    fill_in('fromDate', with: from_date)
-    fill_in('toDate', with: to_date)
-    click_button('List my Space')
-
-    click_button('List a Space')
-    fill_in('spaceName', with: name_content2)
-    fill_in('spaceDescription', with: description_content2)
-    fill_in('spacePrice', with: price_content2)
-    fill_in('fromDate', with: from_date)
-    fill_in('toDate', with: to_date)
-    click_button('List my Space')
-
-    fill_in('fromDate', with: from_date)
-    fill_in('toDate', with: to_date)
-    click_button('List Spaces')
-
-    expect(page).to have_content(name_content)
-    expect(page).to have_content(description_content)
-    expect(page).to have_content(price_content)
-
+    create_space
+    create_space(name: name_content2, description: description_content2)
+    filter_spaces
+    expect(page).to have_content(TestHelpers::NAME)
+    expect(page).to have_content(TestHelpers::DESCRIPTION)
+    expect(page).to have_content(TestHelpers::PRICE)
     expect(page).to have_content(name_content2)
-  end
-
-  scenario 'can add range of availablity to space' do
-    click_button('List a Space')
-    fill_in('spaceName', with: name_content)
-    fill_in('spaceDescription', with: description_content)
-    fill_in('spacePrice', with: price_content)
-    fill_in('fromDate', with: from_date)
-    fill_in('toDate', with: to_date)
-    click_button('List my Space')
   end
 end
