@@ -30,13 +30,7 @@ $(".datepicker").datepicker({
   minDate: 0,
   numberOfMonths: [1,1],
   dateFormat: "yy-MM-dd",
-  beforeShowDay: enableSpecificDates
-  // function(date){
-      // var check_in = $.datepicker.parseDate("yy-MM-dd", $("#check_in").val());
-      // var check_out = $.datepicker.parseDate("yy-MM-dd", $("#check_out").val());
-      // return [enableSpecificDates(date), check_in && ((date.getTime() == check_in.getTime()) || (check_out && date >= check_in && date <= check_out)) ? "dp-highlight" : ""];
-
-  ,
+  beforeShowDay: enableSpecificDates,
   onSelect: function(dateText, inst) {
       var check_in = $.datepicker.parseDate("yy-MM-dd", $("#check_in").val());
       var check_out = $.datepicker.parseDate("yy-MM-dd", $("#check_out").val());
