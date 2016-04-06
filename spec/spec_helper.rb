@@ -12,6 +12,7 @@ require 'helpers/test_helpers.rb'
 Capybara.app = MakersBnB
 
 RSpec.configure do |config|
+  config.filter_run_excluding :broken => true
   config.include TestHelpers
   config.include Capybara::DSL
 

@@ -1,6 +1,6 @@
-feature 'Booking spaces' do
+feature 'Booking spaces', :broken => false do
   before(:each) do
-    visit 'spaces'
+    sign_up
     create_space
   end
 

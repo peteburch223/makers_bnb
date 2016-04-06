@@ -1,6 +1,6 @@
-feature 'Space availability' do
+feature 'Space search results', :broken => false do
   before(:each) do
-    visit 'spaces'
+    sign_up
     create_space
   end
 

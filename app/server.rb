@@ -7,6 +7,7 @@ class MakersBnB < Sinatra::Base
   set :partial_template_engine, :erb
 
   enable :partial_underscores
+  include Helpers
 
   get '/' do
     erb :index

@@ -6,6 +6,6 @@ class Space
   property :description, Text
   property :price, String
 
-  # belongs_to :user
+  belongs_to :user
   has n, :availabledates
 end

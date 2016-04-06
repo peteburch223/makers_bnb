@@ -13,7 +13,7 @@ class User
   validates_length_of :password, min: 6
 
   has n, :requests
-  # has n, :spaces
+  has n, :spaces
 
   def password=(password)
     @password = password
