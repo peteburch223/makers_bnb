@@ -1,6 +1,6 @@
 var available_obj = gon.available_dates;
-console.log(available_obj);
 var dates = [];
+var id = [];
 
 for (var key in available_obj) {
   dates.push(available_obj[key]);
@@ -43,22 +43,22 @@ $(".datepicker").datepicker({
 
       var mo = inst.currentMonth + 1;
       if (mo < 10) { mo = '0' + mo; }
-      var test = String(inst.currentYear) + '-' + mo + '-' + inst.currentDay;
-      var id = (_.invert(available_obj))[test];
-
+      var chosenDate = String(inst.currentYear) + '-' + mo + '-' + inst.currentDay;
 
       if (!check_in || check_out) {
-          $("#check_in").val(dateText, id);
+          $("#check_in").val(dateText);
           $("#check_out").val("");
-          $(this).datepicker();
+          id = [];
+          // $(this).datepicker();
       } else if( selectedDate < check_in ) {
           $("#check_out").val( $("#check_in").val() );
-          $("#check_in").val(dateText, id);
-          $(this).datepicker();
+          $("#check_in").val(dateText);
+          // $(this).datepicker();
       } else {
-          $("#check_out").val(dateText, id);
-          $(this).datepicker();
+          $("#check_out").val(dateText);
+          // $(this).datepicker();
       }
+      id.push((_.invert(available_obj))[chosenDate]);
       $("#availabledate_id").val(id);
   }
 });
