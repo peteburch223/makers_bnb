@@ -1,11 +1,40 @@
+var available_obj = gon.available_dates;
+
+var dates = [];
+
+for (var key in available_obj) {
+  dates.push(available_obj[key]);
+}
+
+function enableSpecificDates(date) {
+  var m = date.getMonth() + 1;
+  if (m < 10) { m = '0' + m; }
+  var d = date.getDate();
+  if (d < 10) { d = '0' + d; }
+  var y = date.getFullYear();
+  var currentDate = y + '-' + m + '-' + d;
+
+  for (var i = 0; i < dates.length; i++) {
+    if ($.inArray(currentDate, dates) != -1 ) {
+      return [true];
+    } else {
+      return [false];
+    }
+  }
+}
+
+
 $(".datepicker").datepicker({
   minDate: 0,
   numberOfMonths: [1,1],
-  beforeShowDay: function(date) {
-      var check_in = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#check_in").val());
-      var check_out = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#check_out").val());
-      return [true, check_in && ((date.getTime() == check_in.getTime()) || (check_out && date >= check_in && date <= check_out)) ? "dp-highlight" : ""];
-  },
+  dateFormat: "yy-MM-dd",
+  beforeShowDay: enableSpecificDates
+  // function(date){
+      // var check_in = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#check_in").val());
+      // var check_out = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#check_out").val());
+      // return [enableSpecificDates(date), check_in && ((date.getTime() == check_in.getTime()) || (check_out && date >= check_in && date <= check_out)) ? "dp-highlight" : ""];
+
+  ,
   onSelect: function(dateText, inst) {
       var check_in = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#check_in").val());
       var check_out = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#check_out").val());

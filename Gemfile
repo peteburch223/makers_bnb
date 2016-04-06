@@ -10,6 +10,7 @@ gem 'bcrypt'
 gem 'sinatra-flash'
 gem 'sinatra-partial'
 gem 'rake'
+gem 'gon-sinatra'
 
 group :test do
   gem 'rspec'
