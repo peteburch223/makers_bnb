@@ -6,7 +6,6 @@ for (var key in available_obj) {
   dates.push(available_obj[key]);
 }
 
-
 function enableSpecificDates(date) {
   currentDate = parseDates(date);
   for (var i = 0; i < dates.length; i++) {
@@ -14,9 +13,7 @@ function enableSpecificDates(date) {
       var check_in = $.datepicker.parseDate("yy-MM-dd", $("#check_in").val());
       var check_out = $.datepicker.parseDate("yy-MM-dd", $("#check_out").val());
       return [true, check_in && ((date.getTime() == check_in.getTime()) || (check_out && date >= check_in && date <= check_out)) ? "dp-highlight" : ""];
-    } else {
-      return [false];
-    }
+    } return [false];
   }
 }
 
@@ -29,7 +26,6 @@ function parseDates(date){
   var currentDate = y + '-' + m + '-' + d;
   return currentDate;
 }
-
 
 $(".datepicker").datepicker({
   minDate: 0,
@@ -49,14 +45,11 @@ $(".datepicker").datepicker({
           $("#check_in").val(dateText);
           $("#check_out").val("");
           id = [];
-          // $(this).datepicker();
       } else if( selectedDate < check_in ) {
           $("#check_out").val( $("#check_in").val() );
           $("#check_in").val(dateText);
-          // $(this).datepicker();
       } else {
           $("#check_out").val(dateText);
-          // $(this).datepicker();
       }
       id.push((_.invert(available_obj))[chosenDate]);
       $("#availabledate_id").val(id);
