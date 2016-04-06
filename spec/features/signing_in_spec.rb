@@ -7,7 +7,7 @@ feature 'Signing in' do
 
   it 'does not allow a user to sign in with incorrect password' do
     sign_up
-    sign_in(password: 789101)
+    sign_in(password: 789_101)
     expect(page).to have_content('The email or password is incorrect')
   end
 
