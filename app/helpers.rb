@@ -9,28 +9,27 @@ module Helpers
                          price: params[:price],
                          user_id: current_user.id)
 
-
     stay = stay_period(params)
     stay[:nights_count].times do |i|
-      availabledate =  Availabledate.create(avail_date: stay[:date_from] + i, space_id: space.id)
+      Availabledate.create(avail_date: stay[:date_from] + i, space_id: space.id)
     end
   end
 
-  def available_spaces(params)
+  def available_dates(params)
     stay = stay_period(params)
+    create_available_dates stay if stay
+  end
+
+  def create_available_dates(stay)
     spaces = []
-
-    if stay
-      avail = Hash.new(0)
-      stay[:nights_count].times do |i|
-        Space.all(availabledates: { avail_date: stay[:date_from] + i }).each do |space|
-          avail[space.id] += 1
-        end
+    avail = Hash.new(0)
+    stay[:nights_count].times do |i|
+      Space.all(availabledates: { avail_date: stay[:date_from] + i }).each do |space|
+        avail[space.id] += 1
       end
-
-      avail.each_pair { |k, v| spaces << Space.get(k) if v == stay[:nights_count] }
     end
 
+    avail.each_pair { |k, v| spaces << Space.get(k) if v == stay[:nights_count] }
     spaces
   end
 

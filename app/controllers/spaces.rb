@@ -1,6 +1,6 @@
 class MakersBnB < Sinatra::Base
   get '/spaces' do
-    @spaces = available_spaces(params)
+    @spaces = available_dates(params)
     erb(:spaces)
   end
 
@@ -14,7 +14,6 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/spaces/:id' do
-    p params[:id]
     @space = Space.get(params[:id].to_i)
 
     erb(:"spaces/id")
