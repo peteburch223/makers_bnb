@@ -17,6 +17,7 @@ class MakersBnB < Sinatra::Base
 
   get '/spaces/:id' do
     @space = Space.get(params[:id].to_i)
+    @available = Availabledate.all(space_id: @space.id)
     erb(:"spaces/id")
   end
 end
