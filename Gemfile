@@ -11,7 +11,7 @@ gem 'sinatra-flash'
 gem 'sinatra-partial'
 gem 'rake'
 gem 'gon-sinatra'
-
+gem 'stripe'
 
 group :test do
   gem 'rspec'
