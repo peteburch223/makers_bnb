@@ -8,7 +8,6 @@ class MakersBnB < Sinatra::Base
     ids.pop unless ids.length == 1
     ids.each { |id| availabledate << Availabledate.get(id) }
     availabledate.each do |a_date|
-      p a_date
       Request.create(user_id: current_user.id,
                      availabledate_id: a_date.id,
                      status: Helpers::NOT_CONFIRMED)

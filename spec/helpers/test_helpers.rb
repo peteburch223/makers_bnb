@@ -92,7 +92,7 @@ module TestHelpers
     make_request(name: NAME)
     visit('/spaces')
     filter_spaces
-    click_link '01_S1_NAME'
+    click_link 'Space 2'
     make_request(name: O1_S1_NAME)
   end
 
