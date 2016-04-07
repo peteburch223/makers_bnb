@@ -12,6 +12,7 @@ function stripeResponseHandler(status, response) {
     var token = response.id;
     // Insert the token into the form so it gets submitted to the server
     $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+    // add info about space, price, etc. here
     // and submit
     $form.get(0).submit();
   }
