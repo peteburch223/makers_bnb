@@ -38,20 +38,29 @@ $(".datepicker").datepicker({
       var selectedDate = $.datepicker.parseDate("yy-MM-dd", dateText);
 
       var mo = inst.currentMonth + 1;
+      var da = inst.selectedDay;
       if (mo < 10) { mo = '0' + mo; }
-      var chosenDate = String(inst.currentYear) + '-' + mo + '-' + inst.currentDay;
+      if (da < 10) { da = '0' + da; }
+      var chosenDate = String(inst.currentYear) + '-' + mo + '-' + da;
 
       if (!check_in || check_out) {
           $("#check_in").val(dateText);
           $("#check_out").val("");
           id = [];
+          updateIdInput('push');
       } else if( selectedDate < check_in ) {
           $("#check_out").val( $("#check_in").val() );
           $("#check_in").val(dateText);
+          updateIdInput('unshift');
       } else {
           $("#check_out").val(dateText);
+          updateIdInput('push');
       }
-      id.push((_.invert(available_obj))[chosenDate]);
-      $("#availabledate_id").val(id);
+
+      function updateIdInput(method){
+        if(method === 'push'){ id.push((_.invert(available_obj))[chosenDate]); }
+        else { id.unshift((_.invert(available_obj))[chosenDate]); }
+        $("#availabledate_id").val(id);
+      }
   }
 });
