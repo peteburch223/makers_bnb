@@ -1,4 +1,4 @@
-feature 'Booking spaces', :broken => true do
+feature 'Booking spaces', :broken => false do
   before(:each) do
     sign_up
     create_space

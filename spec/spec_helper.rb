@@ -13,8 +13,8 @@ require 'tilt/erb'
 require 'helpers/test_helpers.rb'
 
 Capybara.app = MakersBnB
-  include Capybara::DSL
-  Capybara.default_driver = :selenium
+  # include Capybara::DSL
+  # Capybara.default_driver = :selenium
 
 RSpec.configure do |config|
   config.filter_run_excluding :broken => true

@@ -1,6 +1,6 @@
 # require 'spec_helper'
 
-feature 'Signing up', :broken => true  do
+feature 'Signing up', :broken => false  do
   scenario 'user can view the sign up page' do
     visit '/'
     expect(page).to have_content('Sign up to MakersBnB')
