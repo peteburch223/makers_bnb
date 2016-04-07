@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/app/app.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/app/app.rb": [
         1,
         null,
         1,
@@ -21,7 +21,7 @@
         1,
         1
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/app/helpers.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/app/helpers.rb": [
         1,
         null,
         1,
@@ -74,7 +74,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/app/models/data_mapper_setup.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/app/models/data_mapper_setup.rb": [
         1,
         null,
         1,
@@ -93,7 +93,7 @@
         null,
         1
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/app/models/space.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/app/models/space.rb": [
         1,
         1,
         null,
@@ -106,7 +106,7 @@
         1,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/app/models/user.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/app/models/user.rb": [
         1,
         null,
         1,
@@ -135,7 +135,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/app/models/available_date.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/app/models/available_date.rb": [
         1,
         1,
         null,
@@ -146,7 +146,7 @@
         1,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/app/models/request.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/app/models/request.rb": [
         1,
         1,
         null,
@@ -157,7 +157,7 @@
         1,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/app/server.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/app/server.rb": [
         1,
         1,
         1,
@@ -176,7 +176,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/app/controllers/spaces.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/app/controllers/spaces.rb": [
         1,
         1,
         55,
@@ -205,7 +205,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/app/controllers/users.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/app/controllers/users.rb": [
         1,
         1,
         24,
@@ -221,7 +221,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/app/controllers/sessions.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/app/controllers/sessions.rb": [
         1,
         1,
         3,
@@ -244,7 +244,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/app/controllers/requests.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/app/controllers/requests.rb": [
         1,
         null,
         1,
@@ -300,7 +300,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/spec/helpers/test_helpers.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/spec/helpers/test_helpers.rb": [
         1,
         null,
         1,
@@ -408,7 +408,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/spec/features/book_spaces_spec.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/spec/features/book_spaces_spec.rb": [
         1,
         1,
         4,
@@ -437,7 +437,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/spec/features/check_access_spec.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/spec/features/check_access_spec.rb": [
         1,
         1,
         1,
@@ -465,7 +465,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/spec/features/list_a_space_spec.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/spec/features/list_a_space_spec.rb": [
         1,
         2,
         2,
@@ -504,7 +504,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/spec/features/requesting_a_space_spec.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/spec/features/requesting_a_space_spec.rb": [
         1,
         1,
         5,
@@ -560,7 +560,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/spec/features/signing_in_spec.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/spec/features/signing_in_spec.rb": [
         1,
         1,
         1,
@@ -581,7 +581,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/spec/features/signing_out_spec.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/spec/features/signing_out_spec.rb": [
         1,
         1,
         1,
@@ -595,7 +595,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/spec/features/signing_up_spec.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/spec/features/signing_up_spec.rb": [
         null,
         null,
         1,
@@ -624,7 +624,7 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/spec/features/space_search_results_spec.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/spec/features/space_search_results_spec.rb": [
         1,
         1,
         1,
@@ -637,10 +637,10 @@
         null,
         null
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/spec/models/space_spec.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/spec/models/space_spec.rb": [
 
       ],
-      "/Users/shane/Drive/Projects/makers/week06/makers_bnb/spec/models/user_spec.rb": [
+      "/Users/murilodalri/Projects/Makers/makers_bnb/spec/models/user_spec.rb": [
         1,
         null,
         1,
@@ -657,6 +657,6 @@
         null
       ]
     },
-    "timestamp": 1460021330
+    "timestamp": 1460021422
   }
 }

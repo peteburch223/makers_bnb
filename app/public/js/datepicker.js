@@ -36,22 +36,28 @@ $(".datepicker").datepicker({
       var check_in = $.datepicker.parseDate("yy-MM-dd", $("#check_in").val());
       var check_out = $.datepicker.parseDate("yy-MM-dd", $("#check_out").val());
       var selectedDate = $.datepicker.parseDate("yy-MM-dd", dateText);
-
+console.log(inst);
       var mo = inst.currentMonth + 1;
+      var da = inst.selectedDay;
       if (mo < 10) { mo = '0' + mo; }
-      var chosenDate = String(inst.currentYear) + '-' + mo + '-' + inst.currentDay;
+      if (da < 10) { da = '0' + da; }
+      var chosenDate = String(inst.currentYear) + '-' + mo + '-' + da;
 
       if (!check_in || check_out) {
           $("#check_in").val(dateText);
           $("#check_out").val("");
           id = [];
+          id.push((_.invert(available_obj))[chosenDate]);
+          $("#availabledate_id").val(id);
       } else if( selectedDate < check_in ) {
           $("#check_out").val( $("#check_in").val() );
           $("#check_in").val(dateText);
+          id.unshift((_.invert(available_obj))[chosenDate]);
+          $("#availabledate_id").val(id);
       } else {
           $("#check_out").val(dateText);
+          id.push((_.invert(available_obj))[chosenDate]);
+          $("#availabledate_id").val(id);
       }
-      id.push((_.invert(available_obj))[chosenDate]);
-      $("#availabledate_id").val(id);
   }
 });
