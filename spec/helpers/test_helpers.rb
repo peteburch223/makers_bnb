@@ -39,10 +39,23 @@ module TestHelpers
     click_button 'Sign up'
   end
 
+  def sign_in(email: O1_USER_EMAIL,
+              password: PASSWORD)
+
+    visit '/sessions/new'
+    fill_in 'email',    with: email
+    fill_in 'password', with: password
+    click_button 'Log in'
+  end
+
+  def log_out
+    click_button('Log out')
+  end
+
   def make_request(name: TestHelpers::NAME ,date: TestHelpers::REQUEST_DATE)
     click_link(name)
     check(date)
-    check('2016-03-06')
+    check(REQUEST_DATE)
     click_button 'Request booking'
   end
 
@@ -74,14 +87,7 @@ module TestHelpers
   end
 
 
-  def sign_in(email: O1_USER_EMAIL,
-              password: PASSWORD)
 
-    visit '/sessions/new'
-    fill_in 'email',    with: email
-    fill_in 'password', with: password
-    click_button 'Log in'
-  end
 
   def create_space(name: NAME,
                    description: DESCRIPTION,

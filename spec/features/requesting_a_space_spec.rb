@@ -42,7 +42,7 @@ feature 'requesting a space' do
     sign_up(email: TestHelpers::O2_USER_EMAIL)
     filter_spaces
     make_request
-    click_button('Log out')
+    log_out
     sign_in
     click_link('Requests')
     expect(page).to have_link(TestHelpers::NAME)
