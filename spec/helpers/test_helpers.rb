@@ -52,7 +52,7 @@ module TestHelpers
     click_button('Log out')
   end
 
-  def make_request(name: TestHelpers::NAME ,date: TestHelpers::REQUEST_DATE)
+  def make_request(name: O1_S1_NAME ,date: REQUEST_DATE)
     click_link(name)
     check(date)
     check(REQUEST_DATE)

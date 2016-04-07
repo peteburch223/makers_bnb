@@ -1,3 +1,6 @@
+require 'byebug'
+
+
 class MakersBnB < Sinatra::Base
 
   # post '/requests/new' do
@@ -33,39 +36,9 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/requests' do
-
     redirect '/spaces' unless current_user
-    requests = Request.all(user_id: current_user.id, :fields => [:id, :user_id, :request_id], :unique => true,)
-
-    space_requests_made = []
-    requests.each do |request|
-      space_requests_made << Space.first(availabledates: { requests: { user_id: current_user.id, request_id: request.request_id } })
-    end
-
-    @space_requests_made = prepare_request_display(space_requests_made)
-
-    # space_requests_received = Space.all(user_id: current_user.id)
-    # space_requests_received.reject!{|space| space.availabledates.requests.empty?}
-    requests = Request.all(:fields => [:id, :user_id, :request_id], :unique => true,)
-
-    # p requests.first.availabledate.space
-
-    requests_received = []
-    requests.each do |request|
-      requests_received << request.id if request.availabledate.space.user_id = current_user.id
-    end
-
-    space_requests_received = []
-    id = requests_received.first
-    space = Space.first(availabledates: { requests: {request_id: id } })
-    p space
-    requests_received.each do |id|
-      space_requests_received << Space.first(availabledates: { requests: {request_id: id } })
-    end
-
-    p space_requests_received
-
-    @space_requests_received = prepare_request_display(space_requests_received)
+    @space_requests_made = requests_made
+    @space_requests_received = requests_received
     erb(:requests)
   end
 
@@ -76,21 +49,44 @@ class MakersBnB < Sinatra::Base
     @from = User.first(requests: { id: params[:id]})
     @date = Availabledate.first(requests: { id: params[:id]})
     erb(:"requests/id")
-
   end
 
   post '/requests/:id' do
-
     request = Request.all(id: params[:id])
     request.update(status: params[:response])
-
     redirect '/requests'
-
   end
 
-  def prepare_request_display(requests)
+  def requests_made
+    requests_made = Request.all(user_id: current_user.id, :fields => [:user_id, :request_id], :unique => true, :order => nil)
+    space_requests_made = []
+    requests_made.each do |request|
+      space_requests_made << Space.first(availabledates: { requests: { user_id: current_user.id, request_id: request.request_id } })
+    end
+    prepare_request_display(space_requests_made)
+  end
+
+  def requests_received
+    requests = Request.all()
+    return [] if requests.nil?
+    requests_received = []
+    requests.each do |request|
+      requests_received << request.id if request.availabledate.space.user_id == current_user.id
+    end
+
+    space_requests_received = []
+    requests_received.each do |id|
+      space_requests_received << Space.first(availabledates: { requests: {request_id: id } })
+    end
+
+    # need to understand why we need to compact...where are the nils coming from?
+    prepare_request_display(space_requests_received.compact!)
+  end
+
+  def prepare_request_display(space_requests)
+    return [] if space_requests.nil?
     return_value = []
-    requests.each do |space|
+    space_requests.each do |space|
       result = []
       result << space
       result << space.availabledates.requests.first.status
@@ -100,6 +96,4 @@ class MakersBnB < Sinatra::Base
     end
     return_value
   end
-
-
 end
