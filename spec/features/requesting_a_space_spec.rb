@@ -65,12 +65,11 @@ feature 'requesting a space' do
     click_button('Log out')
     sign_up(email: TestHelpers::O2_USER_EMAIL)
     filter_spaces
-    make_request
-    make_request
+    5.times{ make_request }
     log_out
     sign_in(email: TestHelpers::O1_USER_EMAIL)
     click_link('Requests')
-    expect(page).to have_link(TestHelpers::O1_S1_NAME, count: 4)
+    expect(page).to have_link(TestHelpers::O1_S1_NAME, count: 2)
   end
 
 end
