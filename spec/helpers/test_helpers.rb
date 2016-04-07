@@ -89,7 +89,7 @@ module TestHelpers
 
 
 
-  def create_space(name: NAME,
+  def create_space(name: O1_S1_NAME,
                    description: DESCRIPTION,
                    price: PRICE,
                    from_date: FROM_DATE,

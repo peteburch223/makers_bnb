@@ -1,4 +1,5 @@
-feature 'Booking spaces', :broken => true do
+require 'byebug'
+feature 'Acknowledge bookings', :broken => true do
   before(:each) do
     sign_up(email: TestHelpers::O1_USER_EMAIL)
     create_space
@@ -9,12 +10,13 @@ feature 'Booking spaces', :broken => true do
     log_out
     sign_in(email: TestHelpers::O1_USER_EMAIL)
     visit '/requests'
-    click_link(TestHelpers::NAME)
+    click_link(TestHelpers::O1_S1_NAME)
   end
 
 
   scenario 'I can process requests I\'ve received' do
-    expect(page).to have_content("Request for #{TestHelpers::NAME}")
+    byebug
+    expect(page).to have_content("Request for #{TestHelpers::O1_S1_NAME}")
     expect(page).to have_content("From: #{TestHelpers::O2_USER_EMAIL}")
     expect(page).to have_content("Date: #{TestHelpers::REQUEST_DATE}")
 
@@ -22,14 +24,14 @@ feature 'Booking spaces', :broken => true do
 
   scenario 'I can approve request' do
     click_button('Confirm request')
-    expect(page).to have_link(TestHelpers::NAME)
+    expect(page).to have_link(TestHelpers::O1_S1_NAME)
     expect(page).not_to have_content(Helpers::NOT_CONFIRMED)
     expect(page).to have_content(Helpers::APPROVED)
   end
 
   scenario 'I can reject request' do
     click_button('Reject request')
-    expect(page).to have_link(TestHelpers::NAME)
+    expect(page).to have_link(TestHelpers::O1_S1_NAME)
     expect(page).not_to have_content(Helpers::NOT_CONFIRMED)
     expect(page).to have_content(Helpers::REJECTED)
   end

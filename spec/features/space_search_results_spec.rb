@@ -6,6 +6,6 @@ feature 'Space search results', :broken => true do
 
   scenario 'can display a list of available spaces with links to detail page' do
     filter_spaces
-    expect(page).to have_link(TestHelpers::NAME)
+    expect(page).to have_link(TestHelpers::O1_S1_NAME)
   end
 end
