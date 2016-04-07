@@ -42,11 +42,20 @@ class MakersBnB < Sinatra::Base
 
 
   get '/requests/:id' do
-
+    @request_id = params[:id]
     @space = Space.first(availabledates: { requests: { id: params[:id] } })
     @from = User.first(requests: { id: params[:id]})
     @date = Availabledate.first(requests: { id: params[:id]})
     erb(:"requests/id")
+
+  end
+
+  post '/requests/:id' do
+
+    request = Request.all(id: params[:id])
+    request.update(status: params[:response])
+
+    redirect '/requests'
 
   end
 

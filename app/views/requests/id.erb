@@ -3,3 +3,8 @@
 <h3>From: <%= @from.email %></h3>
 
 <h3>Date: <%= @date.avail_date %></h3>
+
+<form action="/requests/<%= @request_id %>" method="post">
+  <button class="btn" type="submit" name="response" value="<%= Helpers::APPROVED %>">Confirm request</button>
+  <button class="btn" type="submit" name="response" value="<%= Helpers::REJECTED %>">Reject request</button>
+</form>
