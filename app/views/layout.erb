@@ -1,10 +1,10 @@
-<!DOCTYPE html>
 <html>
   <head>
     <title>MakersBnB</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= include_gon %>
+    <%= partial :headlinks %>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="/js/jquery.min.js"></script>
     <script src="/js/underscore-min.js"></script>
@@ -15,8 +15,8 @@
   </head>
   <body>
       <%= partial :navbar %>
-      <%= partial :errors %>
       <%= yield %>
+      <%= partial :errors %>
     </div>
   </body>
 </html>
