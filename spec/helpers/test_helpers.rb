@@ -1,8 +1,7 @@
 module TestHelpers
-
-  O1_USER_EMAIL = 'user1@person.com'
-  O2_USER_EMAIL = 'user2@person.com'
-  PASSWORD = 'password'
+  O1_USER_EMAIL = 'user1@person.com'.freeze
+  O2_USER_EMAIL = 'user2@person.com'.freeze
+  PASSWORD = 'password'.freeze
 
   NAME = 'Space 0'.freeze
   DESCRIPTION = 'Space 0 description'.freeze

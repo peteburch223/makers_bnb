@@ -13,10 +13,10 @@ feature 'Requesting a space' do
     expect(page).to have_content(TestHelpers::DESCRIPTION)
   end
 
-  scenario 'can select a check in and out date', :js => true do
-    page.execute_script %Q{ $('a.ui-datepicker-next').trigger("click") }
-    page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
-    page.execute_script %Q{ $("a.ui-state-default:contains('3')").trigger("click") }
+  scenario 'can select a check in and out date', js: true do
+    page.execute_script %{ $('a.ui-datepicker-next').trigger("click") }
+    page.execute_script %{ $("a.ui-state-default:contains('2')").trigger("click") }
+    page.execute_script %{ $("a.ui-state-default:contains('3')").trigger("click") }
     expect(page).to have_field('check_in', with: '2016-May-02')
     expect(page).to have_field('check_out', with: '2016-May-03')
   end
@@ -44,7 +44,7 @@ feature 'Requesting a space' do
     expect(page).to have_field('check_out', with: '')
   end
 
-  scenario 'cannot select the same date for check in and check out', :js => true do
+  scenario 'cannot select the same date for check in and check out', js: true do
     page.accept_confirm 'Dates invalid' do
       page.execute_script %Q{ $('a.ui-datepicker-next').trigger("click") }
       page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
