@@ -36,7 +36,7 @@ $(".datepicker").datepicker({
       var check_in = $.datepicker.parseDate("yy-MM-dd", $("#check_in").val());
       var check_out = $.datepicker.parseDate("yy-MM-dd", $("#check_out").val());
       var selectedDate = $.datepicker.parseDate("yy-MM-dd", dateText);
-console.log(inst);
+
       var mo = inst.currentMonth + 1;
       var da = inst.selectedDay;
       if (mo < 10) { mo = '0' + mo; }
