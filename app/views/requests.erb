@@ -4,8 +4,10 @@
     <h2>Requests I've made</h2>
     <% if @space_requests_made %>
       <% @space_requests_made.each do |space| %>
-        <div  class="list-group-item">
-          <h3><a href="/spaces/<%= space.id %>"><%= space.name %>: £<%= space.price %></a></h3>
+        <div class="list-group-item">
+          <h3><a href="/spaces/<%= space.first.id %>"><%= space.first.name %>: £<%= space.first.price %></a></h3>
+          <p><%= space[1]%></p>
+          <p><%= space[2]%></p>
         </div>
       <% end %>
     <% end %>
@@ -15,8 +17,10 @@
       <h2>Requests I've received</h2>
       <% if @space_requests_received %>
         <% @space_requests_received.each do |space| %>
-          <div  class="list-group-item">
-            <h3><a href="/spaces/<%= space.id %>"><%= space.name %>: £<%= space.price %></a></h3>
+          <div class="list-group-item">
+            <h3><a href="/spaces/<%= space.first.id %>"><%= space.first.name %>: £<%= space.first.price %></a></h3>
+            <p><%= space[1]%></p>
+            <p><%= space[2]%></p>
           </div>
         <% end %>
       <% end %>
