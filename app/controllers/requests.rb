@@ -20,18 +20,28 @@ class MakersBnB < Sinatra::Base
     availabledate = []
     params.each_pair{|key, value| availabledate << Availabledate.get(value)}
     #----------------- CALENDAR INPUT TO COME -------------------------------
+
+    request_id = Request.max(:request_id)
+    request_id = (request_id.nil? ? 1 : request_id + 1)
+
+
     availabledate.each{|a_date| Request.create(user_id: current_user.id,
                                                availabledate_id: a_date.id,
-                                               status: Helpers::NOT_CONFIRMED)}
+                                               status: Helpers::NOT_CONFIRMED,
+                                               request_id: request_id)}
     redirect '/requests'
   end
 
   get '/requests' do
 
     redirect '/spaces' unless current_user
+    requests = Request.all(user_id: current_user.id, :fields => [:id, :user_id, :request_id], :unique => true,)
 
-    # need to ensure that multiple requests to the same space are considered separately
-    space_requests_made = Space.all(availabledates: { requests: { user_id: current_user.id } })
+    space_requests_made = []
+    requests.each do |request|
+      space_requests_made << Space.first(availabledates: { requests: { user_id: current_user.id, request_id: request.request_id } })
+    end
+
     @space_requests_made = prepare_request_display(space_requests_made)
 
     space_requests_received = Space.all(user_id: current_user.id)

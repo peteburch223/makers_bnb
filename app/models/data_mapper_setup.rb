@@ -10,7 +10,7 @@ require_relative 'available_date'
 require_relative 'request'
 
 connection_string = "postgres://localhost/#{DB}_#{ENV['RACK_ENV']}"
-# DataMapper::Logger.new($stdout, :debug)
+#  DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, ENV['DATABASE_URL'] || connection_string)
 DataMapper.auto_migrate! if ENV['RACK_ENV'] == 'test'
 
