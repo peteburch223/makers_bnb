@@ -1,9 +1,12 @@
 <h1><%= @space.name %></h1>
 <h2><%= @space.description %></h2>
 
-<%= partial :datePicker %>
+<link rel='stylesheet' href='//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css'>
+<script src='//code.jquery.com/ui/1.11.4/jquery-ui.js'></script>
+
 <p>Check in: <input id='check_in' size='12' name='check_in' type='text' /></p>
 <p>Check out: <input id='check_out' size='12' name='check_out' type='text' /></p>
+
 <form action="/requests/new" method="post" onsubmit="return validateIds()">
   <div class='datepicker'></div>
   <input id='availabledate_id' size='12' name='availabledate_id' type='text' />
