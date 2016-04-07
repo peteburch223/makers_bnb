@@ -47,17 +47,20 @@ $(".datepicker").datepicker({
           $("#check_in").val(dateText);
           $("#check_out").val("");
           id = [];
-          id.push((_.invert(available_obj))[chosenDate]);
-          $("#availabledate_id").val(id);
+          updateIdInput('push');
       } else if( selectedDate < check_in ) {
           $("#check_out").val( $("#check_in").val() );
           $("#check_in").val(dateText);
-          id.unshift((_.invert(available_obj))[chosenDate]);
-          $("#availabledate_id").val(id);
+          updateIdInput('unshift');
       } else {
           $("#check_out").val(dateText);
-          id.push((_.invert(available_obj))[chosenDate]);
-          $("#availabledate_id").val(id);
+          updateIdInput('push');
+      }
+
+      function updateIdInput(method){
+        if(method === 'push'){ id.push((_.invert(available_obj))[chosenDate]); }
+        else { id.unshift((_.invert(available_obj))[chosenDate]); }
+        $("#availabledate_id").val(id);
       }
   }
 });

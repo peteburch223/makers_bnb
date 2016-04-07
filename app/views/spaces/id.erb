@@ -1,10 +1,10 @@
 <h1><%= @space.name %></h1>
 <h2><%= @space.description %></h2>
-
+<script src="/js/validateIds.js"></script>
 
 <p>Check in: <input id='check_in' size='12' name='check_in' type='text' /></p>
 <p>Check out: <input id='check_out' size='12' name='check_out' type='text' /></p>
-<form action="/requests/new" method="post">
+<form action="/requests/new" method="post" onsubmit="return validateIds()">
   <div class='datepicker'></div>
   <input id='availabledate_id' size='12' name='availabledate_id' type='text' />
   <button class="btn">Request booking</button>
