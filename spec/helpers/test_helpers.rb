@@ -1,8 +1,7 @@
 module TestHelpers
-
-  O1_USER_EMAIL = 'user1@person.com'
-  O2_USER_EMAIL = 'user2@person.com'
-  PASSWORD = 'password'
+  O1_USER_EMAIL = 'user1@person.com'.freeze
+  O2_USER_EMAIL = 'user2@person.com'.freeze
+  PASSWORD = 'password'.freeze
 
   NAME = 'Space 0'.freeze
   DESCRIPTION = 'Space 0 description'.freeze
@@ -81,8 +80,8 @@ module TestHelpers
   end
 
   def make_request(name: TestHelpers::NAME)
-    page.execute_script %Q{ $('a.ui-state-default:contains('15')').trigger('click') }
-    page.execute_script %Q{ $('a.ui-state-default:contains('16')').trigger('click') }
+    page.execute_script %{ $('a.ui-state-default:contains('15')').trigger('click') }
+    page.execute_script %{ $('a.ui-state-default:contains('16')').trigger('click') }
     click_button 'Request booking'
   end
 
