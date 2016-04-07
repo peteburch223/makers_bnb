@@ -67,48 +67,48 @@ class MakersBnB < Sinatra::Base
   end
 
   def requests_received
-    puts "*****RECEIVED******"
+    # puts "*****RECEIVED******"
     requests = Request.all()
-    p requests
+    # p requests
     return [] if requests.nil?
     requests_received = []
     requests.each do |req|
-      p req
-      p req.availabledate.space.user_id
+      # p req
+      # p req.availabledate.space.user_id
       requests_received << req.id if req.availabledate.space.user_id == current_user.id
     end
 
-    p requests_received
+    # p requests_received
 
     space_requests_received = []
     requests_received.each do |id|
 
-      p id
-      p Space.first(availabledates: { requests: {request_id: id } })
+      # p id
+      # p Space.first(availabledates: { requests: {request_id: id } })
       space_requests_received << Space.first(availabledates: { requests: {request_id: id } })
     end
-    puts "space_requests_received"
-    p space_requests_received
+    # puts "space_requests_received"
+    # p space_requests_received
 
     # need to understand why we need to compact...where are the nils coming from?
 
     stuff = space_requests_received.compact
-    p stuff
+    # p stuff
     temp = prepare_request_display(stuff)
-    puts "temp"
-    p temp
+    # puts "temp"
+    # p temp
     temp
   end
 
   def prepare_request_display(space_requests)
-    puts "prepare_request_displayn - before guard clause"
-        p space_requests
+    # puts "prepare_request_displayn - before guard clause"
+    #     p space_requests
   return [] if space_requests.nil?
-    puts "prepare_request_display"
+    # puts "prepare_request_display"
     return_value = []
-    p space_requests
+    # p space_requests
     space_requests.each do |space|
-      p space
+      # p space
       result = []
       result << space
       result << space.availabledates.requests.first.status

@@ -1,6 +1,8 @@
 require 'simplecov'
 SimpleCov.start
 
+puts "starting spec_helper"
+
 ENV['RACK_ENV'] = 'test'
 
 require File.join(File.dirname(__FILE__), '..', './app/app.rb')
@@ -11,6 +13,7 @@ require 'rspec'
 require 'database_cleaner'
 require 'tilt/erb'
 require 'helpers/test_helpers.rb'
+require 'byebug'
 
 Capybara.app = MakersBnB
   # include Capybara::DSL
@@ -31,14 +34,22 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
+  # DatabaseCleaner.clean_with(:truncation)
+    # puts "DatabaseCleaner has truncated data"
   end
 
-  config.before(:each) do
-    DatabaseCleaner.start
+  config.before(:each, :js => true) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before do
+    DatabaseCleaner.clean
+  DatabaseCleaner.start
+    # puts "DatabaseCleaner has started"
   end
 
   config.after(:each) do
     DatabaseCleaner.clean
+    # puts "DatabaseCleaner has cleaned"
   end
 end

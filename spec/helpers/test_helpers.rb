@@ -29,6 +29,14 @@ module TestHelpers
   TO_DATE_NOT_AVAIL = '01/06/2016'.freeze
   REQUEST_DATE = '2016-03-05'.freeze
 
+
+  def in_browser(name)
+    old_session = Capybara.session_name
+    Capybara.session_name = name
+    yield
+    Capybara.session_name = old_session
+  end
+
   def sign_up(email: O1_USER_EMAIL,
               password: PASSWORD,
               password_confirmation: PASSWORD)
