@@ -3,10 +3,10 @@ class MakersBnB < Sinatra::Base
     redirect '/spaces' unless current_user
     redirect '/requests' if params.empty?
     availabledate = []
-    id_array = params[:availabledate_id]
-    id_array = [*id_array[0]..id_array[1]] unless id_array.length == 1
-    id_array.pop unless id_array.length == 1
-    id_array.each { |id| availabledate << Availabledate.get(id) }
+    ids = params[:availabledate_id]
+    ids = [*ids[0]..ids[1]] unless ids.length == 1
+    ids.pop unless ids.length == 1
+    ids.each { |id| availabledate << Availabledate.get(id) }
     availabledate.each do |a_date|
       Request.create(user_id: current_user.id,
                      availabledate_id: a_date.id,
@@ -14,17 +14,6 @@ class MakersBnB < Sinatra::Base
     end
     redirect '/requests'
   end
-
-  # post '/requests/new' do
-  #
-  #   availabledate = []
-  #   params.each_pair{|key, value| availabledate << Availabledate.get(value)}
-  #   #----------------- CALENDAR INPUT TO COME -------------------------------
-  #   availabledate.each{|a_date| Request.create(user_id: current_user.id,
-  #                                              availabledate_id: a_date.id,
-  #                                              status: Helpers::NOT_CONFIRMED)}
-  #   redirect '/requests'
-  # end
 
   get '/requests' do
     redirect '/spaces' unless current_user
