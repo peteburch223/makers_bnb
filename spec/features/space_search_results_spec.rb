@@ -1,4 +1,4 @@
-feature 'Space search results', :broken => false do
+feature 'Space search results', :broken => true do
   before(:each) do
     sign_up
     create_space

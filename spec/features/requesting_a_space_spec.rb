@@ -1,11 +1,13 @@
+require 'byebug'
+
 feature 'requesting a space' do
   before(:each) do
-    sign_up
+    sign_up(email: TestHelpers::O1_USER_EMAIL)
     create_space
     filter_spaces
   end
 
-  scenario 'request a booking' do
+  scenario 'request a booking', :broken => true do
     click_link TestHelpers::NAME
     expect(page).to have_content(TestHelpers::NAME)
     expect(page).to have_content(TestHelpers::DESCRIPTION)
@@ -14,30 +16,40 @@ feature 'requesting a space' do
     expect { click_button 'Request booking' }.to change(Request, :count).by(1)
   end
 
-  scenario 'visit requests page (has content)' do
+  scenario 'visit requests page (has content)', :broken => true do
     make_request
 
     expect(page).to have_content("Requests I've made")
     expect(page).to have_content("Requests I've received")
   end
 
-  scenario 'displays details of request i\'ve made' do
+  scenario 'displays details of request i\'ve made', :broken => true do
     make_request
 
     expect(page).to have_link(TestHelpers::NAME)
     expect(page).to have_content(Helpers::NOT_CONFIRMED)
     end
 
-  scenario 'displays details of request i\'ve made multiple bookings' do
+  scenario 'displays details of request i\'ve made multiple bookings', :broken => true do
     create_multiple_spaces
     filter_spaces
     make_multiple_requests
     expect(page).to have_link(TestHelpers::O1_S1_NAME)
     expect(page).to have_link(TestHelpers::O1_S2_NAME)
+
   end
 
-  scenario 'displays details of request i\'ve received' do
 
+  scenario 'displays details of request i\'ve made multiple bookings to same space' , :broken => true do
+    create_multiple_spaces
+    filter_spaces
+    make_multiple_requests(s1: TestHelpers::O1_S1_NAME, s2: TestHelpers::O1_S1_NAME)
+    expect(page).to have_link(TestHelpers::O1_S1_NAME, count: 3)
+
+  end
+
+
+  scenario 'displays details of request i\'ve received' , :broken => true do
     click_button('Log out')
     sign_up(email: TestHelpers::O2_USER_EMAIL)
     filter_spaces
@@ -47,8 +59,18 @@ feature 'requesting a space' do
     click_link('Requests')
     expect(page).to have_link(TestHelpers::NAME)
     expect(page).to have_content(Helpers::NOT_CONFIRMED)
+  end
 
-
+  scenario 'displays details of multiple requests i\'ve received to same space' , :broken => false do
+    click_button('Log out')
+    sign_up(email: TestHelpers::O2_USER_EMAIL)
+    filter_spaces
+    make_request
+    make_request
+    log_out
+    sign_in(email: TestHelpers::O1_USER_EMAIL)
+    click_link('Requests')
+    expect(page).to have_link(TestHelpers::O1_S1_NAME, count: 4)
   end
 
 end

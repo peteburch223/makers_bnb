@@ -1,4 +1,4 @@
-feature 'Check access', :broken => false  do
+feature 'Check access', :broken => true  do
   scenario 'cannot access spaces/new unless logged in' do
     visit '/spaces/new'
     within 'h1' do
