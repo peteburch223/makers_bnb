@@ -81,9 +81,10 @@ module TestHelpers
   end
 
   def make_request(name: TestHelpers::NAME)
-    page.execute_script %Q{ $('a.ui-state-default:contains('15')').trigger('click') }
-    page.execute_script %Q{ $('a.ui-state-default:contains('16')').trigger('click') }
-    click_button 'Request booking'
+    page.execute_script %Q{ $('a.ui-datepicker-next').trigger("click") }
+    page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
+    page.execute_script %Q{ $("a.ui-state-default:contains('3')").trigger("click") }
+    click_button('Request booking')
   end
 
   def make_multiple_requests
