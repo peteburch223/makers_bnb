@@ -3,7 +3,7 @@ class MakersBnB < Sinatra::Base
     redirect '/spaces' unless current_user
     redirect '/requests' if params.empty?
     availabledate = []
-    ids = params[:availabledate_id]
+    ids = params[:availabledate_id].split(',').map(&:to_i)
     ids = [*ids[0]..ids[1]] unless ids.length == 1
     ids.pop unless ids.length == 1
     ids.each { |id| availabledate << Availabledate.get(id) }

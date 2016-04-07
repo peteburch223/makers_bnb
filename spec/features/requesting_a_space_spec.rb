@@ -26,7 +26,7 @@ feature 'Requesting a space' do
     page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
     page.execute_script %Q{ $("a.ui-state-default:contains('3')").trigger("click") }
     click_button('Request booking')
-    expect(page).to have_link(TestHelpers::NAME + ':£' + TestHelpers::PRICE)
+    expect(page).to have_link(TestHelpers::NAME + ': £' + TestHelpers::PRICE)
   end
 
 
