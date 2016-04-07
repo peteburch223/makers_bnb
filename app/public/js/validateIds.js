@@ -12,8 +12,11 @@ else if (b.length === 1){
   return false;
 }
 else if (b[0] === b[1]) {
+  console.log(b);
   alert("Dates invalid");
   return false;
 }
-else { return true;}
+else {
+  $('#availabledate_id').val(b);
+  return true;}
 }
