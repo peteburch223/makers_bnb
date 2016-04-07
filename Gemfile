@@ -12,6 +12,7 @@ gem 'sinatra-partial'
 gem 'rake'
 gem 'gon-sinatra'
 
+
 group :test do
   gem 'rspec'
   gem 'capybara'
@@ -21,4 +22,5 @@ group :test do
   gem 'coveralls', require: false
   gem 'byebug'
   gem 'pry'
+  gem 'simplecov', :require => false
 end

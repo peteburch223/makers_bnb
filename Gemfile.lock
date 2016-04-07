@@ -166,6 +166,7 @@ DEPENDENCIES
   rspec
   rspec-sinatra
   selenium-webdriver
+  simplecov
   sinatra
   sinatra-flash
   sinatra-partial
