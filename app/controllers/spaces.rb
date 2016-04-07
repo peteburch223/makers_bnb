@@ -17,10 +17,11 @@ class MakersBnB < Sinatra::Base
 
   get '/spaces/:id' do
     @space = Space.get(params[:id].to_i)
-    available = Availabledate.all(space_id: @space.id)
+    @available = Availabledate.all(space_id: @space.id)
     hash = {}
-    available.each { |obj| hash[obj.id] = obj.avail_date }
+    @available.each { |obj| hash[obj.id] = obj.avail_date }
     gon.available_dates = hash
+
     erb(:"spaces/id")
   end
 end

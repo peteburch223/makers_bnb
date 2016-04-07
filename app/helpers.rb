@@ -1,4 +1,9 @@
 module Helpers
+
+  NOT_CONFIRMED = 'Not Confirmed'
+  APPROVED = 'Approved'
+  REJECTED = 'Rejected'
+
   def current_user
     @current_user ||= User.get(session[:user_id])
   end
