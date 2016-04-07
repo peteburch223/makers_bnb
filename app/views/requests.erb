@@ -1,0 +1,24 @@
+<h1>Requests</h1>
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Requests I've made</h2>
+    <% if @space_requests_made %>
+      <% @space_requests_made.each do |space| %>
+        <div  class="list-group-item">
+          <h3><a href="/spaces/<%= space.id %>"><%= space.name %>: £<%= space.price %></a></h3>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+    <div class="col-sm-6">
+      <h2>Requests I've received</h2>
+      <% if @space_requests_received %>
+        <% @space_requests_received.each do |space| %>
+          <div  class="list-group-item">
+            <h3><a href="/spaces/<%= space.id %>"><%= space.name %>: £<%= space.price %></a></h3>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>

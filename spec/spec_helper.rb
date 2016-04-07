@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 ENV['RACK_ENV'] = 'test'
 
 require File.join(File.dirname(__FILE__), '..', './app/app.rb')
@@ -7,17 +10,16 @@ require 'capybara/rspec'
 require 'rspec'
 require 'database_cleaner'
 require 'tilt/erb'
-require 'helpers/helpers.rb'
+require 'helpers/test_helpers.rb'
 
 Capybara.app = MakersBnB
 
 RSpec.configure do |config|
-
-  config.include Helpers
+  config.filter_run_excluding :broken => true
+  config.include TestHelpers
   config.include Capybara::DSL
 
   config.expect_with :rspec do |expectations|
-
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
 

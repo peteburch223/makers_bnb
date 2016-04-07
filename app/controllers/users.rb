@@ -1,5 +1,4 @@
 class MakersBnB < Sinatra::Base
-
   post '/users/new' do
     @user = User.new(email: params[:email],
                      password: params[:password],
@@ -12,5 +11,4 @@ class MakersBnB < Sinatra::Base
       erb :index
     end
   end
-
 end

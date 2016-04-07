@@ -13,16 +13,15 @@ class User
   validates_length_of :password, min: 6
 
   has n, :requests
-  # has n, :spaces
+  has n, :spaces
 
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
   end
 
-  def self.authenticate(email,password)
+  def self.authenticate(email, password)
     user = User.first(email: email)
     return user if user && BCrypt::Password.new(user.password_digest) == password
   end
-
 end

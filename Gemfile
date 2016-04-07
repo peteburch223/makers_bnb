@@ -10,6 +10,8 @@ gem 'bcrypt'
 gem 'sinatra-flash'
 gem 'sinatra-partial'
 gem 'rake'
+gem 'gon-sinatra'
+
 
 group :test do
   gem 'rspec'
@@ -20,4 +22,5 @@ group :test do
   gem 'coveralls', require: false
   gem 'byebug'
   gem 'pry'
+  gem 'simplecov', :require => false
 end

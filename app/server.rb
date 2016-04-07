@@ -6,10 +6,12 @@ class MakersBnB < Sinatra::Base
   set :session_secret, 'super secret'
   set :partial_template_engine, :erb
 
+  register Gon::Sinatra
+
   enable :partial_underscores
+  include Helpers
 
   get '/' do
     erb :index
   end
-
 end
