@@ -17,10 +17,7 @@ module Helpers
     stay[:nights_count].times do |i|
       Availabledate.create(avail_date: stay[:date_from] + i, space_id: space.id)
     end
-    send_email(
-      subject: "You've just created a new space: #{params[:name]}",
-      body: "Description: #{params[:description]}\nPrice: #{params[:price]}\n"\
-      "Available from #{params[:from_date]} to #{params[:to_date]}")
+    create_space_email(params)
   end
 
   def available_dates(params)
@@ -29,14 +26,13 @@ module Helpers
   end
 
   def create_available_dates(stay)
-    spaces = []
     avail = Hash.new(0)
     stay[:nights_count].times do |i|
       Space.all(availabledates: { avail_date: stay[:date_from] + i }).each do |space|
         avail[space.id] += 1 if Availabledate.all(avail_date: stay[:date_from] + i, requests: { status: APPROVED }).empty?
       end
     end
-
+    spaces = []
     avail.each_pair { |k, v| spaces << Space.get(k) if v == stay[:nights_count] }
     spaces
   end
@@ -66,6 +62,13 @@ module Helpers
     mail.deliver!
   end
 
+  def create_space_email(params)
+    send_email(
+      subject: "You've just created a new space: #{params[:name]}",
+      body: "Description: #{params[:description]}\nPrice: #{params[:price]}\n"\
+      "Available from #{params[:from_date]} to #{params[:to_date]}")
+  end
+
   def booking_confirmation_emails(params, space, requester)
     booking_email_owner(params, space, requester)
     booking_email_requester(params, space, requester)
@@ -74,7 +77,8 @@ module Helpers
   def booking_email_owner(params, space, requester)
     approved?(params)
     send_email(
-      subject: "You've #{params[:response].downcase} #{requester.email}'s request for #{space.name}",
+      subject: "You've #{params[:response].downcase} #{requester.email}'s"\
+      " request for #{space.name}",
       body: @body_owner
     )
   end
@@ -83,7 +87,8 @@ module Helpers
     approved?(params)
     send_email(
       to: requester.email,
-      subject: "Your request for #{space.name} has been #{params[:response].downcase}",
+      subject: "Your request for #{space.name} has been"\
+      " #{params[:response].downcase}",
       body: @body_requester
     )
   end
@@ -93,12 +98,12 @@ module Helpers
       @body_owner = "We hope you enjoy a stranger in your house \n\n Kisses"
       @body_requester = "We hope you enjoy staying in a stranger's house \n\n Kisses"
     else
-      @body_owner = "We're sorry you're too afraid to host that stranger"
+      @body_owner = "We're sorry you're too afraid to host that stranger \n\n Kisses"
       @body_requester = "We're sorry the stranger didn't like the look of you, better luck next time. \n\n Kisses"
     end
   end
 
-  def make_request(availabledate, _ids)
+  def make_request(availabledate)
     request_id = Request.max(:request_id)
     request_id = (request_id.nil? ? 1 : request_id + 1)
     number_of_nights = 0
@@ -112,13 +117,25 @@ module Helpers
 
     space = Space.first(id: availabledate[0].space_id)
     total_cost = space.price.to_f * number_of_nights
-    send_email(to: current_user.email,
-               subject: "You've just requested to stay at: #{space.name}",
-               body: "#{space.description}\nCost of stay: £#{total_cost}\nKisses")
     owner = User.first(id: space.user_id)
-    send_email(to: owner.email,
-               subject: "You have a new request for #{space.name}",
-               body: "#{current_user.email} has requested to stay in your shithole '#{space.name}' for #{number_of_nights} horrific nights!\nKisses")
+
+    request_email_requester(space, total_cost)
+    request_email_owner(owner, space, number_of_nights)
+  end
+
+  def request_email_requester(space, total_cost)
+    send_email(
+      to: current_user.email,
+      subject: "You've just requested to stay at: #{space.name}",
+      body: "#{space.description}\nCost of stay: £#{total_cost}\nKisses")
+  end
+
+  def request_email_owner(owner, space, number_of_nights)
+    send_email(
+      to: owner.email,
+      subject: "You have a new request for #{space.name}",
+      body: "#{current_user.email} has requested to stay in your shithole"\
+      " '#{space.name}' for #{number_of_nights} horrific nights!\nKisses")
   end
 
   def requests_made

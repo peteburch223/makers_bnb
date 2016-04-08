@@ -8,7 +8,7 @@ class MakersBnB < Sinatra::Base
     ids.pop unless ids.length == 1
     ids.each { |id| availabledate << Availabledate.get(id) }
 
-    make_request(availabledate, ids)
+    make_request(availabledate)
 
     redirect '/requests'
   end
