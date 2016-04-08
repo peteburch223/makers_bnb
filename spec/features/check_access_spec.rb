@@ -1,4 +1,4 @@
-feature 'Check access', :focus => false  do
+feature 'Check access', js: true, passing: true  do
   scenario 'cannot access spaces/new unless logged in' do
     visit '/spaces/new'
     within 'h1' do

@@ -7,7 +7,7 @@ class MakersBnB < Sinatra::Base
     ids = [*ids[0]..ids[1]] unless ids.length == 1
     ids.pop unless ids.length == 1
     ids.each { |id| availabledate << Availabledate.get(id) }
-    
+
     make_request(availabledate, ids)
 
     redirect '/requests'
@@ -35,9 +35,9 @@ class MakersBnB < Sinatra::Base
     space = Space.first(availabledates: { requests: { id: params[:id] } })
 
     send_email(to: requester.email, subject: "Your request for #{space.name} has been #{params[:response].downcase}",
-               body: email_responses)
+               body: email_responses(params))
     send_email(to: current_user.email, subject: "You've #{params[:response].downcase} #{requester.email}'s request",
-               body: email_responses)
+               body: email_responses(params))
     redirect '/requests'
   end
 end
