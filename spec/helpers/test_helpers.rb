@@ -21,16 +21,14 @@ module TestHelpers
   O1_S2_FROM_DATE = '02/05/2016'.freeze
   O1_S2_TO_DATE = '03/06/2016'.freeze
 
-
-  FROM_DATE_EXCL_RES = '06/05/2016'
-  TO_DATE_EXCL_RES = '31/05/2016'
+  FROM_DATE_EXCL_RES = '06/05/2016'.freeze
+  TO_DATE_EXCL_RES = '31/05/2016'.freeze
 
   FROM_DATE_MINUS_ONE = '30/04/2016'.freeze
   TO_DATE_PLUS_ONE = '01/06/2016'.freeze
   FROM_DATE_NOT_AVAIL = '01/06/2016'.freeze
   TO_DATE_NOT_AVAIL = '30/06/2016'.freeze
   REQUEST_DATE = '2016-05-15'.freeze
-
 
   def in_browser(name)
     old_session = Capybara.session_name
@@ -93,9 +91,6 @@ module TestHelpers
     click_button('List my space')
   end
 
-
-
-
   def create_space(name: NAME,
                    description: DESCRIPTION,
                    price: PRICE,
@@ -130,12 +125,11 @@ module TestHelpers
   end
 
   def make_request(name: TestHelpers::NAME)
-    page.execute_script %Q{ $('a.ui-datepicker-next').trigger("click") }
-    page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
-    page.execute_script %Q{ $("a.ui-state-default:contains('3')").trigger("click") }
+    page.execute_script %{ $('a.ui-datepicker-next').trigger("click") }
+    page.execute_script %{ $("a.ui-state-default:contains('2')").trigger("click") }
+    page.execute_script %{ $("a.ui-state-default:contains('3')").trigger("click") }
     click_button('Request booking')
   end
-
 
   def make_multiple_requests
     filter_spaces

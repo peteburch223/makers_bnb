@@ -26,7 +26,6 @@ feature 'List a Space', js: true, passing: true do
     expect(page).to have_content(TestHelpers::NAME)
     expect(page).to have_content(TestHelpers::DESCRIPTION)
     expect(page).to have_content(TestHelpers::PRICE)
-
   end
 
   scenario 'multiple spaces' do

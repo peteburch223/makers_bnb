@@ -1,7 +1,6 @@
 require 'data_mapper'
 require './app/app.rb'
 
-
 if ENV['RACK_ENV'] != 'production'
   require 'rspec/core/rake_task'
 
@@ -11,19 +10,19 @@ if ENV['RACK_ENV'] != 'production'
 end
 
 namespace :db do
-  desc "Non-destructive update"
+  desc 'Non-destructive update'
   task :auto_upgrade do
     DataMapper.auto_upgrade!
-    puts "Auto-upgrade complete (no data loss)"
+    puts 'Auto-upgrade complete (no data loss)'
   end
 
-  desc "Destructive update"
+  desc 'Destructive update'
   task :auto_migrate do
     DataMapper.auto_migrate!
-    puts "Auto-migrate complete (data was lost)"
+    puts 'Auto-migrate complete (data was lost)'
   end
 
-  task :upgrade_migrate => [:auto_migrate, :auto_upgrade] do
-    puts "updating database..."
+  task upgrade_migrate: [:auto_migrate, :auto_upgrade] do
+    puts 'updating database...'
   end
 end

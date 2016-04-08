@@ -32,7 +32,7 @@ feature 'booked space not available', js: true, passing: true do
     end
   end
 
-  scenario 'booked dates not available in date picker'  do
+  scenario 'booked dates not available in date picker' do
     in_browser(:one) do
       create_space1
     end

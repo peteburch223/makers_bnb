@@ -1,4 +1,4 @@
-feature 'multiple users', js: true, passing: true   do
+feature 'multiple users', js: true, passing: true do
   before(:each) do
     in_browser(:one) do
       sign_up(email: TestHelpers::O1_USER_EMAIL)
@@ -20,7 +20,6 @@ feature 'multiple users', js: true, passing: true   do
       click_link('Requests')
       expect(page).to have_link(TestHelpers::O1_S1_NAME)
       expect(page).to have_content(Helpers::NOT_CONFIRMED)
-
     end
   end
 end

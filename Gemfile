@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 ruby '2.2.3'
 
@@ -13,7 +13,6 @@ gem 'rake'
 gem 'gon-sinatra'
 gem 'mail'
 
-
 group :test do
   gem 'rspec'
   gem 'capybara'
@@ -23,5 +22,5 @@ group :test do
   gem 'coveralls', require: false
   gem 'byebug'
   gem 'pry'
-  gem 'simplecov', :require => false
+  gem 'simplecov', require: false
 end

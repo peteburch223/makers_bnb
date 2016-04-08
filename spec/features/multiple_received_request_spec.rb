@@ -1,4 +1,4 @@
-feature 'multiple users multiple requests', passing: true  do
+feature 'multiple users multiple requests', passing: true do
   before(:each) do
     in_browser(:one) do
       sign_up(email: TestHelpers::O1_USER_EMAIL)
@@ -22,5 +22,4 @@ feature 'multiple users multiple requests', passing: true  do
       expect(page).to have_content(TestHelpers::NAME, count: 2)
     end
   end
-
 end

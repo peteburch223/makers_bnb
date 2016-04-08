@@ -14,12 +14,12 @@ require 'helpers/test_helpers.rb'
 require 'byebug'
 
 Capybara.app = MakersBnB
-  # include Capybara::DSL
-  # Capybara.default_driver = :selenium
+# include Capybara::DSL
+# Capybara.default_driver = :selenium
 
 RSpec.configure do |config|
-  config.filter_run_excluding :broken => true
-  config.filter_run_excluding :interacting => true
+  config.filter_run_excluding broken: true
+  config.filter_run_excluding interacting: true
   config.include TestHelpers
   config.include Capybara::DSL
 
@@ -35,7 +35,7 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
   end
 
-  config.before(:each, :js => true) do
+  config.before(:each, js: true) do
     DatabaseCleaner.strategy = :truncation
   end
 
