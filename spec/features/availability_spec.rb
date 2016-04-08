@@ -1,6 +1,6 @@
 require 'byebug'
 
-feature 'Searching availability' do
+feature 'Searching availability', :focus => false  do
   before(:each) do
     sign_up
     create_space0
@@ -29,6 +29,7 @@ feature 'Searching availability' do
 
   scenario 'can display a list of available spaces with links to detail page' do
     filter_spaces
+    # byebug
     expect(page).to have_link(TestHelpers::NAME)
   end
 end

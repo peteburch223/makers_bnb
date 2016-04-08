@@ -13,7 +13,7 @@ feature 'Requesting a space' do
     expect(page).to have_content(TestHelpers::DESCRIPTION)
   end
 
-  scenario 'can select a check in and out date', js: true do
+  scenario 'can select a check in and out date', js: true  do
     page.execute_script %{ $('a.ui-datepicker-next').trigger("click") }
     page.execute_script %{ $("a.ui-state-default:contains('2')").trigger("click") }
     page.execute_script %{ $("a.ui-state-default:contains('3')").trigger("click") }

@@ -1,8 +1,8 @@
-feature 'Reviewing requests' do
+feature 'Reviewing requests', focus: false  do
 
   before(:each) do
     sign_up
-    create_space
+    create_space0
     filter_spaces
     click_link TestHelpers::NAME
   end
