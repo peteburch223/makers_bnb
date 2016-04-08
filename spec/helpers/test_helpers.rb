@@ -27,6 +27,14 @@ module TestHelpers
   TO_DATE_NOT_AVAIL = '30/06/2016'.freeze
   REQUEST_DATE = '2016-05-15'.freeze
 
+
+  def in_browser(name)
+    old_session = Capybara.session_name
+    Capybara.session_name = name
+    yield
+    Capybara.session_name = old_session
+  end
+
   def sign_up(email: O1_USER_EMAIL,
               password: PASSWORD,
               password_confirmation: PASSWORD)
@@ -44,6 +52,17 @@ module TestHelpers
     fill_in 'email',    with: email
     fill_in 'password', with: password
     click_button 'Log in'
+  end
+
+  def log_out
+    click_button('Log out')
+  end
+
+  def make_request(name: O1_S1_NAME ,date: REQUEST_DATE)
+    click_link(name)
+    check(date)
+    check(REQUEST_DATE)
+    click_button 'Request booking'
   end
 
   def create_space(name: NAME,
@@ -85,6 +104,28 @@ module TestHelpers
     page.execute_script %Q{ $("a.ui-state-default:contains('3')").trigger("click") }
     click_button('Request booking')
   end
+
+  def create_space(name: O1_S1_NAME,
+                   description: DESCRIPTION,
+                   price: PRICE,
+                   from_date: FROM_DATE,
+                   to_date: TO_DATE)
+
+    click_button('List a Space')
+    fill_in('spaceName', with: name)
+    fill_in('spaceDescription', with: description)
+    fill_in('spacePrice', with: price)
+    fill_in('fromDate', with: from_date)
+    fill_in('toDate', with: to_date)
+    click_button('List my Space')
+
+# def make_multiple_requests(s1: O1_S1_NAME, s2: O1_S2_NAME)
+#   make_request(name: s1)
+#   visit('/spaces')
+#   filter_spaces
+#   make_request(name: s2)
+#
+# end
 
   def make_multiple_requests
     filter_spaces

@@ -1,6 +1,8 @@
 require 'simplecov'
 SimpleCov.start
 
+puts "starting spec_helper"
+
 ENV['RACK_ENV'] = 'test'
 
 require File.join(File.dirname(__FILE__), '..', './app/app.rb')
@@ -11,11 +13,15 @@ require 'rspec'
 require 'database_cleaner'
 require 'tilt/erb'
 require 'helpers/test_helpers.rb'
+require 'byebug'
 
 Capybara.app = MakersBnB
+  # include Capybara::DSL
+  # Capybara.default_driver = :selenium
 
 RSpec.configure do |config|
   config.filter_run_excluding :broken => true
+  config.filter_run_excluding :interacting => true
   config.include TestHelpers
   config.include Capybara::DSL
 
@@ -35,7 +41,7 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :truncation
   end
 
-  config.before(:each) do
+  config.before do
     DatabaseCleaner.start
   end
 

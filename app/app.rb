@@ -1,4 +1,8 @@
+puts "starting app"
+
 ENV['RACK_ENV'] ||= 'development'
+
+puts "RACK_ENV = #{ENV['RACK_ENV']}"
 
 require 'sinatra/base'
 require 'sinatra/flash'
