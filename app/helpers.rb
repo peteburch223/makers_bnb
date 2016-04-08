@@ -4,24 +4,6 @@ module Helpers
   APPROVED = 'Approved'
   REJECTED = 'Rejected'
 
-  def sign_in_one_player_game(player_name)
-    visit "/"
-    fill_in "player_name", :with => player_name
-    choose ('one-player')
-    click_button "Submit"
-  end
-
-  def sign_in_two_player_game(player_name)
-    visit "/"
-    fill_in "player_name", :with => player_name
-    choose ('two-player')
-    click_button "Submit"
-  end
-
-
-
-
-
   def current_user
     @current_user ||= User.get(session[:user_id])
   end
