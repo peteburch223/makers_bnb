@@ -1,24 +1,110 @@
-.bg-header {
-  background-color: #1abc9c; /* Green */
-  color: #000000;
+/* LOGIN AND REGISTER FORM */
+.panel-login {
+	border-color: #D3D3D3;
+	-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.panel-login>.panel-heading {
+	color: #00415d;
+	/*background-color: #fff;*/
+	border-color: #fff;
+	text-align:center;
+}
+.panel-login>.panel-heading a{
+	text-decoration: none;
+	color: #666;
+	font-weight: bold;
+	font-size: 15px;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	transition: all 0.1s linear;
+}
+.panel-login>.panel-heading a.active{
+	color: #f68544;
+	font-size: 18px;
+}
+.panel-login>.panel-heading hr{
+	margin-top: 10px;
+	margin-bottom: 0px;
+	clear: both;
+	border: 0;
+	height: 1px;
+	background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+	background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+	background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+	background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+}
+.panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
+	height: 45px;
+	border: 1px solid #ddd;
+	font-size: 16px;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	transition: all 0.1s linear;
+  text-align: center;
+  font-size: 18px;
+}
+.panel-login input:hover,
+.panel-login input:focus {
+	outline:none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	border-color: #ccc;
+}
+.btn-login {
+	background-color: #f68544;
+	outline: none;
+	color: #fff;
+	font-size: 14px;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+	text-transform: uppercase;
+	border-color: #f68544;
+}
+.btn-login:hover,
+.btn-login:focus {
+	color: #fff;
+	background-color: #f68544;
+	border-color: #f68544;
+}
+.forgot-password {
+	text-decoration: underline;
+	color: #888;
+}
+.forgot-password:hover,
+.forgot-password:focus {
+	text-decoration: underline;
+	color: #666;
 }
 
-.bg-main {
-  background-image:url('../images/ocean.jpg');
+.btn-register {
+	background-color: #f68544;
+	outline: none;
+	color: #fff;
+	font-size: 14px;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+	text-transform: uppercase;
+	border-color: #f68544;
+}
+.btn-register:hover,
+.btn-register:focus {
+	color: #fff;
+	background-color: #f68544;
+	border-color: #f68544;
+}
+
+body {
+  background-image:url('../images/favela.jpg');
   background-position: top;
   font-family: 'Quicksand', sans-serif;
 }
-::-webkit-input-placeholder {
-   color: #909090;
-   font-size: 12px;
-}
-input[type] {
-  padding: 5px 5px;
-  line-height: 18px;
-}
-.btn-style{
 
-}
 .error {
   font-size:16px;
   font-weight: bold;
@@ -38,40 +124,38 @@ input[type] {
 .navbar-default .navbar-nav>li>a {
   color: black;
 }
-/* HOME PAGE STYLES */
-
-.hero-unit {
-    background-size: cover;
-    background-color: transparent;
-    padding-top: 200px;
+/* All sizes */
+::-webkit-input-placeholder {
+   color: #909090;
+   font-size: 18px;
+}
+/* Large desktop */
+@media (min-width: 1200px) { ... }
+  .home {
+    margin-top: 100px;
   }
-.hero-unit h1 {
-    color: #FF0080;
-    font: 700 80px 'Quicksand', sans-serif;
-    letter-spacing: -1px;
-    line-height: 1;
+  .siteName {
+    font-size: 90px;
+    font-weight: bold;
+    color: #f68544;
+    text-transform: uppercase;
     margin-bottom: 0;
-    font-weight: normal;
-    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+  }
+  .siteTag {
+    font-size: 18px;
+    margin: 0 0 25px 0;
+    padding: 0;
+  }
 }
-.hero-unit h2 {
-    font-size: 25px;
-    color: black;
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+
 }
-.fill{width:100%;height:350px;background-position:center;background-size:cover;
-}
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { ... }
 
-    /* Large desktop */
-    @media (min-width: 1200px) { ... }
-
-    /* Portrait tablet to landscape and desktop */
-    @media (min-width: 768px) and (max-width: 979px) { ... }
-
-    /* Landscape phone to portrait tablet */
-    @media (max-width: 767px) { ... }
-
-    /* Landscape phones and down */
-    @media (max-width: 480px) { ... }
+/* Landscape phones and down */
+@media (max-width: 480px) { ... }
 
 
 /* DATEPICKER STYLES */

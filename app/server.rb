@@ -12,6 +12,7 @@ class MakersBnB < Sinatra::Base
   include Helpers
 
   get '/' do
+    redirect '/spaces' if current_user
     erb :index
   end
 end

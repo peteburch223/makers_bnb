@@ -20,12 +20,18 @@ feature 'Reviewing requests' do
     expect(page).to have_content('02/05/2016')
     end
 
-  scenario 'displays details of request i\'ve made multiple bookings', :js => true do
+  scenario 'displays details of request i\'ve made multiple bookings', :js => true, focus: true do
     visit('/spaces')
-    create_multiple_spaces
-    make_multiple_requests
-    expect(page).to have_link(TestHelpers::O1_S1_NAME)
-    expect(page).to have_link(TestHelpers::O1_S2_NAME)
+    create_space1
+    filter_spaces
+    click_link (TestHelpers::NAME)
+    make_request
+    click_link('Spaces')
+    filter_spaces
+    click_link (TestHelpers::O1_S1_NAME)
+    make_request
+    expect(page).to have_link(TestHelpers::NAME, count: 2)
+    expect(page).to have_link(TestHelpers::O1_S1_NAME, count: 2)
   end
 
   scenario 'displays details of request i\'ve received', :js => true do
