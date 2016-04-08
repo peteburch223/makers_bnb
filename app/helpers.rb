@@ -30,7 +30,7 @@ module Helpers
     avail = Hash.new(0)
     stay[:nights_count].times do |i|
       Space.all(availabledates: { avail_date: stay[:date_from] + i }).each do |space|
-        avail[space.id] += 1
+        avail[space.id] += 1 if Availabledate.all(avail_date: stay[:date_from] + i, requests: {status: APPROVED}).empty?
       end
     end
 
