@@ -1,4 +1,4 @@
-feature 'Signing in', :broken => false  do
+feature 'Signing in', :focus => false   do
   it 'allows a user to sign in' do
     sign_up
     sign_in

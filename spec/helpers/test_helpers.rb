@@ -58,11 +58,22 @@ module TestHelpers
     click_button('Log out')
   end
 
-  def make_request(name: O1_S1_NAME ,date: REQUEST_DATE)
-    click_link(name)
-    check(date)
-    check(REQUEST_DATE)
-    click_button 'Request booking'
+  # def make_request(name: O1_S1_NAME ,date: REQUEST_DATE)
+  #   click_link(name)
+  #   check(date)
+  #   check(REQUEST_DATE)
+  #   click_button 'Request booking'
+  # end
+
+
+  def create_space0
+    click_button('List a Space')
+    fill_in('spaceName', with: NAME)
+    fill_in('spaceDescription', with: DESCRIPTION)
+    fill_in('spacePrice', with: PRICE)
+    fill_in('fromDate', with: FROM_DATE)
+    fill_in('toDate', with: TO_DATE)
+    click_button('List my Space')
   end
 
   def create_space(name: NAME,

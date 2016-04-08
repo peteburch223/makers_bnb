@@ -1,6 +1,6 @@
 require 'byebug'
 
-feature 'Acknowledge bookings' do
+feature 'Acknowledge bookings', focus: true  do
   before(:each) do
     sign_up(email: TestHelpers::O1_USER_EMAIL)
     create_space
@@ -14,14 +14,14 @@ feature 'Acknowledge bookings' do
   end
 
 
-  scenario 'I can process requests I\'ve received', :interacting => true  do
+  scenario 'I can process requests I\'ve received', :interacting => false  do
     click_link(TestHelpers::O1_S1_NAME)
     expect(page).to have_content("Request for #{TestHelpers::O1_S1_NAME}")
     expect(page).to have_content("From: #{TestHelpers::O2_USER_EMAIL}")
     expect(page).to have_content("Date: #{TestHelpers::REQUEST_DATE}")
   end
 
-  scenario 'I can approve request', :interacting => true  do
+  scenario 'I can approve request', :interacting => false  do
     click_link(TestHelpers::O1_S1_NAME)
     click_button('Confirm request')
     expect(page).to have_link(TestHelpers::O1_S1_NAME)
@@ -29,7 +29,7 @@ feature 'Acknowledge bookings' do
     expect(page).to have_content(Helpers::APPROVED)
   end
 
-  scenario 'I can reject request', :interacting => true  do
+  scenario 'I can reject request', :interacting => false  do
     click_link(TestHelpers::O1_S1_NAME)
     click_button('Reject request')
     expect(page).to have_link(TestHelpers::O1_S1_NAME)
