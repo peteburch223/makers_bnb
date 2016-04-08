@@ -3,6 +3,8 @@ module Helpers
   NOT_CONFIRMED = 'Not Confirmed'
   APPROVED = 'Approved'
   REJECTED = 'Rejected'
+  CONFIRMATION_EMAIL = "We hope you enjoy a stranger in your house \n\n Kisses"
+  REJECTION_EMAIL = "We're sorry the stranger didn't like the look of you, better luck next time. \n\n Kisses"
 
   def current_user
     @current_user ||= User.get(session[:user_id])
@@ -56,7 +58,7 @@ module Helpers
 
     return if ENV['RACK_ENV'] == 'test'
     mail = Mail.new do
-     from     'yomama@yomama.com'
+     from     'hello@favela.com'
      to       to
      subject  subject
      body     body

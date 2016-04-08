@@ -35,10 +35,12 @@ class MakersBnB < Sinatra::Base
     req.update(status: params[:response])
     requester = User.first(id: req[0].user_id)
     space = Space.first(availabledates: { requests: { id: params[:id] } })
-    send_email(to: requester.email, subject: "Your request for #{space.name} has been #{params[:response]}",
-               body: "We hope you enjoy your stay at a strangers house")
-    send_email(to: current_user.email, subject: "You've #{params[:response]} #{requester.email}'s request",
-               body: "We hope you enjoy a stranger in your house")
+    params[:response] == "Confirmed" ? body = Helpers::CONFIRMATION_EMAIL : Helpers::REJECTION_EMAIL
+
+    send_email(to: requester.email, subject: "Your request for #{space.name} has been #{params[:response].downcase}",
+               body: body)
+    send_email(to: current_user.email, subject: "You've #{params[:response].downcase} #{requester.email}'s request",
+               body: body)
     redirect '/requests'
   end
 
