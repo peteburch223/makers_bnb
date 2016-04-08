@@ -1,33 +1,22 @@
 class MakersBnB < Sinatra::Base
-
   post '/requests/new' do
     redirect '/spaces' unless current_user
     redirect '/requests' if params.empty?
     availabledate = []
-    id_array = params[:availabledate_id].split(',').sort
-    id_array = [*(id_array[0].to_i)..(id_array[1].to_i)]
-    id_array.each { |id| availabledate << Availabledate.get(id) }
+    ids = params[:availabledate_id].split(',').map(&:to_i)
+    ids = [*ids[0]..ids[1]] unless ids.length == 1
+    ids.pop unless ids.length == 1
+    ids.each { |id| availabledate << Availabledate.get(id) }
     availabledate.each do |a_date|
       Request.create(user_id: current_user.id,
                      availabledate_id: a_date.id,
                      status: Helpers::NOT_CONFIRMED)
-                   end
-     redirect '/requests'
+    end
+
+    redirect '/requests'
   end
 
-  # post '/requests/new' do
-  #
-  #   availabledate = []
-  #   params.each_pair{|key, value| availabledate << Availabledate.get(value)}
-  #   #----------------- CALENDAR INPUT TO COME -------------------------------
-  #   availabledate.each{|a_date| Request.create(user_id: current_user.id,
-  #                                              availabledate_id: a_date.id,
-  #                                              status: Helpers::NOT_CONFIRMED)}
-  #   redirect '/requests'
-  # end
-
   get '/requests' do
-
     redirect '/spaces' unless current_user
 
     # need to ensure that multiple requests to the same space are considered separately
@@ -35,7 +24,7 @@ class MakersBnB < Sinatra::Base
     @space_requests_made = prepare_request_display(space_requests_made)
 
     space_requests_received = Space.all(user_id: current_user.id)
-    space_requests_received.reject!{|space| space.availabledates.requests.empty?}
+    space_requests_received.reject! { |space| space.availabledates.requests.empty? }
     @space_requests_received = prepare_request_display(space_requests_received)
     erb(:requests)
   end

@@ -1,54 +1,57 @@
-feature 'requesting a space' do
+require 'byebug'
+
+feature 'Requesting a space' do
   before(:each) do
     sign_up
     create_space
     filter_spaces
+    click_link TestHelpers::NAME
   end
 
-  scenario 'request a booking' do
-    click_link TestHelpers::NAME
+  scenario 'displays space details after selecting from list of available spaces' do
     expect(page).to have_content(TestHelpers::NAME)
     expect(page).to have_content(TestHelpers::DESCRIPTION)
-    check('2016-03-05')
-
-    expect { click_button 'Request booking' }.to change(Request, :count).by(1)
   end
 
-  scenario 'visit requests page (has content)' do
-    make_request
-
-    expect(page).to have_content("Requests I've made")
-    expect(page).to have_content("Requests I've received")
+  scenario 'can select a check in and out date', js: true do
+    page.execute_script %{ $('a.ui-datepicker-next').trigger("click") }
+    page.execute_script %{ $("a.ui-state-default:contains('2')").trigger("click") }
+    page.execute_script %{ $("a.ui-state-default:contains('3')").trigger("click") }
+    expect(page).to have_field('check_in', with: '2016-May-02')
+    expect(page).to have_field('check_out', with: '2016-May-03')
   end
 
-  scenario 'displays details of request i\'ve made' do
-    make_request
+  scenario 'adds a request record after selecting valid dates', :js => true do
+    page.execute_script %Q{ $('a.ui-datepicker-next').trigger("click") }
+    page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
+    page.execute_script %Q{ $("a.ui-state-default:contains('3')").trigger("click") }
+    click_button('Request booking')
+    expect(page).to have_link(TestHelpers::NAME + ': £' + TestHelpers::PRICE)
+  end
 
-    expect(page).to have_link(TestHelpers::NAME)
-    expect(page).to have_content(Helpers::NOT_CONFIRMED)
+
+  scenario 'cannot select an unavailable check in date', :js => true do
+    page.execute_script %Q{ $("a.ui-state-default:contains('15')").trigger("click") }
+    expect(page).to have_field('check_in', with: '')
+  end
+
+  scenario 'cannot select an unavailable check out date', :js => true do
+    page.execute_script %Q{ $('a.ui-datepicker-next').trigger("click") }
+    page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
+    page.execute_script %Q{ $('a.ui-datepicker-next').trigger("click") }
+    page.execute_script %Q{ $("a.ui-state-default:contains('4')").trigger("click") }
+    expect(page).to have_field('check_in', with: '2016-May-02')
+    expect(page).to have_field('check_out', with: '')
+  end
+
+  scenario 'cannot select the same date for check in and check out', js: true do
+    page.accept_confirm 'Dates invalid' do
+      page.execute_script %Q{ $('a.ui-datepicker-next').trigger("click") }
+      page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
+      page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
+      click_button('Request booking')
     end
-
-  scenario 'displays details of request i\'ve made multiple bookings' do
-    create_multiple_spaces
-    filter_spaces
-    make_multiple_requests
-    expect(page).to have_link(TestHelpers::O1_S1_NAME)
-    expect(page).to have_link(TestHelpers::O1_S2_NAME)
+    expect(page).to have_field('check_in', with: '2016-May-02')
+    expect(page).to have_field('check_out', with: '2016-May-02')
   end
-
-  scenario 'displays details of request i\'ve received' do
-
-    click_button('Log out')
-    sign_up(email: TestHelpers::O2_USER_EMAIL)
-    filter_spaces
-    make_request
-    click_button('Log out')
-    sign_in
-    click_link('Requests')
-    expect(page).to have_link(TestHelpers::NAME)
-    expect(page).to have_content(Helpers::NOT_CONFIRMED)
-
-
-  end
-
 end
