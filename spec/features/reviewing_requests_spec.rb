@@ -20,7 +20,7 @@ feature 'Reviewing requests' do
     expect(page).to have_content('02/05/2016')
     end
 
-  scenario 'displays details of request i\'ve made multiple bookings', :js => true, focus: true do
+  scenario 'displays details of request i\'ve made multiple bookings', :js => true do
     visit('/spaces')
     create_space1
     filter_spaces

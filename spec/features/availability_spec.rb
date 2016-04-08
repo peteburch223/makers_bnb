@@ -1,6 +1,6 @@
 require 'byebug'
 
-feature 'Searching availability', :focus => false  do
+feature 'Searching availability',js: true  do
   before(:each) do
     sign_up
     create_space0

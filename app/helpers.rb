@@ -67,7 +67,7 @@ module Helpers
    mail.deliver!
   end
 
-  def email_responses
+  def email_responses(params)
     return CONFIRMATION_EMAIL if params[:response] == "Approved"
     REJECTION_EMAIL
   end
