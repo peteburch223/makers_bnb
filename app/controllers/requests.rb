@@ -97,7 +97,7 @@ class MakersBnB < Sinatra::Base
       result = []
       result << space
       result << space.availabledates.requests.first.status
-      result << space.availabledates.first.avail_date.strftime('%d %m %Y') + (' - ' + space.availabledates.last.avail_date.strftime('%d %m %Y') if space.availabledates.count > 1)
+      result << space.availabledates.first.avail_date.strftime('%d/%m/%Y') + (' to ' + space.availabledates.last.avail_date.strftime('%d/%m/%Y') if space.availabledates.count > 1)
       result << space.availabledates.requests.first.id.to_s
       return_value << result
     end
