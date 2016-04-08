@@ -8,13 +8,7 @@ class MakersBnB < Sinatra::Base
     ids.pop unless ids.length == 1
     ids.each { |id| availabledate << Availabledate.get(id) }
 
-    request_id = Request.max(:request_id)
-    request_id = (request_id.nil? ? 1 : request_id + 1)
-    availabledate.each do |a_date|
-      Request.create(user_id: current_user.id,
-                     availabledate_id: a_date.id,
-                     status: Helpers::NOT_CONFIRMED)
-    end
+    make_request(availabledate, ids)
 
     redirect '/requests'
   end
@@ -36,8 +30,15 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/requests/:id' do
+
     req = Request.all(id: params[:id])
     req.update(status: params[:response])
+    requester = User.first(id: req[0].user_id)
+    space = Space.first(availabledates: { requests: { id: params[:id] } })
+    send_email(to: requester.email, subject: "Your request for #{space.name} has been #{params[:response]}",
+               body: "We hope you enjoy your stay at a strangers house")
+    send_email(to: current_user.email, subject: "You've #{params[:response]} #{requester.email}'s request",
+               body: "We hope you enjoy a stranger in your house")
     redirect '/requests'
   end
 

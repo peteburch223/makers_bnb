@@ -18,6 +18,8 @@ module Helpers
     stay[:nights_count].times do |i|
       Availabledate.create(avail_date: stay[:date_from] + i, space_id: space.id)
     end
+    send_email(subject: "You've just created a new space: #{params[:name]}",
+    body: "Description: #{params[:description]}\nPrice: #{params[:price]}\nAvailable from #{params[:from_date]} to #{params[:to_date]}")
   end
 
   def available_dates(params)
@@ -47,5 +49,35 @@ module Helpers
     result[:nights_count] = nights_count
     result[:date_from] = date_from
     result
+  end
+
+  def send_email(to: current_user.email, subject: 'Welcome to MakersBnB',
+                                         body: "test body")
+
+    return if ENV['RACK_ENV'] == 'test'
+    mail = Mail.new do
+     from     'yomama@yomama.com'
+     to       to
+     subject  subject
+     body     body
+    end
+
+   mail.deliver!
+  end
+
+  def make_request(availabledate, ids)
+    request_id = Request.max(:request_id)
+    request_id = (request_id.nil? ? 1 : request_id + 1)
+    availabledate.each do |a_date|
+      Request.create(user_id: current_user.id,
+                     availabledate_id: a_date.id,
+                     status: Helpers::NOT_CONFIRMED,
+                     request_id: request_id)
+    end
+    space = Space.first(id: availabledate[0].space_id)
+    number_of_nights = ids[-1] - ids[0]
+    total_cost = space.price.to_f * number_of_nights
+  send_email(subject: "You've just requested to stay at: #{space.name}",
+             body: "#{space.description}\nCost of stay: £#{total_cost}")
   end
 end
