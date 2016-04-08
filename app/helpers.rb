@@ -48,4 +48,51 @@ module Helpers
     result[:date_from] = date_from
     result
   end
+
+  def requests_made
+    requests_made = Request.all(user_id: current_user.id, :fields => [:user_id, :request_id], :unique => true, :order => nil)
+    space_requests_made = []
+    requests_made.each do |req|
+      result =[]
+      result << Space.first(availabledates: { requests: { user_id: current_user.id, request_id: req.request_id } })
+      result << req.request_id
+      space_requests_made << result
+    end
+    prepare_request_display_array(space_requests_made)
+  end
+
+  def requests_received
+    requests = Request.all()
+    return [] if requests.nil?
+    requests_received = []
+    requests.each do |req|
+      requests_received << req.request_id if req.availabledate.space.user_id == current_user.id
+    end
+
+    requests_received.uniq!
+    space_requests_received = []
+
+    requests_received.each do |id|
+      result =[]
+      result << Space.first(availabledates: { requests: {request_id: id } })
+      result << id
+      space_requests_received << result
+    end
+    prepare_request_display_array(space_requests_received)
+  end
+
+  def prepare_request_display_array(space_request_arrays)
+    return [] if space_request_arrays.nil?
+    return_value = []
+    space_request_arrays.each do |space|
+      result = []
+      result << space.first
+      result << Request.first(request_id: space.last).status
+      dates = Availabledate.all(requests: {request_id: space.last})
+      result << dates.first.avail_date.strftime('%d/%m/%Y') + ((' - ' + dates.last.avail_date.strftime('%d/%m/%Y') if dates.count > 1) || "")
+      result << space.last.to_s
+      return_value << result
+    end
+    return_value
+  end
 end
