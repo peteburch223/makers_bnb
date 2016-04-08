@@ -64,7 +64,7 @@ module TestHelpers
   end
 
   def create_space0
-    click_button('List a Space')
+    click_button('List a space')
     fill_in('spaceName', with: NAME)
     fill_in('spaceDescription', with: DESCRIPTION)
     fill_in('spacePrice', with: PRICE)
@@ -74,7 +74,7 @@ module TestHelpers
   end
 
   def create_space1
-    click_button('List a Space')
+    click_button('List a space')
     fill_in('spaceName', with: O1_S1_NAME)
     fill_in('spaceDescription', with: O1_S1_DESCRIPTION)
     fill_in('spacePrice', with: O1_S1_PRICE)
@@ -84,7 +84,7 @@ module TestHelpers
   end
 
   def create_space2
-    click_button('List a Space')
+    click_button('List a space')
     fill_in('spaceName', with: O1_S2_NAME)
     fill_in('spaceDescription', with: O1_S2_DESCRIPTION)
     fill_in('spacePrice', with: O1_S2_PRICE)

@@ -1,4 +1,4 @@
-feature 'booked space not available' do
+feature 'booked space not available', js: true, passing: true do
   before(:each) do
     in_browser(:one) do
       sign_up(email: TestHelpers::O1_USER_EMAIL)
@@ -8,7 +8,7 @@ feature 'booked space not available' do
     end
   end
 
-  scenario 'book space for one day - not shown in filter', js: true do
+  scenario 'book space for one day - not shown in filter' do
     in_browser(:one) do
       create_space2
     end
@@ -32,7 +32,7 @@ feature 'booked space not available' do
     end
   end
 
-  scenario 'booked dates not available in date picker', js: true, broken: true  do
+  scenario 'booked dates not available in date picker'  do
     in_browser(:one) do
       create_space1
     end
