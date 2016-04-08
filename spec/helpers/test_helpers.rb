@@ -43,10 +43,11 @@ module TestHelpers
               password: PASSWORD,
               password_confirmation: PASSWORD)
     visit '/'
+    click_link 'Register'
     fill_in 'email',    with: email
     fill_in 'password', with: password
     fill_in 'password_confirmation', with: password_confirmation
-    click_button 'Sign up'
+    click_button 'Register Now'
   end
 
   def sign_in(email: O1_USER_EMAIL,

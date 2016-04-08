@@ -1,4 +1,4 @@
-feature 'Before Picker requesting a space', focus: false  do
+feature 'Before Picker requesting a space',js:true, focus: true do
   before(:each) do
     in_browser(:one) do
       sign_up(email: TestHelpers::O1_USER_EMAIL)
@@ -16,7 +16,7 @@ feature 'Before Picker requesting a space', focus: false  do
     end
   end
 
-  scenario 'displays details of request i\'ve made multiple bookings', js: true do
+  scenario 'displays details of request i\'ve made multiple bookings' do
     in_browser(:two) do
       click_link TestHelpers::O1_S1_NAME
       make_request
@@ -25,7 +25,7 @@ feature 'Before Picker requesting a space', focus: false  do
     end
   end
 
-  scenario 'displays details of request i\'ve made multiple bookings to same space', js: true do
+  scenario 'displays details of request i\'ve made multiple bookings to same space' do
     in_browser(:two) do
       click_link TestHelpers::NAME
       make_request
