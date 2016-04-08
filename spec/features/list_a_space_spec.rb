@@ -1,4 +1,4 @@
-feature 'List a Space', js: true do
+feature 'List a Space', js: true, passing: true do
   let(:name_content2) { "Shane's gaff" }
   let(:description_content2) { 'Quite pretty, but nice view' }
 

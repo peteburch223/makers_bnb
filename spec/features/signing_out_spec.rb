@@ -1,4 +1,4 @@
-feature 'Signing out', js: true do
+feature 'Signing out', js: true, passing: true do
   scenario 'when logged in' do
     sign_up
     click_button 'Log out'

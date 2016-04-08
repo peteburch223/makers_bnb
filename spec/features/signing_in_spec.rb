@@ -1,4 +1,4 @@
-feature 'Signing in', js: true  do
+feature 'Signing in', js: true, passing: true  do
   it 'allows a user to sign in' do
     sign_up
     log_out

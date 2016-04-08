@@ -1,6 +1,6 @@
 # require 'spec_helper'
 
-feature 'Signing up', js: true do
+feature 'Signing up', js: true, passing: true do
   scenario 'user can view the sign up page' do
     visit '/'
     expect(page).to have_content('Where every stay is at your own risk')
