@@ -2,21 +2,20 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid bg-header">
     <div class="navbar-header">
-      <p class="navbar-brand" href="#">LocalHOST</p>
+      <p class="navbar-brand" href="#">Favela</p>
     </div>
     <ul class="nav navbar-nav">
     <% if current_user %>
-      <li> <%= current_user.email %> </li>
       <li><a href="/spaces">Spaces</a></li>
       <li><a href="/requests">Requests</a></li>
-      <form method='post' action='/sessions'>
-        <input type='hidden' name='_method' value='delete'>
-        <li><input type='submit' value='Log out'></li>
-      </form>
-    <% else %>
-      <li><a href="/sessions/new">Log in</a></li>
-    <% end %>
     </ul>
+    <div id="userProfile">
+      <%= current_user.email %><form method='post' action='/sessions'>
+        <input type='hidden' name='_method' value='delete'>
+        <input type='submit' value='Log out'>
+      </form>
+    </div>
+    <% end %>
   </div>
 </nav>
 <div class="container-fluid text-center">
