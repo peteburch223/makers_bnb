@@ -4,6 +4,7 @@ require 'sinatra/base'
 require 'sinatra/flash'
 require 'sinatra/partial'
 require 'gon-sinatra'
+require 'mail'
 
 require_relative 'helpers'
 require_relative 'models/data_mapper_setup'

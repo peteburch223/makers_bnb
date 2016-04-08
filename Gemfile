@@ -11,6 +11,7 @@ gem 'sinatra-flash'
 gem 'sinatra-partial'
 gem 'rake'
 gem 'gon-sinatra'
+gem 'mail'
 
 
 group :test do
