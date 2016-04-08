@@ -3,7 +3,7 @@ require 'byebug'
 feature 'Requesting a space' do
   before(:each) do
     sign_up
-    create_space
+    create_space0
     filter_spaces
     click_link TestHelpers::NAME
   end
@@ -13,7 +13,7 @@ feature 'Requesting a space' do
     expect(page).to have_content(TestHelpers::DESCRIPTION)
   end
 
-  scenario 'can select a check in and out date', js: true do
+  scenario 'can select a check in and out date', js: true  do
     page.execute_script %{ $('a.ui-datepicker-next').trigger("click") }
     page.execute_script %{ $("a.ui-state-default:contains('2')").trigger("click") }
     page.execute_script %{ $("a.ui-state-default:contains('3')").trigger("click") }

@@ -2,7 +2,7 @@ feature 'Reviewing requests' do
 
   before(:each) do
     sign_up
-    create_space
+    create_space0
     filter_spaces
     click_link TestHelpers::NAME
   end
@@ -17,7 +17,7 @@ feature 'Reviewing requests' do
     make_request
     expect(page).to have_link(TestHelpers::NAME)
     expect(page).to have_content(Helpers::NOT_CONFIRMED)
-    expect(page).to have_content('02/05/2016-03/05/2016')
+    expect(page).to have_content('02/05/2016')
     end
 
   scenario 'displays details of request i\'ve made multiple bookings', :js => true do

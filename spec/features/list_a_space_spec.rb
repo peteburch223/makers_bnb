@@ -1,4 +1,4 @@
-feature 'List a Space', :broken => false do
+feature 'List a Space', focus: true  do
   let(:name_content2) { "Shane's gaff" }
   let(:description_content2) { 'Quite pretty, but nice view' }
 
@@ -18,9 +18,9 @@ feature 'List a Space', :broken => false do
 
   scenario 'single space' do
     sign_up
-    create_space
+    create_space0
     filter_spaces
-    expect(page).to have_content(TestHelpers::O1_S1_NAME)
+    expect(page).to have_content(TestHelpers::NAME)
     expect(page).to have_content(TestHelpers::DESCRIPTION)
     expect(page).to have_content(TestHelpers::PRICE)
 
@@ -28,10 +28,10 @@ feature 'List a Space', :broken => false do
 
   scenario 'multiple spaces' do
     sign_up
-    create_space
-    create_space(name: name_content2, description: description_content2)
+    create_space0
+    create_space1
     filter_spaces
+    expect(page).to have_content(TestHelpers::NAME)
     expect(page).to have_content(TestHelpers::O1_S1_NAME)
-    expect(page).to have_content(name_content2)
   end
 end

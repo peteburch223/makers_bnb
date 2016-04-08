@@ -7,6 +7,7 @@ class MakersBnB < Sinatra::Base
     ids = [*ids[0]..ids[1]] unless ids.length == 1
     ids.pop unless ids.length == 1
     ids.each { |id| availabledate << Availabledate.get(id) }
+    
     make_request(availabledate, ids)
 
     redirect '/requests'
@@ -19,17 +20,16 @@ class MakersBnB < Sinatra::Base
     erb(:requests)
   end
 
-
   get '/requests/:id' do
     @request_id = params[:id]
-    @space = Space.first(availabledates: { requests: { id: params[:id] } })
-    @from = User.first(requests: { id: params[:id]})
-    @date = Availabledate.first(requests: { id: params[:id]})
+    @space = Space.first(availabledates: { requests: { request_id: params[:id] } })
+    @from = User.first(requests: { request_id: params[:id]})
+    @date = Availabledate.first(requests: { request_id: params[:id]})
     erb(:"requests/id")
   end
 
   post '/requests/:id' do
-    req = Request.all(id: params[:id])
+    req = Request.all(request_id: params[:id])
     req.update(status: params[:response])
     requester = User.first(id: req[0].user_id)
     space = Space.first(availabledates: { requests: { id: params[:id] } })
@@ -45,59 +45,44 @@ class MakersBnB < Sinatra::Base
     requests_made = Request.all(user_id: current_user.id, :fields => [:user_id, :request_id], :unique => true, :order => nil)
     space_requests_made = []
     requests_made.each do |req|
-      space_requests_made << Space.first(availabledates: { requests: { user_id: current_user.id, request_id: req.request_id } })
+      result =[]
+      result << Space.first(availabledates: { requests: { user_id: current_user.id, request_id: req.request_id } })
+      result << req.request_id
+      space_requests_made << result
     end
-    prepare_request_display(space_requests_made)
+    prepare_request_display_array(space_requests_made)
   end
 
   def requests_received
-    # puts "*****RECEIVED******"
     requests = Request.all()
-    # p requests
     return [] if requests.nil?
     requests_received = []
     requests.each do |req|
-      # p req
-      # p req.availabledate.space.user_id
-      requests_received << req.id if req.availabledate.space.user_id == current_user.id
+      requests_received << req.request_id if req.availabledate.space.user_id == current_user.id
     end
 
-    # p requests_received
-
+    requests_received.uniq!
     space_requests_received = []
+
     requests_received.each do |id|
-
-      # p id
-      # p Space.first(availabledates: { requests: {request_id: id } })
-      space_requests_received << Space.first(availabledates: { requests: {request_id: id } })
+      result =[]
+      result << Space.first(availabledates: { requests: {request_id: id } })
+      result << id
+      space_requests_received << result
     end
-    # puts "space_requests_received"
-    # p space_requests_received
-
-    # need to understand why we need to compact...where are the nils coming from?
-
-    stuff = space_requests_received.compact
-    # p stuff
-    temp = prepare_request_display(stuff)
-    # puts "temp"
-    # p temp
-    temp
+    prepare_request_display_array(space_requests_received)
   end
 
-  def prepare_request_display(space_requests)
-    # puts "prepare_request_displayn - before guard clause"
-    #     p space_requests
-  return [] if space_requests.nil?
-    # puts "prepare_request_display"
+  def prepare_request_display_array(space_request_arrays)
+    return [] if space_request_arrays.nil?
     return_value = []
-    # p space_requests
-    space_requests.each do |space|
-      # p space
+    space_request_arrays.each do |space|
       result = []
-      result << space
-      result << space.availabledates.requests.first.status
-      result << space.availabledates.first.avail_date.strftime('%d %m %Y') + (' - ' + space.availabledates.last.avail_date.strftime('%d %m %Y') if space.availabledates.count > 1)
-      result << space.availabledates.requests.first.id.to_s
+      result << space.first
+      result << Request.first(request_id: space.last).status
+      dates = Availabledate.all(requests: {request_id: space.last})
+      result << dates.first.avail_date.strftime('%d/%m/%Y') + ((' - ' + dates.last.avail_date.strftime('%d/%m/%Y') if dates.count > 1) || "")
+      result << space.last.to_s
       return_value << result
     end
     return_value
