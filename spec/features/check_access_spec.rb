@@ -9,7 +9,7 @@ feature 'Check access', js: true, passing: true  do
 
   scenario 'cannot create new space from /spaces' do
     visit '/spaces'
-    click_button 'List a Space'
+    click_button 'List a space'
     within 'h1' do
       expect(page).not_to have_content 'List a Space'
       expect(page).to have_content 'Book a Space'

@@ -13,7 +13,10 @@ feature 'List a Space', js: true, passing: true do
 
   scenario 'first test navigating pages' do
     sign_up
-    expect(page).to have_content('List a Space')
+
+    within('h1') do
+      expect(page).to have_content('Book a Space')
+    end
   end
 
   scenario 'single space' do

@@ -1,6 +1,6 @@
 require 'byebug'
 
-feature 'Requesting a space' do
+feature 'Requesting a space', js: true, passing: true do
   before(:each) do
     sign_up
     create_space0
@@ -13,7 +13,7 @@ feature 'Requesting a space' do
     expect(page).to have_content(TestHelpers::DESCRIPTION)
   end
 
-  scenario 'can select a check in and out date', js: true  do
+  scenario 'can select a check in and out date'  do
     page.execute_script %{ $('a.ui-datepicker-next').trigger("click") }
     page.execute_script %{ $("a.ui-state-default:contains('2')").trigger("click") }
     page.execute_script %{ $("a.ui-state-default:contains('3')").trigger("click") }
@@ -21,7 +21,7 @@ feature 'Requesting a space' do
     expect(page).to have_field('check_out', with: '2016-May-03')
   end
 
-  scenario 'adds a request record after selecting valid dates', :js => true do
+  scenario 'adds a request record after selecting valid dates' do
     page.execute_script %Q{ $('a.ui-datepicker-next').trigger("click") }
     page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
     page.execute_script %Q{ $("a.ui-state-default:contains('3')").trigger("click") }
@@ -30,12 +30,12 @@ feature 'Requesting a space' do
   end
 
 
-  scenario 'cannot select an unavailable check in date', :js => true do
+  scenario 'cannot select an unavailable check in date' do
     page.execute_script %Q{ $("a.ui-state-default:contains('15')").trigger("click") }
     expect(page).to have_field('check_in', with: '')
   end
 
-  scenario 'cannot select an unavailable check out date', :js => true do
+  scenario 'cannot select an unavailable check out date' do
     page.execute_script %Q{ $('a.ui-datepicker-next').trigger("click") }
     page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
     page.execute_script %Q{ $('a.ui-datepicker-next').trigger("click") }
@@ -44,13 +44,14 @@ feature 'Requesting a space' do
     expect(page).to have_field('check_out', with: '')
   end
 
-  scenario 'cannot select the same date for check in and check out', js: true do
-    page.accept_confirm 'Dates invalid' do
+  scenario 'cannot select the same date for check in and check out' do
+    # page.accept_confirm 'Dates invalid' do
       page.execute_script %Q{ $('a.ui-datepicker-next').trigger("click") }
       page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
       page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
       click_button('Request booking')
-    end
+      click_button('OK')
+    # end
     expect(page).to have_field('check_in', with: '2016-May-02')
     expect(page).to have_field('check_out', with: '2016-May-02')
   end

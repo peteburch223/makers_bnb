@@ -91,7 +91,7 @@ module Helpers
     send_email(to: owner.email,
                subject: "You have a new request for #{space.name}",
                body: "#{current_user.email} has requested to stay in your shithole '#{space.name}' for #{number_of_nights} horrific nights!\nKisses")
-
+  end
   def requests_made
     requests_made = Request.all(user_id: current_user.id, :fields => [:user_id, :request_id], :unique => true, :order => nil)
     space_requests_made = []
@@ -138,5 +138,4 @@ module Helpers
     end
     return_value
   end
-end
 end

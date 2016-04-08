@@ -1,6 +1,6 @@
 require 'byebug'
 
-feature 'Acknowledge bookings', focus: false  do
+feature 'Acknowledge bookings', passing: true  do
   before(:each) do
     in_browser(:one) do
       sign_up(email: TestHelpers::O1_USER_EMAIL)
