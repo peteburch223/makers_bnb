@@ -68,6 +68,29 @@ module TestHelpers
     click_button('List my Space')
   end
 
+  def create_space1
+    click_button('List a Space')
+    fill_in('spaceName', with: O1_S1_NAME)
+    fill_in('spaceDescription', with: O1_S1_DESCRIPTION)
+    fill_in('spacePrice', with: O1_S1_PRICE)
+    fill_in('fromDate', with: O1_S1_FROM_DATE)
+    fill_in('toDate', with: O1_S1_TO_DATE)
+    click_button('List my Space')
+  end
+
+  def create_space2
+    click_button('List a Space')
+    fill_in('spaceName', with: O1_S2_NAME)
+    fill_in('spaceDescription', with: O1_S2_DESCRIPTION)
+    fill_in('spacePrice', with: O1_S2_PRICE)
+    fill_in('fromDate', with: O1_S2_FROM_DATE)
+    fill_in('toDate', with: O1_S2_TO_DATE)
+    click_button('List my Space')
+  end
+
+
+
+
   def create_space(name: NAME,
                    description: DESCRIPTION,
                    price: PRICE,
@@ -108,20 +131,20 @@ module TestHelpers
     click_button('Request booking')
   end
 
-  def create_space(name: O1_S1_NAME,
-                   description: DESCRIPTION,
-                   price: PRICE,
-                   from_date: FROM_DATE,
-                   to_date: TO_DATE)
-
-    click_button('List a Space')
-    fill_in('spaceName', with: name)
-    fill_in('spaceDescription', with: description)
-    fill_in('spacePrice', with: price)
-    fill_in('fromDate', with: from_date)
-    fill_in('toDate', with: to_date)
-    click_button('List my Space')
-end
+#   def create_space(name: O1_S1_NAME,
+#                    description: DESCRIPTION,
+#                    price: PRICE,
+#                    from_date: FROM_DATE,
+#                    to_date: TO_DATE)
+#
+#     click_button('List a Space')
+#     fill_in('spaceName', with: name)
+#     fill_in('spaceDescription', with: description)
+#     fill_in('spacePrice', with: price)
+#     fill_in('fromDate', with: from_date)
+#     fill_in('toDate', with: to_date)
+#     click_button('List my Space')
+# end
 
   def make_multiple_requests
     filter_spaces

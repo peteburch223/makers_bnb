@@ -15,7 +15,9 @@
   </head>
   <body>
       <%= partial :navbar %>
-      <%= yield %>
+      <div class="container-fluid bg-main text-center">
+        <%= yield %>
+      </div>
       <%= partial :errors %>
     </div>
   </body>
