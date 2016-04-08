@@ -1,4 +1,4 @@
-feature 'multiple users multiple requests', :broken => false  do
+feature 'multiple users multiple requests', :broken => false, :focus => true  do
   before(:each) do
     in_browser(:one) do
       sign_up(email: TestHelpers::O1_USER_EMAIL)
@@ -19,7 +19,6 @@ feature 'multiple users multiple requests', :broken => false  do
       make_request(name: TestHelpers::O1_S1_NAME)
     end
     in_browser(:one) do
-      sign_in(email: TestHelpers::O1_USER_EMAIL)
       click_link('Requests')
       expect(page).to have_content(TestHelpers::O1_S1_NAME, count: 2)
     end

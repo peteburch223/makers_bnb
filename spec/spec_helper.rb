@@ -44,7 +44,7 @@ RSpec.configure do |config|
 
   config.before do
     DatabaseCleaner.clean
-  DatabaseCleaner.start
+    DatabaseCleaner.start
     # puts "DatabaseCleaner has started"
   end
 

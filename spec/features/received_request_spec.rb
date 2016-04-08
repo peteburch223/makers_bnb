@@ -1,4 +1,4 @@
-feature 'multiple users', :broken => false  do
+feature 'multiple users', :broken => false, :focus => true   do
   before(:each) do
     in_browser(:one) do
       sign_up(email: TestHelpers::O1_USER_EMAIL)
@@ -16,7 +16,6 @@ feature 'multiple users', :broken => false  do
     end
 
     in_browser(:one) do
-      sign_in
       click_link('Requests')
       expect(page).to have_link(TestHelpers::O1_S1_NAME)
       expect(page).to have_content(Helpers::NOT_CONFIRMED)
