@@ -3,7 +3,7 @@ require 'byebug'
 feature 'Requesting a space' do
   before(:each) do
     sign_up
-    create_space
+    create_space0
     filter_spaces
     click_link TestHelpers::NAME
   end

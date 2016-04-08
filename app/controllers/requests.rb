@@ -13,7 +13,8 @@ class MakersBnB < Sinatra::Base
     availabledate.each do |a_date|
       Request.create(user_id: current_user.id,
                      availabledate_id: a_date.id,
-                     status: Helpers::NOT_CONFIRMED)
+                     status: Helpers::NOT_CONFIRMED,
+                     request_id: request_id)
     end
 
     redirect '/requests'
