@@ -67,6 +67,11 @@ module Helpers
    mail.deliver!
   end
 
+  def email_responses
+    return CONFIRMATION_EMAIL if params[:response] == "Approved"
+    REJECTION_EMAIL
+  end
+
   def make_request(availabledate, ids)
     request_id = Request.max(:request_id)
     request_id = (request_id.nil? ? 1 : request_id + 1)
@@ -79,7 +84,12 @@ module Helpers
     space = Space.first(id: availabledate[0].space_id)
     number_of_nights = ids[-1] - ids[0]
     total_cost = space.price.to_f * number_of_nights
-  send_email(subject: "You've just requested to stay at: #{space.name}",
-             body: "#{space.description}\nCost of stay: £#{total_cost}")
+    send_email(to: current_user.email,
+               subject: "You've just requested to stay at: #{space.name}",
+               body: "#{space.description}\nCost of stay: £#{total_cost}\nKisses")
+    owner = User.first(id: space.user_id)
+    send_email(to: owner.email,
+               subject: "You have a new request for #{space.name}",
+               body: "#{current_user.email} has requested to stay in your shithole '#{space.name}' for #{number_of_nights} horrific nights!\nKisses")
   end
 end
