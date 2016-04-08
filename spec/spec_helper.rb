@@ -21,6 +21,7 @@ Capybara.app = MakersBnB
 
 RSpec.configure do |config|
   config.filter_run_excluding :broken => true
+  config.filter_run_excluding :interacting => true
   config.include TestHelpers
   config.include Capybara::DSL
 

@@ -1,4 +1,4 @@
-feature 'multiple users', :broken => false, :focus => true   do
+feature 'multiple users', :interacting => true, :focus => true   do
   before(:each) do
     in_browser(:one) do
       sign_up(email: TestHelpers::O1_USER_EMAIL)
