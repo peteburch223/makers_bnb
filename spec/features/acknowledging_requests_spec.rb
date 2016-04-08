@@ -1,4 +1,5 @@
 require 'byebug'
+
 feature 'Acknowledge bookings' do
   before(:each) do
     sign_up(email: TestHelpers::O1_USER_EMAIL)

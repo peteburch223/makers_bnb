@@ -118,7 +118,7 @@ module TestHelpers
     fill_in('fromDate', with: from_date)
     fill_in('toDate', with: to_date)
     click_button('List my Space')
-
+end
 # def make_multiple_requests(s1: O1_S1_NAME, s2: O1_S2_NAME)
 #   make_request(name: s1)
 #   visit('/spaces')

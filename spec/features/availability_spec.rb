@@ -1,6 +1,6 @@
 require 'byebug'
 
-feature 'Searching availability', :broken => false do
+feature 'Searching availability' do
   before(:each) do
     sign_up
     create_space
@@ -14,8 +14,7 @@ feature 'Searching availability', :broken => false do
   scenario 'does not display spaces that are unavailable in selected period' do
     filter_spaces(from: TestHelpers::FROM_DATE_NOT_AVAIL,
                   to: TestHelpers::TO_DATE_NOT_AVAIL)
-    # expect(page).not_to have_content(TestHelpers::O1_S1_NAME)
-    expect(page).not_to have_content(TestHelpers::NAME)
+    expect(page).not_to have_content(TestHelpers::O1_S1_NAME)
   end
 
   scenario 'does not show a space when from date is unavailable' do
