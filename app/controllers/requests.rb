@@ -23,8 +23,8 @@ class MakersBnB < Sinatra::Base
   get '/requests/:id' do
     @request_id = params[:id]
     @space = Space.first(availabledates: { requests: { request_id: params[:id] } })
-    @from = User.first(requests: { request_id: params[:id]})
-    @date = Availabledate.first(requests: { request_id: params[:id]})
+    @from = User.first(requests: { request_id: params[:id] })
+    @date = Availabledate.first(requests: { request_id: params[:id] })
     erb(:"requests/id")
   end
 
@@ -34,10 +34,7 @@ class MakersBnB < Sinatra::Base
     requester = User.first(id: req[0].user_id)
     space = Space.first(availabledates: { requests: { id: params[:id] } })
 
-    send_email(to: requester.email, subject: "Your request for #{space.name} has been #{params[:response].downcase}",
-               body: email_responses(params))
-    send_email(to: current_user.email, subject: "You've #{params[:response].downcase} #{requester.email}'s request",
-               body: email_responses(params))
+    booking_confirmation_emails(params, space, requester)
     redirect '/requests'
   end
 end

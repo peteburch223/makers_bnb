@@ -1,6 +1,6 @@
 require 'byebug'
 
-feature 'Acknowledge bookings', passing: true  do
+feature 'Acknowledge bookings', passing: true do
   before(:each) do
     in_browser(:one) do
       sign_up(email: TestHelpers::O1_USER_EMAIL)
@@ -18,7 +18,6 @@ feature 'Acknowledge bookings', passing: true  do
       click_link(TestHelpers::NAME)
     end
   end
-
 
   scenario 'I can process requests I\'ve received', js: true do
     in_browser(:one) do
@@ -44,5 +43,4 @@ feature 'Acknowledge bookings', passing: true  do
       expect(page).to have_content(Helpers::REJECTED)
     end
   end
-
 end

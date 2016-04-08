@@ -6,10 +6,9 @@ feature 'Signing up', js: true, passing: true do
     expect(page).to have_content('Where every stay is at your own risk')
   end
 
-  scenario 'user can sign up with valid credentials'do
+  scenario 'user can sign up with valid credentials' do
     expect { sign_up }.to change(User, :count).by 1
   end
-
 
   scenario 'user can sign up with valid credentials' do
     expect { sign_up }.to change(User, :count).by 1

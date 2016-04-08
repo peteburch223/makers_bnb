@@ -1,5 +1,4 @@
-feature 'Reviewing requests', :js => true, passing: true do
-
+feature 'Reviewing requests', js: true, passing: true do
   before(:each) do
     in_browser(:one) do
       sign_up
@@ -38,11 +37,11 @@ feature 'Reviewing requests', :js => true, passing: true do
       visit('/spaces')
       create_space1
       filter_spaces
-      click_link (TestHelpers::NAME)
+      click_link TestHelpers::NAME
       make_request
       click_link('Spaces')
       filter_spaces
-      click_link (TestHelpers::O1_S1_NAME)
+      click_link TestHelpers::O1_S1_NAME
       make_request
       expect(page).to have_link(TestHelpers::NAME, count: 2)
       expect(page).to have_link(TestHelpers::O1_S1_NAME, count: 2)

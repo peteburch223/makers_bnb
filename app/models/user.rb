@@ -6,7 +6,7 @@ class User
   attr_accessor :password_confirmation
 
   property :id, Serial
-  property :email, String, format: :email_address, required: true, unique: true, :lazy => false
+  property :email, String, format: :email_address, required: true, unique: true, lazy: false
   property :password_digest, Text
 
   validates_confirmation_of :password
@@ -21,7 +21,7 @@ class User
   end
 
   def self.authenticate(email, password)
-    user = User.first(email: email)
-    return user if user && BCrypt::Password.new(user.password_digest) == password
+    usr = User.first(email: email)
+    return usr if usr && BCrypt::Password.new(usr.password_digest) == password
   end
 end

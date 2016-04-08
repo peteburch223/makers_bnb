@@ -1,10 +1,7 @@
 module Helpers
-
-  NOT_CONFIRMED = 'Not Confirmed'
-  APPROVED = 'Approved'
-  REJECTED = 'Rejected'
-  CONFIRMATION_EMAIL = "We hope you enjoy a stranger in your house \n\n Kisses"
-  REJECTION_EMAIL = "We're sorry the stranger didn't like the look of you, better luck next time. \n\n Kisses"
+  NOT_CONFIRMED = 'Not Confirmed'.freeze
+  APPROVED = 'Approved'.freeze
+  REJECTED = 'Rejected'.freeze
 
   def current_user
     @current_user ||= User.get(session[:user_id])
@@ -20,8 +17,10 @@ module Helpers
     stay[:nights_count].times do |i|
       Availabledate.create(avail_date: stay[:date_from] + i, space_id: space.id)
     end
-    send_email(subject: "You've just created a new space: #{params[:name]}",
-    body: "Description: #{params[:description]}\nPrice: #{params[:price]}\nAvailable from #{params[:from_date]} to #{params[:to_date]}")
+    send_email(
+      subject: "You've just created a new space: #{params[:name]}",
+      body: "Description: #{params[:description]}\nPrice: #{params[:price]}\n"\
+      "Available from #{params[:from_date]} to #{params[:to_date]}")
   end
 
   def available_dates(params)
@@ -34,7 +33,7 @@ module Helpers
     avail = Hash.new(0)
     stay[:nights_count].times do |i|
       Space.all(availabledates: { avail_date: stay[:date_from] + i }).each do |space|
-        avail[space.id] += 1 if Availabledate.all(avail_date: stay[:date_from] + i, requests: {status: APPROVED}).empty?
+        avail[space.id] += 1 if Availabledate.all(avail_date: stay[:date_from] + i, requests: { status: APPROVED }).empty?
       end
     end
 
@@ -54,35 +53,64 @@ module Helpers
   end
 
   def send_email(to: current_user.email, subject: 'Welcome to MakersBnB',
-                                         body: "test body")
+                 body: 'test body')
 
     return if ENV['RACK_ENV'] == 'test'
     mail = Mail.new do
-     from     'hello@favela.com'
-     to       to
-     subject  subject
-     body     body
+      from 'hello@favela.com'
+      to       to
+      subject  subject
+      body     body
     end
 
-   mail.deliver!
+    mail.deliver!
   end
 
-  def email_responses(params)
-    return CONFIRMATION_EMAIL if params[:response] == "Approved"
-    REJECTION_EMAIL
+  def booking_confirmation_emails(params, space, requester)
+    booking_email_owner(params, space, requester)
+    booking_email_requester(params, space, requester)
   end
 
-  def make_request(availabledate, ids)
+  def booking_email_owner(params, space, requester)
+    approved?(params)
+    send_email(
+      subject: "You've #{params[:response].downcase} #{requester.email}'s request for #{space.name}",
+      body: @body_owner
+    )
+  end
+
+  def booking_email_requester(params, space, requester)
+    approved?(params)
+    send_email(
+      to: requester.email,
+      subject: "Your request for #{space.name} has been #{params[:response].downcase}",
+      body: @body_requester
+    )
+  end
+
+  def approved?(params)
+    if params[:response] == 'Approved'
+      @body_owner = "We hope you enjoy a stranger in your house \n\n Kisses"
+      @body_requester = "We hope you enjoy staying in a stranger's house \n\n Kisses"
+    else
+      @body_owner = "We're sorry you're too afraid to host that stranger"
+      @body_requester = "We're sorry the stranger didn't like the look of you, better luck next time. \n\n Kisses"
+    end
+  end
+
+  def make_request(availabledate, _ids)
     request_id = Request.max(:request_id)
     request_id = (request_id.nil? ? 1 : request_id + 1)
+    number_of_nights = 0
     availabledate.each do |a_date|
       Request.create(user_id: current_user.id,
                      availabledate_id: a_date.id,
                      status: Helpers::NOT_CONFIRMED,
                      request_id: request_id)
+      number_of_nights += 1
     end
+
     space = Space.first(id: availabledate[0].space_id)
-    number_of_nights = ids[-1] - ids[0]
     total_cost = space.price.to_f * number_of_nights
     send_email(to: current_user.email,
                subject: "You've just requested to stay at: #{space.name}",
@@ -92,11 +120,12 @@ module Helpers
                subject: "You have a new request for #{space.name}",
                body: "#{current_user.email} has requested to stay in your shithole '#{space.name}' for #{number_of_nights} horrific nights!\nKisses")
   end
+
   def requests_made
-    requests_made = Request.all(user_id: current_user.id, :fields => [:user_id, :request_id], :unique => true, :order => nil)
+    requests_made = Request.all(user_id: current_user.id, fields: [:user_id, :request_id], unique: true, order: nil)
     space_requests_made = []
     requests_made.each do |req|
-      result =[]
+      result = []
       result << Space.first(availabledates: { requests: { user_id: current_user.id, request_id: req.request_id } })
       result << req.request_id
       space_requests_made << result
@@ -105,7 +134,7 @@ module Helpers
   end
 
   def requests_received
-    requests = Request.all()
+    requests = Request.all
     return [] if requests.nil?
     requests_received = []
     requests.each do |req|
@@ -116,8 +145,8 @@ module Helpers
     space_requests_received = []
 
     requests_received.each do |id|
-      result =[]
-      result << Space.first(availabledates: { requests: {request_id: id } })
+      result = []
+      result << Space.first(availabledates: { requests: { request_id: id } })
       result << id
       space_requests_received << result
     end
@@ -131,8 +160,8 @@ module Helpers
       result = []
       result << space.first
       result << Request.first(request_id: space.last).status
-      dates = Availabledate.all(requests: {request_id: space.last})
-      result << dates.first.avail_date.strftime('%d/%m/%Y') + ((' - ' + dates.last.avail_date.strftime('%d/%m/%Y') if dates.count > 1) || "")
+      dates = Availabledate.all(requests: { request_id: space.last })
+      result << dates.first.avail_date.strftime('%d/%m/%Y') + ((' - ' + dates.last.avail_date.strftime('%d/%m/%Y') if dates.count > 1) || '')
       result << space.last.to_s
       return_value << result
     end
