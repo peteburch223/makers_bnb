@@ -5,7 +5,7 @@ module TestHelpers
 
   NAME = 'Space 0'.freeze
   DESCRIPTION = 'Space 0 description'.freeze
-  PRICE = '99.99'.freeze
+  PRICE = '100.00'.freeze
   FROM_DATE = '01/05/2016'.freeze
   TO_DATE = '31/05/2016'.freeze
 
@@ -58,12 +58,38 @@ module TestHelpers
     click_button('Log out')
   end
 
-  def make_request(name: O1_S1_NAME ,date: REQUEST_DATE)
-    click_link(name)
-    check(date)
-    check(REQUEST_DATE)
-    click_button 'Request booking'
+  def create_space0
+    click_button('List a Space')
+    fill_in('spaceName', with: NAME)
+    fill_in('spaceDescription', with: DESCRIPTION)
+    fill_in('spacePrice', with: PRICE)
+    fill_in('fromDate', with: FROM_DATE)
+    fill_in('toDate', with: TO_DATE)
+    click_button('List my Space')
   end
+
+  def create_space1
+    click_button('List a Space')
+    fill_in('spaceName', with: O1_S1_NAME)
+    fill_in('spaceDescription', with: O1_S1_DESCRIPTION)
+    fill_in('spacePrice', with: O1_S1_PRICE)
+    fill_in('fromDate', with: O1_S1_FROM_DATE)
+    fill_in('toDate', with: O1_S1_TO_DATE)
+    click_button('List my Space')
+  end
+
+  def create_space2
+    click_button('List a Space')
+    fill_in('spaceName', with: O1_S2_NAME)
+    fill_in('spaceDescription', with: O1_S2_DESCRIPTION)
+    fill_in('spacePrice', with: O1_S2_PRICE)
+    fill_in('fromDate', with: O1_S2_FROM_DATE)
+    fill_in('toDate', with: O1_S2_TO_DATE)
+    click_button('List my Space')
+  end
+
+
+
 
   def create_space(name: NAME,
                    description: DESCRIPTION,
@@ -105,26 +131,19 @@ module TestHelpers
     click_button('Request booking')
   end
 
-  def create_space(name: O1_S1_NAME,
-                   description: DESCRIPTION,
-                   price: PRICE,
-                   from_date: FROM_DATE,
-                   to_date: TO_DATE)
-
-    click_button('List a Space')
-    fill_in('spaceName', with: name)
-    fill_in('spaceDescription', with: description)
-    fill_in('spacePrice', with: price)
-    fill_in('fromDate', with: from_date)
-    fill_in('toDate', with: to_date)
-    click_button('List my Space')
-end
-# def make_multiple_requests(s1: O1_S1_NAME, s2: O1_S2_NAME)
-#   make_request(name: s1)
-#   visit('/spaces')
-#   filter_spaces
-#   make_request(name: s2)
+#   def create_space(name: O1_S1_NAME,
+#                    description: DESCRIPTION,
+#                    price: PRICE,
+#                    from_date: FROM_DATE,
+#                    to_date: TO_DATE)
 #
+#     click_button('List a Space')
+#     fill_in('spaceName', with: name)
+#     fill_in('spaceDescription', with: description)
+#     fill_in('spacePrice', with: price)
+#     fill_in('fromDate', with: from_date)
+#     fill_in('toDate', with: to_date)
+#     click_button('List my Space')
 # end
 
   def make_multiple_requests

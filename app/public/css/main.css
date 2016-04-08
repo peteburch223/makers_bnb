@@ -1,4 +1,9 @@
-body {
+.bg-header {
+  background-color: #1abc9c; /* Green */
+  color: #000000;
+}
+
+.bg-main {
   background-image:url('../images/ocean.jpg');
   background-position: top;
   font-family: 'Quicksand', sans-serif;

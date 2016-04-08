@@ -1,40 +1,49 @@
 require 'byebug'
 
-feature 'Acknowledge bookings' do
+feature 'Acknowledge bookings', focus: false  do
   before(:each) do
-    sign_up(email: TestHelpers::O1_USER_EMAIL)
-    create_space
-    log_out
-    sign_up(email: TestHelpers::O2_USER_EMAIL)
-    filter_spaces
-    make_request
-    log_out
-    sign_in(email: TestHelpers::O1_USER_EMAIL)
-    visit '/requests'
+    in_browser(:one) do
+      sign_up(email: TestHelpers::O1_USER_EMAIL)
+      create_space0
+    end
+    in_browser(:two) do
+      sign_up(email: TestHelpers::O2_USER_EMAIL)
+      filter_spaces
+      click_link TestHelpers::NAME
+      make_request
+    end
+
+    in_browser(:one) do
+      visit '/requests'
+      click_link(TestHelpers::NAME)
+    end
   end
 
 
-  scenario 'I can process requests I\'ve received', :interacting => true  do
-    click_link(TestHelpers::O1_S1_NAME)
-    expect(page).to have_content("Request for #{TestHelpers::O1_S1_NAME}")
-    expect(page).to have_content("From: #{TestHelpers::O2_USER_EMAIL}")
-    expect(page).to have_content("Date: #{TestHelpers::REQUEST_DATE}")
+  scenario 'I can process requests I\'ve received', js: true, :interacting => false  do
+    in_browser(:one) do
+      expect(page).to have_content("Request for #{TestHelpers::NAME}")
+      expect(page).to have_content("From: #{TestHelpers::O2_USER_EMAIL}")
+      # expect(page).to have_content("Date: #{TestHelpers::REQUEST_DATE}")
+    end
   end
 
-  scenario 'I can approve request', :interacting => true  do
-    click_link(TestHelpers::O1_S1_NAME)
-    click_button('Confirm request')
-    expect(page).to have_link(TestHelpers::O1_S1_NAME)
-    expect(page).not_to have_content(Helpers::NOT_CONFIRMED)
-    expect(page).to have_content(Helpers::APPROVED)
+  scenario 'I can approve request', js: true, :interacting => false  do
+    in_browser(:one) do
+      click_button('Confirm request')
+      expect(page).to have_link(TestHelpers::NAME)
+      expect(page).not_to have_content(Helpers::NOT_CONFIRMED)
+      expect(page).to have_content(Helpers::APPROVED)
+    end
   end
 
-  scenario 'I can reject request', :interacting => true  do
-    click_link(TestHelpers::O1_S1_NAME)
-    click_button('Reject request')
-    expect(page).to have_link(TestHelpers::O1_S1_NAME)
-    expect(page).not_to have_content(Helpers::NOT_CONFIRMED)
-    expect(page).to have_content(Helpers::REJECTED)
+  scenario 'I can reject request', js: true, :interacting => false  do
+    in_browser(:one) do
+      click_button('Reject request')
+      expect(page).to have_link(TestHelpers::NAME)
+      expect(page).not_to have_content(Helpers::NOT_CONFIRMED)
+      expect(page).to have_content(Helpers::REJECTED)
+    end
   end
 
 end
