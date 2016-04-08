@@ -70,7 +70,7 @@ module TestHelpers
     fill_in('spacePrice', with: PRICE)
     fill_in('fromDate', with: FROM_DATE)
     fill_in('toDate', with: TO_DATE)
-    click_button('List my Space')
+    click_button('List my space')
   end
 
   def create_space1
@@ -80,7 +80,7 @@ module TestHelpers
     fill_in('spacePrice', with: O1_S1_PRICE)
     fill_in('fromDate', with: O1_S1_FROM_DATE)
     fill_in('toDate', with: O1_S1_TO_DATE)
-    click_button('List my Space')
+    click_button('List my space')
   end
 
   def create_space2
@@ -90,7 +90,7 @@ module TestHelpers
     fill_in('spacePrice', with: O1_S2_PRICE)
     fill_in('fromDate', with: O1_S2_FROM_DATE)
     fill_in('toDate', with: O1_S2_TO_DATE)
-    click_button('List my Space')
+    click_button('List my space')
   end
 
 
@@ -102,31 +102,31 @@ module TestHelpers
                    from_date: FROM_DATE,
                    to_date: TO_DATE)
 
-    click_button('List a Space')
+    click_button('List a space')
     fill_in('spaceName', with: name)
     fill_in('spaceDescription', with: description)
     fill_in('spacePrice', with: price)
     fill_in('fromDate', with: from_date)
     fill_in('toDate', with: to_date)
-    click_button('List my Space')
+    click_button('List my space')
   end
 
   def create_multiple_spaces
-    click_button('List a Space')
+    click_button('List a space')
     fill_in('spaceName', with: O1_S1_NAME)
     fill_in('spaceDescription', with: O1_S1_DESCRIPTION)
     fill_in('spacePrice', with: O1_S1_PRICE)
     fill_in('fromDate', with: O1_S1_FROM_DATE)
     fill_in('toDate', with: O1_S1_TO_DATE)
-    click_button('List my Space')
+    click_button('List my space')
 
-    click_button('List a Space')
+    click_button('List a space')
     fill_in('spaceName', with: O1_S2_NAME)
     fill_in('spaceDescription', with: O1_S2_DESCRIPTION)
     fill_in('spacePrice', with: O1_S2_PRICE)
     fill_in('fromDate', with: O1_S2_FROM_DATE)
     fill_in('toDate', with: O1_S2_TO_DATE)
-    click_button('List my Space')
+    click_button('List my space')
   end
 
   def make_request(name: TestHelpers::NAME)
@@ -150,6 +150,6 @@ module TestHelpers
   def filter_spaces(from: FROM_DATE, to: TO_DATE)
     fill_in('fromDate', with: from)
     fill_in('toDate', with: to)
-    click_button('List Spaces')
+    click_button('List spaces')
   end
 end

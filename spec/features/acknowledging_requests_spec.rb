@@ -24,7 +24,6 @@ feature 'Acknowledge bookings', passing: true  do
     in_browser(:one) do
       expect(page).to have_content("Request for #{TestHelpers::NAME}")
       expect(page).to have_content("From: #{TestHelpers::O2_USER_EMAIL}")
-      # expect(page).to have_content("Date: #{TestHelpers::REQUEST_DATE}")
     end
   end
 
