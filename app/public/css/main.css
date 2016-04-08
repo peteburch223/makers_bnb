@@ -1,6 +1,75 @@
-/*#availabledate_id {
-  display: none;
-}*/
+body {
+  background-image:url('../images/ocean.jpg');
+  background-position: top;
+  font-family: 'Quicksand', sans-serif;
+}
+::-webkit-input-placeholder {
+   color: #909090;
+   font-size: 12px;
+}
+input[type] {
+  padding: 5px 5px;
+  line-height: 18px;
+}
+.btn-style{
+
+}
+.error {
+  font-size:16px;
+  font-weight: bold;
+}
+
+/* NAV BAR */
+.navbar {
+  margin: 0;
+}
+.navbar-default {
+  background-color: transparent;
+  border: none;
+}
+.navbar-default .navbar-brand {
+    color: black;
+}
+.navbar-default .navbar-nav>li>a {
+  color: black;
+}
+/* HOME PAGE STYLES */
+
+.hero-unit {
+    background-size: cover;
+    background-color: transparent;
+    padding-top: 200px;
+  }
+.hero-unit h1 {
+    color: #FF0080;
+    font: 700 80px 'Quicksand', sans-serif;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+}
+.hero-unit h2 {
+    font-size: 25px;
+    color: black;
+}
+.fill{width:100%;height:350px;background-position:center;background-size:cover;
+}
+
+    /* Large desktop */
+    @media (min-width: 1200px) { ... }
+
+    /* Portrait tablet to landscape and desktop */
+    @media (min-width: 768px) and (max-width: 979px) { ... }
+
+    /* Landscape phone to portrait tablet */
+    @media (max-width: 767px) { ... }
+
+    /* Landscape phones and down */
+    @media (max-width: 480px) { ... }
+
+
+/* DATEPICKER STYLES */
 .dp-highlight .ui-state-default {
   background: #484;
   color: #FFF;

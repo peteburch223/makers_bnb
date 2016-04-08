@@ -35,22 +35,17 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
-  # DatabaseCleaner.clean_with(:truncation)
-    # puts "DatabaseCleaner has truncated data"
   end
 
   config.before(:each, :js => true) do
-    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.strategy = :truncation
   end
 
   config.before do
-    DatabaseCleaner.clean
     DatabaseCleaner.start
-    # puts "DatabaseCleaner has started"
   end
 
   config.after(:each) do
     DatabaseCleaner.clean
-    # puts "DatabaseCleaner has cleaned"
   end
 end

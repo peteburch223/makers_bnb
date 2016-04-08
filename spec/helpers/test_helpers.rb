@@ -1,33 +1,31 @@
 module TestHelpers
+  O1_USER_EMAIL = 'user1@person.com'.freeze
+  O2_USER_EMAIL = 'user2@person.com'.freeze
+  PASSWORD = 'password'.freeze
 
-  O1_USER_EMAIL = "user1@person.com"
-  O2_USER_EMAIL = "user2@person.com"
-  PASSWORD = "password"
-
-  NAME = "Pete's grotty gaff".freeze
-  DESCRIPTION = 'Quite smelly, but nice view'.freeze
+  NAME = 'Space 0'.freeze
+  DESCRIPTION = 'Space 0 description'.freeze
   PRICE = '99.99'.freeze
-  FROM_DATE = '03/03/2016'.freeze
-  TO_DATE = '01/04/2016'.freeze
+  FROM_DATE = '01/05/2016'.freeze
+  TO_DATE = '31/05/2016'.freeze
 
-  O1_S1_NAME = "O1 S1".freeze
-  O1_S1_DESCRIPTION = 'O1 S1 Description'.freeze
+  O1_S1_NAME = 'Space 1'.freeze
+  O1_S1_DESCRIPTION = 'Space 1 description'.freeze
   O1_S1_PRICE = '99.99'.freeze
-  O1_S1_FROM_DATE = '03/03/2016'.freeze
-  O1_S1_TO_DATE = '01/04/2016'.freeze
+  O1_S1_FROM_DATE = '01/05/2016'.freeze
+  O1_S1_TO_DATE = '31/05/2016'.freeze
 
-  O1_S2_NAME = "O1 S2".freeze
-  O1_S2_DESCRIPTION = 'O2 S2 Description'.freeze
+  O1_S2_NAME = 'Space 2'.freeze
+  O1_S2_DESCRIPTION = 'Space 2 description'.freeze
   O1_S2_PRICE = '99.99'.freeze
-  O1_S2_FROM_DATE = '03/03/2016'.freeze
-  O1_S2_TO_DATE = '01/04/2016'.freeze
+  O1_S2_FROM_DATE = '01/05/2016'.freeze
+  O1_S2_TO_DATE = '31/05/2016'.freeze
 
-
-  FROM_DATE_MINUS_ONE = '02/03/2016'.freeze
-  TO_DATE_PLUS_ONE = '03/04/2016'.freeze
-  FROM_DATE_NOT_AVAIL = '03/05/2016'.freeze
-  TO_DATE_NOT_AVAIL = '01/06/2016'.freeze
-  REQUEST_DATE = '2016-03-05'.freeze
+  FROM_DATE_MINUS_ONE = '30/04/2016'.freeze
+  TO_DATE_PLUS_ONE = '01/06/2016'.freeze
+  FROM_DATE_NOT_AVAIL = '01/06/2016'.freeze
+  TO_DATE_NOT_AVAIL = '30/06/2016'.freeze
+  REQUEST_DATE = '2016-05-15'.freeze
 
 
   def in_browser(name)
@@ -67,6 +65,21 @@ module TestHelpers
     click_button 'Request booking'
   end
 
+  def create_space(name: NAME,
+                   description: DESCRIPTION,
+                   price: PRICE,
+                   from_date: FROM_DATE,
+                   to_date: TO_DATE)
+
+    click_button('List a Space')
+    fill_in('spaceName', with: name)
+    fill_in('spaceDescription', with: description)
+    fill_in('spacePrice', with: price)
+    fill_in('fromDate', with: from_date)
+    fill_in('toDate', with: to_date)
+    click_button('List my Space')
+  end
+
   def create_multiple_spaces
     click_button('List a Space')
     fill_in('spaceName', with: O1_S1_NAME)
@@ -85,17 +98,12 @@ module TestHelpers
     click_button('List my Space')
   end
 
-
-  def make_multiple_requests(s1: O1_S1_NAME, s2: O1_S2_NAME)
-    make_request(name: s1)
-    visit('/spaces')
-    filter_spaces
-    make_request(name: s2)
-
+  def make_request(name: TestHelpers::NAME)
+    page.execute_script %Q{ $('a.ui-datepicker-next').trigger("click") }
+    page.execute_script %Q{ $("a.ui-state-default:contains('2')").trigger("click") }
+    page.execute_script %Q{ $("a.ui-state-default:contains('3')").trigger("click") }
+    click_button('Request booking')
   end
-
-
-
 
   def create_space(name: O1_S1_NAME,
                    description: DESCRIPTION,
@@ -110,6 +118,23 @@ module TestHelpers
     fill_in('fromDate', with: from_date)
     fill_in('toDate', with: to_date)
     click_button('List my Space')
+
+# def make_multiple_requests(s1: O1_S1_NAME, s2: O1_S2_NAME)
+#   make_request(name: s1)
+#   visit('/spaces')
+#   filter_spaces
+#   make_request(name: s2)
+#
+# end
+
+  def make_multiple_requests
+    filter_spaces
+    click_link 'Space 1'
+    make_request(name: NAME)
+    visit('/spaces')
+    filter_spaces
+    click_link 'Space 2'
+    make_request(name: O1_S1_NAME)
   end
 
   def filter_spaces(from: FROM_DATE, to: TO_DATE)
