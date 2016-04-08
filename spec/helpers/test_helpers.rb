@@ -18,8 +18,12 @@ module TestHelpers
   O1_S2_NAME = 'Space 2'.freeze
   O1_S2_DESCRIPTION = 'Space 2 description'.freeze
   O1_S2_PRICE = '99.99'.freeze
-  O1_S2_FROM_DATE = '01/05/2016'.freeze
-  O1_S2_TO_DATE = '31/05/2016'.freeze
+  O1_S2_FROM_DATE = '02/05/2016'.freeze
+  O1_S2_TO_DATE = '03/06/2016'.freeze
+
+
+  FROM_DATE_EXCL_RES = '06/05/2016'
+  TO_DATE_EXCL_RES = '31/05/2016'
 
   FROM_DATE_MINUS_ONE = '30/04/2016'.freeze
   TO_DATE_PLUS_ONE = '01/06/2016'.freeze
@@ -131,20 +135,6 @@ module TestHelpers
     click_button('Request booking')
   end
 
-#   def create_space(name: O1_S1_NAME,
-#                    description: DESCRIPTION,
-#                    price: PRICE,
-#                    from_date: FROM_DATE,
-#                    to_date: TO_DATE)
-#
-#     click_button('List a Space')
-#     fill_in('spaceName', with: name)
-#     fill_in('spaceDescription', with: description)
-#     fill_in('spacePrice', with: price)
-#     fill_in('fromDate', with: from_date)
-#     fill_in('toDate', with: to_date)
-#     click_button('List my Space')
-# end
 
   def make_multiple_requests
     filter_spaces

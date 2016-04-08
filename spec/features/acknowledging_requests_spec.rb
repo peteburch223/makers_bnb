@@ -20,7 +20,7 @@ feature 'Acknowledge bookings', focus: false  do
   end
 
 
-  scenario 'I can process requests I\'ve received', js: true, :interacting => false  do
+  scenario 'I can process requests I\'ve received', js: true do
     in_browser(:one) do
       expect(page).to have_content("Request for #{TestHelpers::NAME}")
       expect(page).to have_content("From: #{TestHelpers::O2_USER_EMAIL}")
@@ -28,7 +28,7 @@ feature 'Acknowledge bookings', focus: false  do
     end
   end
 
-  scenario 'I can approve request', js: true, :interacting => false  do
+  scenario 'I can approve request', js: true do
     in_browser(:one) do
       click_button('Confirm request')
       expect(page).to have_link(TestHelpers::NAME)
@@ -37,7 +37,7 @@ feature 'Acknowledge bookings', focus: false  do
     end
   end
 
-  scenario 'I can reject request', js: true, :interacting => false  do
+  scenario 'I can reject request', js: true do
     in_browser(:one) do
       click_button('Reject request')
       expect(page).to have_link(TestHelpers::NAME)
