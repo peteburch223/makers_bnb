@@ -3,13 +3,14 @@ var idValue = $('#availabledate_id').val();
 var b = idValue.split(',').map(function(item) {
   return parseInt(item, 10);
 });
+var range = [];
 
 if (b.length > 1) {
-  var range = [];
   var unavailable;
   for (var i = b[0]; i <= b[1]; i++) {
       range.push(i);
   }
+  range.pop();
   unavailable = findUnavailableIds();
   for (var x = 0; x < range.length; x++) {
     if ($.inArray(range[x], unavailable) != -1 ) {
@@ -32,6 +33,6 @@ else if (b[0] === b[1]) {
   return false;
 }
 else {
-  $('#availabledate_id').val(b);
+  $('#availabledate_id').val(range);
   return true;}
 }

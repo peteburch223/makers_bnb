@@ -29,7 +29,8 @@ module Helpers
     avail = Hash.new(0)
     stay[:nights_count].times do |i|
       Space.all(availabledates: { avail_date: stay[:date_from] + i }).each do |space|
-        avail[space.id] += 1 if Availabledate.all(avail_date: stay[:date_from] + i, requests: { status: APPROVED }).empty?
+        avail[space.id] += 1 if Availabledate.all(
+          avail_date: stay[:date_from] + i, requests: { status: APPROVED }).empty?
       end
     end
     spaces = []
@@ -69,11 +70,15 @@ module Helpers
   end
 
   def requests_made
-    requests_made = Request.all(user_id: current_user.id, fields: [:user_id, :request_id], unique: true, order: nil)
+    requests_made = Request.all(
+      user_id: current_user.id,
+      fields: [:user_id, :request_id], unique: true, order: nil)
     space_requests_made = []
     requests_made.each do |req|
       result = []
-      result << Space.first(availabledates: { requests: { user_id: current_user.id, request_id: req.request_id } })
+      result << Space.first(
+        availabledates: { requests: { user_id: current_user.id,
+                                      request_id: req.request_id } })
       result << req.request_id
       space_requests_made << result
     end
@@ -108,7 +113,9 @@ module Helpers
       result << space.first
       result << Request.first(request_id: space.last).status
       dates = Availabledate.all(requests: { request_id: space.last })
-      result << dates.first.avail_date.strftime('%d/%m/%Y') + ((' - ' + dates.last.avail_date.strftime('%d/%m/%Y') if dates.count > 1) || '')
+      result << dates.first.avail_date.strftime(
+        '%d/%m/%Y') + ((' - ' + dates.last.avail_date.strftime(
+          '%d/%m/%Y') if dates.count > 1) || '')
       result << space.last.to_s
       return_value << result
     end

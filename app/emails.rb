@@ -1,7 +1,7 @@
 module Emails
   def send_email(to: current_user.email, subject: 'Welcome to MakersBnB',
                  body: 'test body')
-    return # COMMENT THIS LINE TO ENABLE EMAILS
+    # return # COMMENT THIS LINE TO ENABLE EMAILS
     return if ENV['RACK_ENV'] == 'test'
     mail = Mail.new do
       from 'hello@favela.com'
@@ -29,7 +29,7 @@ module Emails
     approved?(params)
     send_email(
       subject: "You've #{params[:response].downcase} #{requester.email}'s"\
-      " request for #{space.name}",
+      " request for '#{space.name}'",
       body: @body_owner
     )
   end
@@ -38,7 +38,7 @@ module Emails
     approved?(params)
     send_email(
       to: requester.email,
-      subject: "Your request for #{space.name} has been"\
+      subject: "Your request for '#{space.name}' has been"\
       " #{params[:response].downcase}",
       body: @body_requester
     )
@@ -64,7 +64,7 @@ module Emails
   def request_email_owner(owner, space, number_of_nights)
     send_email(
       to: owner.email,
-      subject: "You have a new request for #{space.name}",
+      subject: "You have a new request for '#{space.name}'",
       body: "#{current_user.email} has requested to stay in your shithole"\
       " '#{space.name}' for #{number_of_nights} horrific nights!\nKisses")
   end
