@@ -29,7 +29,8 @@ module Helpers
     avail = Hash.new(0)
     stay[:nights_count].times do |i|
       Space.all(availabledates: { avail_date: stay[:date_from] + i }).each do |space|
-        avail[space.id] += 1 if Availabledate.all(avail_date: stay[:date_from] + i, requests: { status: APPROVED }).empty?
+        avail[space.id] += 1 if Availabledate.all(
+          avail_date: stay[:date_from] + i, requests: { status: APPROVED }).empty?
       end
     end
     spaces = []
@@ -46,61 +47,6 @@ module Helpers
     result[:nights_count] = nights_count
     result[:date_from] = date_from
     result
-  end
-
-  def send_email(to: current_user.email, subject: 'Welcome to MakersBnB',
-                 body: 'test body')
-
-    return if ENV['RACK_ENV'] == 'test'
-    mail = Mail.new do
-      from 'hello@favela.com'
-      to       to
-      subject  subject
-      body     body
-    end
-
-    mail.deliver!
-  end
-
-  def create_space_email(params)
-    send_email(
-      subject: "You've just created a new space: #{params[:name]}",
-      body: "Description: #{params[:description]}\nPrice: #{params[:price]}\n"\
-      "Available from #{params[:from_date]} to #{params[:to_date]}")
-  end
-
-  def booking_confirmation_emails(params, space, requester)
-    booking_email_owner(params, space, requester)
-    booking_email_requester(params, space, requester)
-  end
-
-  def booking_email_owner(params, space, requester)
-    approved?(params)
-    send_email(
-      subject: "You've #{params[:response].downcase} #{requester.email}'s"\
-      " request for #{space.name}",
-      body: @body_owner
-    )
-  end
-
-  def booking_email_requester(params, space, requester)
-    approved?(params)
-    send_email(
-      to: requester.email,
-      subject: "Your request for #{space.name} has been"\
-      " #{params[:response].downcase}",
-      body: @body_requester
-    )
-  end
-
-  def approved?(params)
-    if params[:response] == 'Approved'
-      @body_owner = "We hope you enjoy a stranger in your house \n\n Kisses"
-      @body_requester = "We hope you enjoy staying in a stranger's house \n\n Kisses"
-    else
-      @body_owner = "We're sorry you're too afraid to host that stranger \n\n Kisses"
-      @body_requester = "We're sorry the stranger didn't like the look of you, better luck next time. \n\n Kisses"
-    end
   end
 
   def make_request(availabledate)
@@ -123,27 +69,16 @@ module Helpers
     request_email_owner(owner, space, number_of_nights)
   end
 
-  def request_email_requester(space, total_cost)
-    send_email(
-      to: current_user.email,
-      subject: "You've just requested to stay at: #{space.name}",
-      body: "#{space.description}\nCost of stay: £#{total_cost}\nKisses")
-  end
-
-  def request_email_owner(owner, space, number_of_nights)
-    send_email(
-      to: owner.email,
-      subject: "You have a new request for #{space.name}",
-      body: "#{current_user.email} has requested to stay in your shithole"\
-      " '#{space.name}' for #{number_of_nights} horrific nights!\nKisses")
-  end
-
   def requests_made
-    requests_made = Request.all(user_id: current_user.id, fields: [:user_id, :request_id], unique: true, order: nil)
+    requests_made = Request.all(
+      user_id: current_user.id,
+      fields: [:user_id, :request_id], unique: true, order: nil)
     space_requests_made = []
     requests_made.each do |req|
       result = []
-      result << Space.first(availabledates: { requests: { user_id: current_user.id, request_id: req.request_id } })
+      result << Space.first(
+        availabledates: { requests: { user_id: current_user.id,
+                                      request_id: req.request_id } })
       result << req.request_id
       space_requests_made << result
     end
@@ -178,7 +113,9 @@ module Helpers
       result << space.first
       result << Request.first(request_id: space.last).status
       dates = Availabledate.all(requests: { request_id: space.last })
-      result << dates.first.avail_date.strftime('%d/%m/%Y') + ((' - ' + dates.last.avail_date.strftime('%d/%m/%Y') if dates.count > 1) || '')
+      result << dates.first.avail_date.strftime(
+        '%d/%m/%Y') + ((' - ' + dates.last.avail_date.strftime(
+          '%d/%m/%Y') if dates.count > 1) || '')
       result << space.last.to_s
       return_value << result
     end

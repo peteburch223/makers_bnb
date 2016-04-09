@@ -10,6 +10,7 @@ class MakersBnB < Sinatra::Base
 
   enable :partial_underscores
   include Helpers
+  include Emails
 
   get '/' do
     redirect '/spaces' if current_user

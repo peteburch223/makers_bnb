@@ -17,8 +17,8 @@ feature 'Requesting a space', js: true, passing: true do
     page.execute_script %{ $('a.ui-datepicker-next').trigger("click") }
     page.execute_script %{ $("a.ui-state-default:contains('2')").trigger("click") }
     page.execute_script %{ $("a.ui-state-default:contains('3')").trigger("click") }
-    expect(page).to have_field('check_in', with: '2016-May-02')
-    expect(page).to have_field('check_out', with: '2016-May-03')
+    expect(page).to have_field('check_in', with: '02-05-2016')
+    expect(page).to have_field('check_out', with: '03-05-2016')
   end
 
   scenario 'adds a request record after selecting valid dates' do
@@ -39,7 +39,7 @@ feature 'Requesting a space', js: true, passing: true do
     page.execute_script %{ $("a.ui-state-default:contains('2')").trigger("click") }
     page.execute_script %{ $('a.ui-datepicker-next').trigger("click") }
     page.execute_script %{ $("a.ui-state-default:contains('4')").trigger("click") }
-    expect(page).to have_field('check_in', with: '2016-May-02')
+    expect(page).to have_field('check_in', with: '02-05-2016')
     expect(page).to have_field('check_out', with: '')
   end
 
@@ -51,7 +51,7 @@ feature 'Requesting a space', js: true, passing: true do
     click_button('Request booking')
     click_button('OK')
     # end
-    expect(page).to have_field('check_in', with: '2016-May-02')
-    expect(page).to have_field('check_out', with: '2016-May-02')
+    expect(page).to have_field('check_in', with: '02-05-2016')
+    expect(page).to have_field('check_out', with: '02-05-2016')
   end
 end
