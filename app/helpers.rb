@@ -88,9 +88,9 @@ module Helpers
   def requests_received
     requests = Request.all
     return [] unless requests
-    received = []
+    requests_received = []
     requests.each do |req|
-      received << req.request_id if req.availabledate.space.user_id == current_user.id
+      requests_received << req.request_id if req.availabledate.space.user_id == current_user.id
     end
 
     requests_received.uniq!
