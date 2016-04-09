@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= include_gon %>
-    <%= partial :headlinks %>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="/js/jquery.min.js"></script>
     <script src="/js/underscore-min.js"></script>
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/css/main.css">
   </head>
   <body>
+    <%= partial :navbar %>
     <div class="container-fluid bg-main text-center">
       <%= yield %>
     </div>

@@ -21,7 +21,7 @@ feature 'List a Space', js: true, passing: true do
 
   scenario 'single space' do
     sign_up
-    create_space0
+    create_space
     filter_spaces
     expect(page).to have_content(TestHelpers::NAME)
     expect(page).to have_content(TestHelpers::DESCRIPTION)
@@ -30,7 +30,7 @@ feature 'List a Space', js: true, passing: true do
 
   scenario 'multiple spaces' do
     sign_up
-    create_space0
+    create_space
     create_space1
     filter_spaces
     expect(page).to have_content(TestHelpers::NAME)

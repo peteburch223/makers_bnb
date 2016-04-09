@@ -1,4 +1,4 @@
-feature 'Reviewing requests', js: true, passing: true do
+feature 'Reviewing requests', js: true, passing: false do
   before(:each) do
     in_browser(:one) do
       sign_up
@@ -8,7 +8,7 @@ feature 'Reviewing requests', js: true, passing: true do
     end
 
     in_browser(:one) do
-      create_space0
+      create_space
       filter_spaces
     end
   end
@@ -34,7 +34,7 @@ feature 'Reviewing requests', js: true, passing: true do
 
   scenario 'displays details of request i\'ve made multiple bookings' do
     in_browser(:one) do
-      visit('/spaces')
+      visit '/spaces'
       create_space1
       filter_spaces
       click_link TestHelpers::NAME
