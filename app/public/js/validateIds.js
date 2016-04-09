@@ -3,6 +3,22 @@ var idValue = $('#availabledate_id').val();
 var b = idValue.split(',').map(function(item) {
   return parseInt(item, 10);
 });
+
+if (b.length > 1) {
+  var range = [];
+  var unavailable;
+  for (var i = b[0]; i <= b[1]; i++) {
+      range.push(i);
+  }
+  unavailable = findUnavailableIds();
+  for (var x = 0; x < range.length; x++) {
+    if ($.inArray(range[x], unavailable) != -1 ) {
+      bootbox.alert("You have selected unavailable dates");
+      return false;
+    }
+  }
+}
+
 if (isNaN(b[0])){
   bootbox.alert("Please select a date");
   return false;

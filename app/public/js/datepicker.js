@@ -1,6 +1,7 @@
 var available_obj = gon.available_dates;
 var dates = [];
 var id = [];
+var dateIds = [];
 
 var key;
 for (key in available_obj) {
@@ -8,6 +9,22 @@ for (key in available_obj) {
       available_obj[key] = available_obj[key].split('-').reverse().join('-');
   }
   dates.push(available_obj[key]);
+  dateIds.push(parseInt(key));
+}
+
+function findUnavailableIds(){
+  var unavailableIds = [];
+  for(var i = 1; i < dateIds.length; i++) {
+      if(dateIds[i] - dateIds[i-1] != 1) {
+          var x = dateIds[i] - dateIds[i-1];
+          var j = 1;
+          while (j<x) {
+              unavailableIds.push(dateIds[i-1]+j);
+              j++;
+          }
+      }
+  }
+  return unavailableIds;
 }
 
 function enableSpecificDates(date) {
@@ -40,9 +57,6 @@ $(".datepicker").datepicker({
       var check_in = $.datepicker.parseDate("dd-mm-yy", $("#check_in").val());
       var check_out = $.datepicker.parseDate("dd-mm-yy", $("#check_out").val());
       var selectedDate = $.datepicker.parseDate("dd-mm-yy", dateText);
-console.log(dateText);
-console.log(inst);
-console.log(selectedDate);
 
       if (!check_in || check_out) {
           $("#check_in").val(dateText);
