@@ -1,10 +1,8 @@
-require 'byebug'
-
 feature 'Acknowledge bookings', passing: true do
   before(:each) do
     in_browser(:one) do
       sign_up(email: TestHelpers::O1_USER_EMAIL)
-      create_space0
+      create_space
     end
     in_browser(:two) do
       sign_up(email: TestHelpers::O2_USER_EMAIL)

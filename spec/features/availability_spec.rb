@@ -1,9 +1,7 @@
-require 'byebug'
-
 feature 'Searching availability', js: true, passing: true do
   before(:each) do
     sign_up
-    create_space0
+    create_space
   end
 
   scenario 'has fields to add an available date range' do
