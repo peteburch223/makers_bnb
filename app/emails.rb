@@ -1,7 +1,7 @@
 module Emails
   def send_email(to: current_user.email, subject: 'Welcome to MakersBnB',
                  body: 'test body')
-
+    return # COMMENT THIS LINE TO ENABLE EMAILS
     return if ENV['RACK_ENV'] == 'test'
     mail = Mail.new do
       from 'hello@favela.com'

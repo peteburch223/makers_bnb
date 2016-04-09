@@ -12,7 +12,6 @@ else if (b.length === 1){
   return false;
 }
 else if (b[0] === b[1]) {
-  console.log(b);
   bootbox.alert("Check in and check out dates must be different");
   return false;
 }
