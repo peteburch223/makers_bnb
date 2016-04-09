@@ -1,5 +1,3 @@
-require 'byebug'
-
 feature 'Acknowledge bookings', passing: true do
   before(:each) do
     in_browser(:one) do

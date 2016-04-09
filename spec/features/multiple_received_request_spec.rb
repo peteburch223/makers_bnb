@@ -16,7 +16,7 @@ feature 'multiple users multiple requests', passing: true do
     end
   end
 
-  scenario 'displays details of multiple requests i\'ve received to same space', js: true do
+  scenario "displays details of multiple requests i've received to same space", js: true do
     in_browser(:one) do
       click_link('Requests')
       expect(page).to have_content(TestHelpers::NAME, count: 2)

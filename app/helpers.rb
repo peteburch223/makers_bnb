@@ -87,10 +87,10 @@ module Helpers
 
   def requests_received
     requests = Request.all
-    return [] if requests.nil?
-    requests_received = []
+    return [] unless requests
+    received = []
     requests.each do |req|
-      requests_received << req.request_id if req.availabledate.space.user_id == current_user.id
+      received << req.request_id if req.availabledate.space.user_id == current_user.id
     end
 
     requests_received.uniq!
@@ -106,7 +106,7 @@ module Helpers
   end
 
   def prepare_request_display_array(space_request_arrays)
-    return [] if space_request_arrays.nil?
+    return [] unless space_request_arrays
     return_value = []
     space_request_arrays.each do |space|
       result = []

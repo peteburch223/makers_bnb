@@ -1,16 +1,11 @@
-feature 'Reviewing requests', js: true, passing: false do
+feature 'Reviewing requests', js: true do
   before(:each) do
     in_browser(:one) do
       sign_up
-    end
-    in_browser(:two) do
-      sign_up(email: TestHelpers::O2_USER_EMAIL)
-    end
-
-    in_browser(:one) do
       create_space
       filter_spaces
     end
+    in_browser(:two) { sign_up(email: TestHelpers::O2_USER_EMAIL) }
   end
 
   scenario 'displays requests page' do

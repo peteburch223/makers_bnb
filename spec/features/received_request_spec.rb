@@ -2,7 +2,6 @@ feature 'multiple users', js: true, passing: true do
   before(:each) do
     in_browser(:one) do
       sign_up(email: TestHelpers::O1_USER_EMAIL)
-      # byebug
       create_space1
       filter_spaces
     end

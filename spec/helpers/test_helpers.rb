@@ -88,15 +88,15 @@ module TestHelpers
     click_button('List my space')
   end
 
-  def create_multiple_spaces
-    create_space(
-      name: O1_S1_NAME, description: O1_S1_DESCRIPTION,
-      price: O1_S1_PRICE, from_date: O1_S1_FROM_DATE, to_date: O1_S1_TO_DATE)
-
-    create_space(
-      name: O1_S2_NAME, description: O1_S2_DESCRIPTION,
-      price: O1_S2_PRICE, from_date: O1_S2_FROM_DATE, to_date: O1_S2_TO_DATE)
-  end
+  # def create_multiple_spaces
+  #   create_space(
+  #     name: O1_S1_NAME, description: O1_S1_DESCRIPTION,
+  #     price: O1_S1_PRICE, from_date: O1_S1_FROM_DATE, to_date: O1_S1_TO_DATE)
+  #
+  #   create_space(
+  #     name: O1_S2_NAME, description: O1_S2_DESCRIPTION,
+  #     price: O1_S2_PRICE, from_date: O1_S2_FROM_DATE, to_date: O1_S2_TO_DATE)
+  # end
 
   def make_request(name: TestHelpers::NAME)
     page.execute_script %{ $('a.ui-datepicker-next').trigger("click") }
@@ -105,15 +105,15 @@ module TestHelpers
     click_button('Request booking')
   end
 
-  def make_multiple_requests
-    filter_spaces
-    click_link 'Space 1'
-    make_request(name: NAME)
-    visit('/spaces')
-    filter_spaces
-    click_link 'Space 2'
-    make_request(name: O1_S1_NAME)
-  end
+  # def make_multiple_requests
+  #   filter_spaces
+  #   click_link 'Space 1'
+  #   make_request(name: NAME)
+  #   visit('/spaces')
+  #   filter_spaces
+  #   click_link 'Space 2'
+  #   make_request(name: O1_S1_NAME)
+  # end
 
   def filter_spaces(from: FROM_DATE, to: TO_DATE)
     fill_in('fromDate', with: from)

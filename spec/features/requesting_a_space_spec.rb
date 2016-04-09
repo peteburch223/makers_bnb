@@ -1,5 +1,3 @@
-require 'byebug'
-
 feature 'Requesting a space', js: true, passing: true do
   before(:each) do
     sign_up
@@ -44,13 +42,11 @@ feature 'Requesting a space', js: true, passing: true do
   end
 
   scenario 'cannot select the same date for check in and check out' do
-    # page.accept_confirm 'Dates invalid' do
     page.execute_script %{ $('a.ui-datepicker-next').trigger("click") }
     page.execute_script %{ $("a.ui-state-default:contains('2')").trigger("click") }
     page.execute_script %{ $("a.ui-state-default:contains('2')").trigger("click") }
     click_button('Request booking')
     click_button('OK')
-    # end
     expect(page).to have_field('check_in', with: '02-05-2016')
     expect(page).to have_field('check_out', with: '02-05-2016')
   end
