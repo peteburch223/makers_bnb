@@ -7,6 +7,7 @@ require 'gon-sinatra'
 require 'mail'
 
 require_relative 'helpers'
+require_relative 'emails'
 require_relative 'models/data_mapper_setup'
 require_relative 'models/space'
 require_relative 'models/available_date'
