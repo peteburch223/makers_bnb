@@ -5,7 +5,8 @@ class MakersBnB < Sinatra::Base
                      password_confirmation: params[:password_confirmation])
     if @user.save
       session[:user_id] = @user.id
-      message = "Hello, #{current_user.email}!\nWe hope you enjoy letting strangers into your own home..."
+      message = "Hello, #{current_user.email}!\n"\
+      'We hope you enjoy letting strangers into your own home...'
       send_email(body: message)
       redirect to '/spaces'
     else

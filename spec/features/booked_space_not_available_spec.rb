@@ -14,7 +14,8 @@ feature 'booked space not available', js: true, passing: true do
     end
 
     in_browser(:two) do
-      filter_spaces(from: TestHelpers::O1_S2_FROM_DATE, to: TestHelpers::O1_S2_TO_DATE)
+      filter_spaces(from: TestHelpers::O1_S2_FROM_DATE,
+                    to: TestHelpers::O1_S2_TO_DATE)
       click_link TestHelpers::O1_S2_NAME
       make_request
     end
@@ -27,7 +28,8 @@ feature 'booked space not available', js: true, passing: true do
 
     in_browser(:two) do
       click_link('Spaces')
-      filter_spaces(from: TestHelpers::O1_S2_FROM_DATE, to: TestHelpers::O1_S2_TO_DATE)
+      filter_spaces(from: TestHelpers::O1_S2_FROM_DATE,
+                    to: TestHelpers::O1_S2_TO_DATE)
       expect(page).not_to have_content(TestHelpers::O1_S2_NAME)
     end
   end
@@ -38,7 +40,8 @@ feature 'booked space not available', js: true, passing: true do
     end
 
     in_browser(:two) do
-      filter_spaces(from: TestHelpers::O1_S1_FROM_DATE, to: TestHelpers::O1_S1_TO_DATE)
+      filter_spaces(from: TestHelpers::O1_S1_FROM_DATE,
+                    to: TestHelpers::O1_S1_TO_DATE)
       click_link TestHelpers::O1_S1_NAME
       make_request
     end
@@ -51,7 +54,8 @@ feature 'booked space not available', js: true, passing: true do
 
     in_browser(:two) do
       click_link('Spaces')
-      filter_spaces(from: TestHelpers::FROM_DATE_EXCL_RES, to: TestHelpers::TO_DATE_EXCL_RES)
+      filter_spaces(from: TestHelpers::FROM_DATE_EXCL_RES,
+                    to: TestHelpers::TO_DATE_EXCL_RES)
       click_link TestHelpers::O1_S1_NAME
     end
   end

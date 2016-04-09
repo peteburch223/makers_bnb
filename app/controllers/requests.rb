@@ -20,7 +20,8 @@ class MakersBnB < Sinatra::Base
 
   get '/requests/:id' do
     @request_id = params[:id]
-    @space = Space.first(availabledates: { requests: { request_id: params[:id] } })
+    @space = Space.first(
+      availabledates: { requests: { request_id: params[:id] } })
     @from = User.first(requests: { request_id: params[:id] })
     @date = Availabledate.first(requests: { request_id: params[:id] })
     erb(:"requests/id")

@@ -14,10 +14,12 @@ module Emails
   end
 
   def create_space_email(params)
+    from = params[:from_date].split('-').reverse.join('-')
+    to = params[:to_date].split('-').reverse.join('-')
     send_email(
       subject: "You've just created a new space: #{params[:name]}",
       body: "Description: #{params[:description]}\nPrice: #{params[:price]}\n"\
-      "Available from #{params[:from_date]} to #{params[:to_date]}")
+      "Available from #{from} to #{to}")
   end
 
   def booking_confirmation_emails(params, space, requester)
@@ -46,11 +48,14 @@ module Emails
 
   def approved?(params)
     if params[:response] == 'Approved'
-      @body_owner = "We hope you enjoy a stranger in your house \n\n Kisses"
-      @body_requester = "We hope you enjoy staying in a stranger's house \n\n Kisses"
+      @body_owner = "We hope you enjoy a stranger in your house\n\nKisses"
+      @body_requester = "We hope you enjoy staying in a stranger's house\n\n"\
+      'Kisses'
     else
-      @body_owner = "We're sorry you're too afraid to host that stranger \n\n Kisses"
-      @body_requester = "We're sorry the stranger didn't like the look of you, better luck next time. \n\n Kisses"
+      @body_owner = "We're sorry you're too afraid to host that stranger\n\n"\
+      'Kisses'
+      @body_requester = "We're sorry the stranger didn't like the look of you,"\
+      " better luck next time. \n\n Kisses"
     end
   end
 
