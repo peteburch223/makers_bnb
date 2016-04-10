@@ -35,6 +35,15 @@
                 <p><%= space.description %></p>
               </div>
             <% end %>
+          <% else %>
+            <% if @allspaces %>
+              <% @allspaces.each do |space| %>
+                <div  class="list-group-item">
+                  <h3><a href="/spaces/<%= space.id %>"><%= space.name %>: £<%= space.price %></a></h3>
+                  <p><%= space.description %></p>
+                </div>
+              <% end %>
+            <% end %>
           <% end %>
         </div>
       </div>
