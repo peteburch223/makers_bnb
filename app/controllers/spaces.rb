@@ -1,6 +1,7 @@
 class MakersBnB < Sinatra::Base
   get '/spaces' do
     @spaces = available_dates(params)
+    @allspaces = Space.all
     erb(:spaces)
   end
 
