@@ -90,6 +90,13 @@ body {
 .panel-default {
   border-color: transparent;
 }
+button[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+a {
+  color: #266457;
+}
 /* NAV BAR */
 .navbar {
   margin: 0;
@@ -108,14 +115,18 @@ body {
   font-size: 30px;
   font-weight: bold;
 }
-.userProfile {
+#userProfile {
   text-align: right;
   display: inline;
+  padding-top: 25px;
 }
 /* All sizes */
 ::-webkit-input-placeholder {
    color: #909090;
    font-size: 18px;
+}
+.inline-fields label {
+    display: inline-block;
 }
 /* Large desktop */
 @media (min-width: 1200px) { ... }
@@ -161,10 +172,20 @@ body {
 .ui-datepicker-multi .ui-datepicker-group {
   float:none;
 }
+#datepicker-container{
+  text-align:center;
+}
+#datepicker-center{
+  display:inline-block;
+  margin:0 auto;
+}
 .datepicker {
   height: 300px;
   overflow-x: scroll;
   margin: 0 auto;
+}
+div.ui-datepicker{
+ font-size: 15px;
 }
 .ui-widget {
   font-size: 100%
