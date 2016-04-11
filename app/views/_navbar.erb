@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-default">
   <div class="container-fluid bg-header">
     <div class="navbar-header">
@@ -9,8 +8,9 @@
       <li><a href="/spaces">Spaces</a></li>
       <li><a href="/requests">Requests</a></li>
     </ul>
-    <div id="userProfile">
-      <%= current_user.email %><form method='post' action='/sessions'>
+    <div id="inline-fields userProfile">
+      <form method='post' action='/sessions'>
+        <label for="Log out" class=""><%= current_user.email %></label>
         <input type='hidden' name='_method' value='delete'>
         <input type='submit' value='Log out'>
       </form>

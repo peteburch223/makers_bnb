@@ -1,14 +1,28 @@
-<h1><%= @space.name %></h1>
-<h2><%= @space.description %></h2>
+<%= partial :navbar %>
+<div class="row">
+  <div class="col-sm-4"></div>
+    <div class="col-sm-4 notHome">
+      <h1 class="capitalize"><%= @space.name %></h1>
+      <h2 class="capitalize"><%= @space.description %></h2>
+      <p class="">Choose your check in and check out dates in the calendar.</p>
+      <div class="inline-fields">
+        <label for="check_in" class="">Check in:</label>
+        <input id='check_in' size='12' name='check_in' type='text' />
+        <label for="check_in" class="">Check out:</label>
+        <input id='check_out' size='12' name='check_out' type='text' /></p>
+        <form action="/requests/new" method="post" onsubmit="return validateIds()">
+          <div id="datepicker-container">
+            <div id="datepicker-center">
+              <div class='datepicker'></div>
+            </div>
+          </div>
 
-<p>Check in: <input id='check_in' size='12' name='check_in' type='text' /></p>
-<p>Check out: <input id='check_out' size='12' name='check_out' type='text' /></p>
-
-<form action="/requests/new" method="post" onsubmit="return validateIds()">
-  <div class='datepicker'></div>
-  <input id='availabledate_id' size='12' name='availabledate_id' type='text' />
-  <button class="btn">Request booking</button>
-</form>
+          <button class="form-control btn btn-login">Request booking</button>
+          <input id='availabledate_id' size='12' name='availabledate_id' type='hidden' />
+        </form>
+    </div>
+  </div>
+</div>
 
 <script src="/js/datepicker.js"></script>
 <script src="/js/validateIds.js"></script>
